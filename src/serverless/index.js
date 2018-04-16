@@ -1,3 +1,3 @@
-export const handler = (event, context, cb) => {
-  throw new Error('not yet implemented')
+export const handler = () => {
+    throw new Error('not yet implemented');
 };
