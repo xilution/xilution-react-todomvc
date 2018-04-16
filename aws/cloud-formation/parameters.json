@@ -1,0 +1,38 @@
+[
+  {
+    "ParameterKey": "AwsRegion",
+    "ParameterValue": "us-east-1"
+  },
+  {
+    "ParameterKey": "AwsAccount",
+    "ParameterValue": "887430382797"
+  },
+  {
+    "ParameterKey": "FunctionName",
+    "ParameterValue": "xilution-api-traffic-delegator"
+  },
+  {
+    "ParameterKey": "LambdaExecutionRole",
+    "ParameterValue": "arn:aws:iam::887430382797:role/lambda_basic_execution"
+  },
+  {
+    "ParameterKey": "OAuthToken",
+    "ParameterValue": "8047d12f1c2f9a611808965fbf2bd6821d33b3a7"
+  },
+  {
+    "ParameterKey": "CodeBuildRole",
+    "ParameterValue": "arn:aws:iam::887430382797:role/xilution-codebuild-role"
+  },
+  {
+    "ParameterKey": "CodeBuildDockerImage",
+    "ParameterValue": "887430382797.dkr.ecr.us-east-1.amazonaws.com/xilution/codebuild/nodejs-6.3.1:latest"
+  },
+  {
+    "ParameterKey": "CodeBuildComputeType",
+    "ParameterValue": "BUILD_GENERAL1_SMALL"
+  },
+  {
+    "ParameterKey": "CodePipelineRole",
+    "ParameterValue": "arn:aws:iam::887430382797:role/xilution-codepipeline-role"
+  }
+]

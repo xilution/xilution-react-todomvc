@@ -1,0 +1,57 @@
+{
+  "name": "@xilution/xilution-react-todomvc",
+  "version": "0.0.0",
+  "description": "Xilution - React - TODO MVC",
+  "scripts": {
+    "lint": "eslint ./test/**/*.js ./src/**/*.js",
+    "test": "mocha --require babel-polyfill --require babel-register --require ./test/unit/client/setup.js --recursive ./test/unit/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xilution/xilution-react-todomvc"
+  },
+  "bugs": {
+    "url": "https://github.com/xilution/xilution-react-todomvc/issues"
+  },
+  "homepage": "https://github.com/xilution/xilution-react-todomvc",
+  "dependencies": {
+    "aws-sdk": "^2.224.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "request": "^2.85.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "chance": "^1.0.13",
+    "enzyme": "^3.3.0",
+    "eslint": "^4.19.1",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.46.2",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "istanbul": "^0.4.5",
+    "jsdom": "^11.8.0",
+    "mocha": "^5.1.0",
+    "react-addons-test-utils": "^15.6.2",
+    "sinon": "^4.5.0",
+    "sinon-chai": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=8.10.0",
+    "yarn": ">=1.3.2",
+    "npm": ">=5.6.0"
+  },
+  "author": "Todd Brunia <tbrunia@gmail.com> (http://www.github.com/tbrunia)",
+  "license": "MIT"
+}
