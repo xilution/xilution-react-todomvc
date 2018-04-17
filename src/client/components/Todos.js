@@ -5,7 +5,7 @@ import VisibleTodoList from '../containers/VisibleTodoList';
 
 import Footer from './Footer';
 
-const App = () => (
+const Todos = () => (
     <div>
         <h1>{'todos'}</h1>
         <AddTodo />
@@ -14,4 +14,4 @@ const App = () => (
     </div>
 );
 
-export default App;
+export default Todos;
