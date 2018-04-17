@@ -45,7 +45,7 @@ const Register = ({dispatch}) => {
                 <input ref={(node) => password = node} />
                 <button type="submit">{'Submit'}</button>
             </form>
-            <Link to="/verify-registration">{'Verify Registration'}</Link>
+            <Link to="/login">{'Sign In'}</Link>
         </div>
     );
 };

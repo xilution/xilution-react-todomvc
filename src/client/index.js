@@ -11,6 +11,7 @@ import LogIn from './containers/LogIn';
 import Register from './containers/Register';
 import VerifyRegistration from './containers/VerifyRegistration';
 import Todos from './components/Todos';
+import PrivateRoute from './components/PrivateRoute';
 import 'todomvc-app-css/index.css';
 
 const history = createHistory();
@@ -30,7 +31,7 @@ render(
         <ConnectedRouter history={history}>
             <div>
                 <Route
-                    component={Register}
+                    component={LogIn}
                     exact
                     path="/"
                 />
@@ -46,7 +47,7 @@ render(
                     component={VerifyRegistration}
                     path="/verify-registration"
                 />
-                <Route
+                <PrivateRoute
                     component={Todos}
                     path="/todos"
                 />

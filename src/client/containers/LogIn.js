@@ -1,5 +1,6 @@
 /* eslint-disable no-return-assign,react/prop-types */
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {authenticationSuccess} from '../actions';
@@ -29,6 +30,7 @@ const LogIn = ({dispatch}) => {
                 <input ref={(node) => password = node} />
                 <button type="submit">{'Submit'}</button>
             </form>
+            <Link to="/register">{'Register'}</Link>
         </div>
     );
 };
