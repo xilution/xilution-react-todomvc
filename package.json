@@ -1,0 +1,57 @@
+{
+  "name": "@xilution/xilution-react-todomvc",
+  "version": "0.0.0",
+  "description": "Xilution - React - TODO MVC",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development --open",
+    "lint": "eslint ./test/**/*.js ./src/**/*.js",
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xilution/xilution-react-todomvc"
+  },
+  "bugs": {
+    "url": "https://github.com/xilution/xilution-react-todomvc/issues"
+  },
+  "homepage": "https://github.com/xilution/xilution-react-todomvc",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "aws-sdk": "^2.224.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "request": "^2.85.0",
+    "todomvc-app-css": "^2.1.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "chance": "^1.0.13",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-config-get-off-my-lawn": "^4.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^22.4.3",
+    "mini-css-extract-plugin": "^0.4.0",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14",
+    "webpack-dev-server": "^3.1.3"
+  },
+  "engines": {
+    "node": ">=8.10.0",
+    "yarn": ">=1.3.2",
+    "npm": ">=5.6.0"
+  },
+  "author": "Todd Brunia <tbrunia@gmail.com> (http://www.github.com/tbrunia)",
+  "license": "MIT"
+}

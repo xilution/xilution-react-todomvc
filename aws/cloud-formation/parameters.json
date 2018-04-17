@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "FunctionName",
+    "ParameterValue": "xilution-react-todomvc"
+  },
+  {
+    "ParameterKey": "LambdaExecutionRole",
+    "ParameterValue": "arn:aws:iam::887430382797:role/lambda_basic_execution"
+  }
+]
