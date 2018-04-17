@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 
 import App from './components/App';
 import rootReducer from './reducers';
+import 'todomvc-app-css/index.css';
 
 const store = createStore(rootReducer);
 

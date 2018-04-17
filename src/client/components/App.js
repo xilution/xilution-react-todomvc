@@ -7,6 +7,7 @@ import Footer from './Footer';
 
 const App = () => (
     <div>
+        <h1>{'todos'}</h1>
         <AddTodo />
         <VisibleTodoList />
         <Footer />

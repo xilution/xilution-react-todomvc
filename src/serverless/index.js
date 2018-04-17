@@ -1,3 +1,3 @@
 export const handler = () => {
-    throw new Error('not yet implemented');
+    throw new Error('not yet implemented. fart.');
 };
