@@ -37,6 +37,3 @@ reprovision:
 	aws cloudformation update-stack --stack-name xilution-react-todomvc \
 		--template-body file://./aws/cloud-formation/template.json \
 		--parameters file://./aws/cloud-formation/parameters.json
-
-test-with-coverage:
-	./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive ./test/unit/
