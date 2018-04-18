@@ -22,11 +22,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     toggleTodo: (id) => {
-        fetch('https://api.xilution.com/prod')
-            .then((result) => {
-                console.log(result.json());
-                dispatch(toggleTodo(id));
-            });
+        dispatch(toggleTodo(id));
     }
 });
 

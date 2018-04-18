@@ -21,7 +21,7 @@ const AppHeader = ({dispatch, auth}) => {
         );
     }
 
-    return <div/>;
+    return <div />;
 };
 
 const mapStateToProps = (state) => ({
