@@ -1,11 +1,11 @@
 build:
 	build-client
-	build-serverless
+	build-server
 
 build-client:
 	echo "not implemented yet"
 
-build-serverless:
+build-server:
 	if [ ! -d ./temp ]; then mkdir ./temp; fi
 	cp -rf ./node_modules ./temp
 	cp -rf ./src/* ./temp
@@ -17,12 +17,12 @@ build-serverless:
 
 deploy:
 	deploy-client
-	deploy-serverless
+	deploy-server
 
 deploy-client:
 	echo "not implemented yet"
 
-deploy-serverless:
+deploy-server:
 	aws lambda update-function-code --function-name xilution-react-todomvc --zip-file fileb://./dist/xilution-react-todomvc.zip
 
 deprovision:
