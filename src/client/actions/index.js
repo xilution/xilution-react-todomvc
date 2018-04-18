@@ -1,9 +1,19 @@
 let nextTodoId = 0;
 
-export const addTodo = (text) => ({
+export const createTodo = (text) => ({
     id: nextTodoId++,
     text,
     type: 'ADD_TODO'
+});
+
+export const deleteTodo = (id) => ({
+    id,
+    type: 'DELETE_TODO'
+});
+
+export const fetchTodosSuccess = (todos) => ({
+    todos,
+    type: 'FETCH_TODOS_SUCCESS'
 });
 
 export const setVisibilityFilter = (filter) => ({

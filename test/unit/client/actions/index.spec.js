@@ -2,7 +2,7 @@ import * as actions from '../../../../src/client/actions/index';
 
 describe('todo actions', () => {
     test('addTodo should create ADD_TODO action', () => {
-        expect(actions.addTodo('Use Redux')).toEqual({
+        expect(actions.createTodo('Use Redux')).toEqual({
             id: 0,
             text: 'Use Redux',
             type: 'ADD_TODO'
