@@ -1,8 +1,9 @@
 /* eslint-disable no-return-assign,react/prop-types */
 import React from 'react';
 import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 
-import {verifyRegistrationSuccess} from '../actions';
+import {authenticationSuccess} from '../actions';
 
 const VerifyRegistration = ({dispatch}) => {
     let verificationCode;
@@ -19,7 +20,9 @@ const VerifyRegistration = ({dispatch}) => {
                     }
 
                     // todo - call the verify-registration endpoint
-                    dispatch(verifyRegistrationSuccess());
+                    dispatch(authenticationSuccess('id-token'));
+                    dispatch(push('/todos'));
+
                     verificationCode.value = '';
                 }}
             >

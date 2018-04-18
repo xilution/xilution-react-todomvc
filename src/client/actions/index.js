@@ -18,17 +18,16 @@ export const toggleTodo = (id) => ({
 
 export const authenticationSuccess = (idToken) => ({
     idToken,
-    type: 'LOG_IN_SUCCESS'
+    type: 'AUTHENTICATION_SUCCESS'
 });
 
-export const registerSuccess = (token) => ({
-    token,
+export const registerSuccess = (registrationToken) => ({
+    registrationToken,
     type: 'REGISTER_SUCCESS'
 });
 
-export const verifyRegistrationSuccess = (idToken) => ({
-    idToken,
-    type: 'VERIFY_REGISTRATION_SUCCESS'
+export const signOut = () => ({
+    type: 'SIGN_OUT'
 });
 
 export const VisibilityFilters = {
