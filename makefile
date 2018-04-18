@@ -3,17 +3,10 @@ build:
 	build-server
 
 build-client:
-	echo "not implemented yet"
+	yarn build:client
 
 build-server:
-	if [ ! -d ./temp ]; then mkdir ./temp; fi
-	cp -rf ./node_modules ./temp
-	cp -rf ./src/* ./temp
-	cp ./package.json ./temp
-	cd ./temp ; zip -qr ./xilution-react-todomvc.zip . * ; cd ..
-	if [ ! -d ./dist ]; then mkdir ./dist; fi
-	mv ./temp/xilution-react-todomvc.zip ./dist
-	rm -rf ./temp
+	yarn build:server
 
 deploy:
 	deploy-client
@@ -23,7 +16,7 @@ deploy-client:
 	echo "not implemented yet"
 
 deploy-server:
-	aws lambda update-function-code --function-name xilution-react-todomvc --zip-file fileb://./dist/xilution-react-todomvc.zip
+	aws lambda update-function-code --function-name xilution-react-todomvc --zip-file fileb://./dist/server/xilution-react-todomvc.zip
 
 deprovision:
 	aws cloudformation delete-stack --stack-name xilution-react-todomvc
