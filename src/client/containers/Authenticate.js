@@ -2,10 +2,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 
 import {authenticationSuccess} from '../actions';
 
-const LogIn = ({dispatch}) => {
+const Authenticate = ({dispatch}) => {
     let username,
         password;
 
@@ -21,7 +22,9 @@ const LogIn = ({dispatch}) => {
                     }
 
                     // todo - call the authentication endpoint
-                    dispatch(authenticationSuccess());
+                    dispatch(authenticationSuccess('id-token'));
+                    dispatch(push('/todos'));
+
                     username.value = '';
                     password.value = '';
                 }}
@@ -35,5 +38,5 @@ const LogIn = ({dispatch}) => {
     );
 };
 
-export default connect()(LogIn);
+export default connect()(Authenticate);
 /* eslint-enable no-return-assign,react/prop-types */

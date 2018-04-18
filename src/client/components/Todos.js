@@ -3,14 +3,13 @@ import React from 'react';
 import AddTodo from '../containers/AddTodo';
 import VisibleTodoList from '../containers/VisibleTodoList';
 
-import Footer from './Footer';
+import TodoFilters from './TodoFilters';
 
 const Todos = () => (
     <div>
-        <h1>{'todos'}</h1>
         <AddTodo />
         <VisibleTodoList />
-        <Footer />
+        <TodoFilters />
     </div>
 );
 

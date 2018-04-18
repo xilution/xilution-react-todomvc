@@ -1,6 +1,6 @@
 const auth = (state = {}, action) => {
     switch (action.type) {
-        case 'LOG_IN_SUCCESS':
+        case 'AUTHENTICATION_SUCCESS':
             return {
                 ...state,
                 idToken: action.idToken
@@ -14,6 +14,11 @@ const auth = (state = {}, action) => {
             return {
                 ...state,
                 idToken: action.idToken
+            };
+        case 'SIGN_OUT':
+            return {
+                ...state,
+                idToken: undefined
             };
         default:
             return state;

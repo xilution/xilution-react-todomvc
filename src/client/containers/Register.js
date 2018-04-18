@@ -2,6 +2,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 
 import {registerSuccess} from '../actions';
 
@@ -30,7 +31,9 @@ const Register = ({dispatch}) => {
                     }
 
                     // todo - call the authenticate endpoint
-                    dispatch(registerSuccess());
+                    dispatch(registerSuccess('registration-token'));
+                    dispatch(push('/verify-registration'));
+
                     firstName.value = '';
                     lastName.value = '';
                     email.value = '';
@@ -45,7 +48,7 @@ const Register = ({dispatch}) => {
                 <input ref={(node) => password = node} />
                 <button type="submit">{'Submit'}</button>
             </form>
-            <Link to="/login">{'Sign In'}</Link>
+            <Link to="/authenticate">{'Sign In'}</Link>
         </div>
     );
 };
