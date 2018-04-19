@@ -2,6 +2,8 @@ const {register, verifyRegistration, authenticate} = require('./identityBroker')
 const {putToDo, getToDo, deleteToDo, fetchToDos} = require('./dataAccessorBroker');
 
 // eslint-disable-next-line complexity
+
+// FIXME - this is completely wrong. Needs to have a function per endpoint see template-sam.yml
 const handler = async (event, context, callback) => {
     const operation = event.operation;
 

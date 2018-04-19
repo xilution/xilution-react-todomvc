@@ -1,10 +1,14 @@
 [
   {
-    "ParameterKey": "FunctionName",
-    "ParameterValue": "xilution-react-todomvc"
+    "ParameterKey": "WebsiteBucketName",
+    "ParameterValue": "xilution-todomvc-website-bucket"
+  },
+  {
+    "ParameterKey": "StagingBucketName",
+    "ParameterValue": "xilution-todomvc-staging-bucket"
   },
   {
     "ParameterKey": "LambdaExecutionRole",
-    "ParameterValue": "arn:aws:iam::887430382797:role/lambda_basic_execution"
+    "ParameterValue": "xilution-todomvc-lambda-execution-role"
   }
 ]

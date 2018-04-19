@@ -1,32 +1,57 @@
 build:
-	build-client
-	build-server
+	make build-client
+	make build-server
 
 build-client:
 	yarn build:client
 
 build-server:
 	yarn build:server
+	make package-sam
 
 deploy:
-	deploy-client
-	deploy-server
+	make deploy-client
+	make deploy-server
 
 deploy-client:
-	echo "not implemented yet"
+	aws s3 cp ./dist/client/ s3://xilution-todomvc-website-bucket/ --recursive --include "*" --acl public-read
 
 deploy-server:
-	aws lambda update-function-code --function-name xilution-react-todomvc --zip-file fileb://./dist/server/xilution-react-todomvc.zip
+	aws cloudformation deploy --stack-name xilution-todomvc-sam \
+		--template-file ./dist/template-sam.yaml
 
 deprovision:
-	aws cloudformation delete-stack --stack-name xilution-react-todomvc
+	make deprovision-server
+
+deprovision-base:
+	aws cloudformation delete-stack --stack-name xilution-todomvc-base
+
+deprovision-server:
+	aws cloudformation delete-stack --stack-name xilution-todomvc-sam
 
 provision:
-	aws cloudformation create-stack --stack-name xilution-react-todomvc \
-		--template-body file://./aws/cloud-formation/template.json \
-		--parameters file://./aws/cloud-formation/parameters.json
+	make provision-base
+
+provision-base:
+	aws cloudformation create-stack --stack-name xilution-todomvc-base \
+		--template-body file://./aws/cloud-formation/template-base.yml \
+		--parameters file://./aws/cloud-formation/parameters.json \
+		--capabilities CAPABILITY_NAMED_IAM
+
+package-sam:
+	aws cloudformation package \
+		--template-file ./aws/cloud-formation/template-sam.yml \
+		--s3-bucket xilution-todomvc-staging-bucket \
+		--output-template-file ./dist/template-sam.yaml
 
 reprovision:
-	aws cloudformation update-stack --stack-name xilution-react-todomvc \
-		--template-body file://./aws/cloud-formation/template.json \
-		--parameters file://./aws/cloud-formation/parameters.json
+	make reprovision-base
+
+reprovision-base:
+	aws cloudformation update-stack --stack-name xilution-todomvc-base \
+		--template-body file://./aws/cloud-formation/template-base.yml \
+		--parameters file://./aws/cloud-formation/parameters.json \
+        --capabilities CAPABILITY_NAMED_IAM
+
+show-client-url:
+	aws cloudformation describe-stacks --stack-name xilution-todomvc-base --query 'Stacks[0].Outputs[0].OutputValue'
