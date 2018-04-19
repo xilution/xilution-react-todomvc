@@ -1,0 +1,58 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  StagingBucketName:
+    Type: String
+  WebsiteBucketName:
+    Type: String
+  LambdaExecutionRole:
+    Type: String
+
+Resources:
+  TodoMVCStagingBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref StagingBucketName
+
+  TodoMVCWebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref WebsiteBucketName
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+  TodoMVCLambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSLambdaFullAccess
+      RoleName: !Ref LambdaExecutionRole
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+              Service:
+                - apigateway.amazonaws.com
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+
+Outputs:
+  TodoMVCWebsiteUrl:
+    Description: Xilution todo MVC website URL.
+    Value: !GetAtt TodoMVCWebsiteBucket.WebsiteURL
+    Export:
+      Name:
+        Fn::Sub: "${AWS::StackName}-website-url"
+
+  TodoMVCLambdaExecutionRoleArn:
+    Description: Xilution todo MVC lambda execution role arn.
+    Value: !GetAtt TodoMVCLambdaExecutionRole.Arn
+    Export:
+      Name:
+        Fn::Sub: "${AWS::StackName}-lambda-execution-role-arn"
