@@ -18,7 +18,8 @@ deploy-client:
 
 deploy-server:
 	aws cloudformation deploy --stack-name xilution-todomvc-sam \
-		--template-file ./dist/template-sam.yaml
+		--template-file ./dist/template-sam.yaml \
+		--parameter-overrides XilutionApiKey=$(XILUTION_API_KEY)
 
 deprovision:
 	make deprovision-server
@@ -55,3 +56,6 @@ reprovision-base:
 
 show-client-url:
 	aws cloudformation describe-stacks --stack-name xilution-todomvc-base --query 'Stacks[0].Outputs[0].OutputValue'
+
+show-server-url:
+	aws cloudformation describe-stacks --stack-name xilution-todomvc-sam --query 'Stacks[0].Outputs[0].OutputValue'

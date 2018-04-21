@@ -1,43 +1,61 @@
-const {register, verifyRegistration, authenticate} = require('./identityBroker');
-const {putToDo, getToDo, deleteToDo, fetchToDos} = require('./dataAccessorBroker');
+const identityBroker = require('./identityBroker');
+const dataAccessorBroker = require('./dataAccessorBroker');
 
-// eslint-disable-next-line complexity
+const registerUser = async (event, context, callback) => {
+    const response = await identityBroker.registerUser(event.body);
 
-// FIXME - this is completely wrong. Needs to have a function per endpoint see template-sam.yml
-const handler = async (event, context, callback) => {
-    const operation = event.operation;
-
-    if (operation === 'REGISTER') {
-        const response = await register(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'VERIFY_REGISTRATION') {
-        const response = await verifyRegistration(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'AUTHENTICATE') {
-        const response = await authenticate(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'PUT_TODO') {
-        const response = await putToDo(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'GET_TODO') {
-        const response = await getToDo(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'DELETE_TODO') {
-        const response = await deleteToDo(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'FETCH_TODOS') {
-        const response = await fetchToDos(event.body);
-
-        return callback(null, response);
-    }
-
-    return callback(new Error(`[BAD REQUEST] Unknown operation: ${operation}`));
+    return callback(null, response);
 };
 
-module.exports = {handler};
+const verifyUser = async (event, context, callback) => {
+    const response = await identityBroker.verifyUser(event.body);
+
+    return callback(null, response);
+};
+
+const authenticate = async (event, context, callback) => {
+    console.log(`event: ${JSON.stringify(event, null, 2)}`);
+    console.log(`context: ${JSON.stringify(context, null, 2)}`);
+
+    const body = JSON.parse(event.body);
+    const response = await identityBroker.authenticate({
+        password: body.password,
+        username: body.username
+    });
+
+    return callback(null, response);
+};
+
+const putToDo = async (event, context, callback) => {
+    const response = await dataAccessorBroker.putToDo(event.body);
+
+    return callback(null, response);
+};
+
+const getToDo = async (event, context, callback) => {
+    const response = await dataAccessorBroker.getToDo(event.body);
+
+    return callback(null, response);
+};
+
+const deleteToDo = async (event, context, callback) => {
+    const response = await dataAccessorBroker.deleteToDo(event.body);
+
+    return callback(null, response);
+};
+
+const fetchToDos = async (event, context, callback) => {
+    const response = await dataAccessorBroker.fetchToDos(event.body);
+
+    return callback(null, response);
+};
+
+module.exports = {
+    authenticate,
+    deleteToDo,
+    fetchToDos,
+    getToDo,
+    putToDo,
+    registerUser,
+    verifyUser
+};

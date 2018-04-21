@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-const doRegister = async ({firstName, lastName, email, username, password}) => {
-    const response = await axios.post('https://api.xilution.com/elements-identity-beta/register-user', {
+const registerUser = async ({firstName, lastName, email, username, password}) => {
+    const response = await axios.post('https://api.xilution.com/business-basics-identity-beta/register-user', {
         email,
         firstName,
         lastName,
@@ -12,25 +12,51 @@ const doRegister = async ({firstName, lastName, email, username, password}) => {
     return response.data;
 };
 
-const doVerifyRegistration = async ({verificationCode}) => {
-    const response = await axios.post('https://api.xilution.com/elements-identity-beta/verify-registration', {
+const verifyUser = async ({verificationCode}) => {
+    const response = await axios.post('https://api.xilution.com/business-basics-identity-beta/verify-registration', {
         verificationCode
     });
 
     return response.data;
 };
 
-const doAuthenticate = async ({username, password}) => {
-    const response = await axios.post('https://api.xilution.com/elements-identity-beta/authenticate', {
-        password,
-        username
-    });
+const authenticate = async ({username, password}) => {
+    try {
+        const response = await axios.post('https://api.xilution.com/business-basics-identity-beta/authenticate', {
+            password,
+            username
+        }, {
+            headers: {
+                'x-api-key': process.env.XilutionApiKey
+            }
+        });
 
-    return response.data;
+        return {
+            body: JSON.stringify(response.data),
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            },
+            isBase64Encoded: false,
+            statusCode: 200
+        };
+
+    } catch (error) {
+        return {
+            body: JSON.stringify({
+                error: error.message
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            isBase64Encoded: false,
+            statusCode: 500
+        };
+    }
 };
 
 module.exports = {
-    authenticate: doAuthenticate,
-    register: doRegister,
-    verifyRegistration: doVerifyRegistration
+    authenticate,
+    registerUser,
+    verifyUser
 };
