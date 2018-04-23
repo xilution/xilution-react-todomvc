@@ -5,7 +5,29 @@ const nodeExternals = require('webpack-node-externals');
 module.exports = {
     entry: ['babel-polyfill', './src/server/index.js'],
     externals: [nodeExternals({
-        whitelist: ['axios']
+        whitelist: [
+            'axios',
+            'babel-polyfill',
+            'core-js/fn/regexp/escape',
+            'core-js/shim',
+            'debug',
+            'follow-redirects',
+            'has-flag',
+            'hoek',
+            'isemail',
+            'is-buffer',
+            'joi',
+            'ms',
+            'os',
+            'regenerator-runtime/runtime',
+            'stream',
+            'supports-color',
+            'topo',
+            'tty',
+            'url',
+            'util',
+            'uuid'
+        ]
     })],
     module: {
         rules: [

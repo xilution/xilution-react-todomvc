@@ -1,57 +1,128 @@
-/* eslint-disable no-return-assign,react/prop-types */
+/* eslint-disable react/no-set-state,react/prop-types */
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
+import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 
 import {registerSuccess} from '../actions';
 
-const Register = ({dispatch}) => {
-    let firstName,
-        lastName,
-        email,
-        username,
-        password;
-
-    return (
-        <div>
-            <h2>{'Register'}</h2>
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-
-                    if (
-                        !firstName.value.trim() ||
-                        !lastName.value.trim() ||
-                        !email.value.trim() ||
-                        !username.value.trim() ||
-                        !password.value.trim()
-                    ) {
-                        return;
-                    }
-
-                    // todo - call the authenticate endpoint
-                    dispatch(registerSuccess('registration-token'));
-                    dispatch(push('/verify-registration'));
-
-                    firstName.value = '';
-                    lastName.value = '';
-                    email.value = '';
-                    username.value = '';
-                    password.value = '';
-                }}
-            >
-                <input ref={(node) => firstName = node} />
-                <input ref={(node) => lastName = node} />
-                <input ref={(node) => email = node} />
-                <input ref={(node) => username = node} />
-                <input ref={(node) => password = node} />
-                <button type="submit">{'Submit'}</button>
-            </form>
-            <Link to="/authenticate">{'Sign In'}</Link>
-        </div>
-    );
+const defaultState = {
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+    username: ''
 };
 
+class Register extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = defaultState;
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    // eslint-disable-next-line complexity
+    handleSubmit(event) {
+        event.preventDefault();
+
+        if (
+            !this.state.firstName.trim() ||
+            !this.state.lastName.trim() ||
+            !this.state.email.trim() ||
+            !this.state.username.trim() ||
+            !this.state.password.trim()
+        ) {
+            return;
+        }
+
+        this.props.dispatch(registerSuccess('registration-token'));
+        this.props.dispatch(push('/verify-registration'));
+
+        this.setState(defaultState);
+    }
+
+    render() {
+        return (
+            <div>
+                <h2>{'Register'}</h2>
+                <p>
+                    {'Already have an account?'}{' '}
+                    <Link to="/authenticate">{'Sign In'}</Link>
+                </p>
+                <Form
+                    horizontal
+                    onSubmit={this.handleSubmit}
+                >
+                    <FormGroup controlId="firstName">
+                        <ControlLabel>{'First Name'}</ControlLabel>
+                        <FormControl
+                            autoComplete="given-name"
+                            name="firstName"
+                            onChange={this.handleChange}
+                            type="text"
+                            value={this.state.firstName}
+                        />
+                    </FormGroup>
+                    <FormGroup controlId="lastName">
+                        <ControlLabel>{'Last Name'}</ControlLabel>
+                        <FormControl
+                            autoComplete="family-name"
+                            name="lastName"
+                            onChange={this.handleChange}
+                            type="text"
+                            value={this.state.lastName}
+                        />
+                    </FormGroup>
+                    <FormGroup controlId="email">
+                        <ControlLabel>{'Email'}</ControlLabel>
+                        <FormControl
+                            autoComplete="email"
+                            name="email"
+                            onChange={this.handleChange}
+                            type="text"
+                            value={this.state.email}
+                        />
+                    </FormGroup>
+                    <FormGroup controlId="username">
+                        <ControlLabel>{'Username'}</ControlLabel>
+                        <FormControl
+                            autoComplete="username"
+                            name="username"
+                            onChange={this.handleChange}
+                            type="text"
+                            value={this.state.username}
+                        />
+                    </FormGroup>
+                    <FormGroup controlId="password">
+                        <ControlLabel>{'Password'}</ControlLabel>
+                        <FormControl
+                            autoComplete="current-password"
+                            name="password"
+                            onChange={this.handleChange}
+                            type="password"
+                            value={this.state.password}
+                        />
+                    </FormGroup>
+                    <Button type="submit">{'Submit'}</Button>
+                </Form>
+            </div>
+        );
+    }
+}
+
 export default connect()(Register);
-/* eslint-enable no-return-assign,react/prop-types */
+/* eslint-enable react/no-set-state,react/prop-types */

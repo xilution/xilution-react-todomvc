@@ -1,43 +1,90 @@
-const {register, verifyRegistration, authenticate} = require('./identityBroker');
-const {putToDo, getToDo, deleteToDo, fetchToDos} = require('./dataAccessorBroker');
+const {brokerRequest} = require('./requestAdapter');
+const {registerUser, verifyUser, authenticate} = require('./identityBroker');
+const {putTodo, getTodo, deleteTodo, fetchTodos} = require('./dataAccessorBroker');
+const {
+    registerUserRequestSchema,
+    verifyUserRequestSchema,
+    authenticateRequestSchema,
+    putTodoRequestSchema,
+    getTodoRequestSchema,
+    deleteTodoRequestSchema,
+    fetchTodosRequestSchema
+} = require('./schemas');
 
-// eslint-disable-next-line complexity
+const doRegisterUser = async (event, context, callback) => {
+    const registerUserRequest = {body: JSON.parse(event.body)};
+    const proxyResponse = await brokerRequest(registerUserRequest, registerUserRequestSchema, registerUser);
 
-// FIXME - this is completely wrong. Needs to have a function per endpoint see template-sam.yml
-const handler = async (event, context, callback) => {
-    const operation = event.operation;
-
-    if (operation === 'REGISTER') {
-        const response = await register(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'VERIFY_REGISTRATION') {
-        const response = await verifyRegistration(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'AUTHENTICATE') {
-        const response = await authenticate(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'PUT_TODO') {
-        const response = await putToDo(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'GET_TODO') {
-        const response = await getToDo(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'DELETE_TODO') {
-        const response = await deleteToDo(event.body);
-
-        return callback(null, response);
-    } else if (operation === 'FETCH_TODOS') {
-        const response = await fetchToDos(event.body);
-
-        return callback(null, response);
-    }
-
-    return callback(new Error(`[BAD REQUEST] Unknown operation: ${operation}`));
+    return callback(null, proxyResponse);
 };
 
-module.exports = {handler};
+const doVerifyUser = async (event, context, callback) => {
+    const verifyUserRequest = {body: JSON.parse(event.body)};
+    const proxyResponse = await brokerRequest(verifyUserRequest, verifyUserRequestSchema, verifyUser);
+
+    return callback(null, proxyResponse);
+};
+
+const doAuthenticate = async (event, context, callback) => {
+    const authenticateRequest = {body: JSON.parse(event.body)};
+    const proxyResponse = await brokerRequest(authenticateRequest, authenticateRequestSchema, authenticate);
+
+    return callback(null, proxyResponse);
+};
+
+const doPutTodo = async (event, context, callback) => {
+    const putTodoRequest = {
+        body: JSON.parse(event.body),
+        parameters: {
+            authorization: event.headers.authorization
+        }
+    };
+    const proxyResponse = await brokerRequest(putTodoRequest, putTodoRequestSchema, putTodo);
+
+    return callback(null, proxyResponse);
+};
+
+const doGetTodo = async (event, context, callback) => {
+    const getTodoRequest = {
+        parameters: {
+            authorization: event.headers.authorization,
+            id: event.pathParameters.id
+        }
+    };
+    const proxyResponse = await brokerRequest(getTodoRequest, getTodoRequestSchema, getTodo);
+
+    return callback(null, proxyResponse);
+};
+
+const doDeleteTodo = async (event, context, callback) => {
+    const deleteTodoRequest = {
+        parameters: {
+            authorization: event.headers.authorization,
+            id: event.pathParameters.id
+        }
+    };
+    const proxyResponse = await brokerRequest(deleteTodoRequest, deleteTodoRequestSchema, deleteTodo);
+
+    return callback(null, proxyResponse);
+};
+
+const doFetchTodos = async (event, context, callback) => {
+    const fetchTodosRequest = {
+        parameters: {
+            authorization: event.headers.authorization
+        }
+    };
+    const proxyResponse = await brokerRequest(fetchTodosRequest, fetchTodosRequestSchema, fetchTodos);
+
+    return callback(null, proxyResponse);
+};
+
+module.exports = {
+    doAuthenticate,
+    doDeleteTodo,
+    doFetchTodos,
+    doGetTodo,
+    doPutTodo,
+    doRegisterUser,
+    doVerifyUser
+};

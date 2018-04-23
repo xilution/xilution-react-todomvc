@@ -6,14 +6,16 @@ Parameters:
   BaseStackName:
     Type: String
     Default: xilution-todomvc-base
+  XilutionApiKey:
+    Type: String
+    Default: FIXME
 
 Globals:
   Function:
     Runtime: nodejs8.10
-    CodeUri: ../../dist/server/
     Environment:
       Variables:
-        XilutionApiKey: "REPLACE_ME"
+        XilutionApiKey: !Ref XilutionApiKey
     MemorySize: 128
     Timeout: 10
 
@@ -22,7 +24,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-authenticate-function
-      Handler: index.authenticate
+      CodeUri: ../../dist/server/
+      Handler: index.doAuthenticate
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -37,7 +40,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-register-user-function
-      Handler: index.register-user
+      CodeUri: ../../dist/server/
+      Handler: index.doRegisterUser
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -52,7 +56,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-verify-user-function
-      Handler: index.verify-user
+      CodeUri: ../../dist/server/
+      Handler: index.doVerifyUser
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -67,7 +72,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-fetch-todos-function
-      Handler: index.fetch-todos
+      CodeUri: ../../dist/server/
+      Handler: index.doFetchTodos
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -82,7 +88,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-put-todo-function
-      Handler: index.put-todo
+      CodeUri: ../../dist/server/
+      Handler: index.doPutTodo
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -97,7 +104,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-get-todo-function
-      Handler: index.get-todo
+      CodeUri: ../../dist/server/
+      Handler: index.doGetTodo
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -112,7 +120,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-delete-todo-function
-      Handler: index.delete-todo
+      CodeUri: ../../dist/server/
+      Handler: index.doDeleteTodo
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -126,4 +135,4 @@ Resources:
 Outputs:
     ApiURL:
       Description: API endpoint URL for Xilution todo MVC example.
-      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

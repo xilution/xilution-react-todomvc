@@ -1,36 +1,22 @@
 const axios = require('axios');
 
-const doRegister = async ({firstName, lastName, email, username, password}) => {
-    const response = await axios.post('https://api.xilution.com/elements-identity-beta/register-user', {
-        email,
-        firstName,
-        lastName,
-        password,
-        username
-    });
-
-    return response.data;
+const commonOptions = {
+    headers: {
+        'x-api-key': process.env.XilutionApiKey
+    }
 };
+const registerUserUrl = 'https://api.xilution.com/business-basics-identity-beta/register-user';
+const verifyUserUrl = 'https://api.xilution.com/business-basics-identity-beta/confirm-user-registration';
+const authenticateUrl = 'https://api.xilution.com/business-basics-identity-beta/authenticate';
 
-const doVerifyRegistration = async ({verificationCode}) => {
-    const response = await axios.post('https://api.xilution.com/elements-identity-beta/verify-registration', {
-        verificationCode
-    });
+const registerUser = (request) => axios.post(registerUserUrl, request.body, commonOptions);
 
-    return response.data;
-};
+const verifyUser = (request) => axios.post(verifyUserUrl, request.body, commonOptions);
 
-const doAuthenticate = async ({username, password}) => {
-    const response = await axios.post('https://api.xilution.com/elements-identity-beta/authenticate', {
-        password,
-        username
-    });
-
-    return response.data;
-};
+const authenticate = (request) => axios.post(authenticateUrl, request.body, commonOptions);
 
 module.exports = {
-    authenticate: doAuthenticate,
-    register: doRegister,
-    verifyRegistration: doVerifyRegistration
+    authenticate,
+    registerUser,
+    verifyUser
 };

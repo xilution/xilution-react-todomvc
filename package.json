@@ -5,9 +5,9 @@
   "scripts": {
     "build:client": "webpack-cli --mode production --config ./webpack.client.config.js",
     "build:server": "webpack-cli --mode production --config ./webpack.server.config.js",
-    "dev": "webpack-dev-server --mode development --open",
+    "dev": "webpack-dev-server --mode development --config ./webpack.client.config.js --open",
     "lint": "eslint ./test/**/*.js ./src/**/*.js",
-    "test": "jest --coverage"
+    "test:unit": "jest --coverage --testPathPattern ./test/unit/"
   },
   "repository": {
     "type": "git",
@@ -24,15 +24,18 @@
     "aws-sdk": "^2.224.1",
     "axios": "^0.18.0",
     "history": "^4.7.2",
+    "joi": "^13.2.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
-    "todomvc-app-css": "^2.1.1"
+    "todomvc-app-css": "^2.1.1",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
