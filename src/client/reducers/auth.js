@@ -8,7 +8,7 @@ const auth = (state = {}, action) => {
         case 'REGISTER_SUCCESS':
             return {
                 ...state,
-                registrationToken: action.registrationToken
+                userRegistrationToken: action.userRegistrationToken
             };
         case 'VERIFY_REGISTRATION_SUCCESS':
             return {

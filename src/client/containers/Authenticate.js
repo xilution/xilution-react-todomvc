@@ -4,8 +4,9 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
+import axios from 'axios/index';
 
-import {authenticationSuccess} from '../actions';
+import {authenticationSuccess, registerSuccess} from '../actions';
 
 const defaultState = {
     password: '',
@@ -42,8 +43,18 @@ class Authenticate extends React.Component {
             return;
         }
 
-        this.props.dispatch(authenticationSuccess('id-token'));
-        this.props.dispatch(push('/todos'));
+        axios.post('https://jxwfbjjp49.execute-api.us-east-1.amazonaws.com/Prod/authenticate', this.state).then((response) => {
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(response, null, 2));
+
+            this.props.dispatch(authenticationSuccess(response.data.IdToken));
+            this.props.dispatch(push('/todos'));
+        }).catch((error) => {
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(error, null, 2));
+            // eslint-disable-next-line no-alert
+            alert('An error has occurred. Check the developer console.');
+        });
 
         this.setState(defaultState);
     }

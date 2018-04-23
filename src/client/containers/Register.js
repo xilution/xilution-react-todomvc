@@ -3,6 +3,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
+import axios from 'axios';
 import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 
 import {registerSuccess} from '../actions';
@@ -49,8 +50,18 @@ class Register extends React.Component {
             return;
         }
 
-        this.props.dispatch(registerSuccess('registration-token'));
-        this.props.dispatch(push('/verify-registration'));
+        axios.post('https://jxwfbjjp49.execute-api.us-east-1.amazonaws.com/Prod/register-user', this.state).then((response) => {
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(response, null, 2));
+
+            this.props.dispatch(registerSuccess(response.data.userRegistrationToken));
+            this.props.dispatch(push('/verify-registration'));
+        }).catch((error) => {
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(error, null, 2));
+            // eslint-disable-next-line no-alert
+            alert('An error has occurred. Check the developer console.');
+        });
 
         this.setState(defaultState);
     }
