@@ -1,9 +1,10 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Button} from 'react-bootstrap';
 
 const Link = ({active, children, onClick}) => (
-    <button
+    <Button
         disabled={active}
         onClick={onClick}
         style={{
@@ -11,7 +12,7 @@ const Link = ({active, children, onClick}) => (
         }}
     >
         {children}
-    </button>
+    </Button>
 );
 
 Link.propTypes = {
