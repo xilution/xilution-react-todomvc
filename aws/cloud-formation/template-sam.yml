@@ -18,6 +18,10 @@ Globals:
         XilutionApiKey: !Ref XilutionApiKey
     MemorySize: 128
     Timeout: 10
+  Api:
+    Cors:
+      AllowHeaders: "'Content-Type'"
+      AllowOrigin: "'*'"
 
 Resources:
   AuthenticateFunction:

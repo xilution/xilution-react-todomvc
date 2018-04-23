@@ -31,9 +31,9 @@ export const authenticationSuccess = (idToken) => ({
     type: 'AUTHENTICATION_SUCCESS'
 });
 
-export const registerSuccess = (registrationToken) => ({
-    registrationToken,
-    type: 'REGISTER_SUCCESS'
+export const registerSuccess = (userRegistrationToken) => ({
+    type: 'REGISTER_SUCCESS',
+    userRegistrationToken
 });
 
 export const signOut = () => ({

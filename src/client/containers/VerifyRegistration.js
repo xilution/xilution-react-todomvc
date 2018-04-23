@@ -3,8 +3,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import {Form, FormGroup, ControlLabel, FormControl, Button, HelpBlock} from 'react-bootstrap';
+import axios from 'axios/index';
 
-import {authenticationSuccess} from '../actions';
+import {authenticationSuccess, registerSuccess} from '../actions';
 
 const defaultState = {
     verificationCode: ''
@@ -39,8 +40,24 @@ class VerifyRegistration extends React.Component {
             return;
         }
 
-        this.props.dispatch(authenticationSuccess('id-token'));
-        this.props.dispatch(push('/todos'));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(this.props, null, 2));
+
+        axios.post('https://jxwfbjjp49.execute-api.us-east-1.amazonaws.com/Prod/verify-user', {
+            code: this.state.verificationCode,
+            userRegistrationToken: this.props.auth.userRegistrationToken
+        }).then((response) => {
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(response, null, 2));
+
+            this.props.dispatch(authenticationSuccess(response.data.IdToken));
+            this.props.dispatch(push('/todos'));
+        }).catch((error) => {
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(error, null, 2));
+            // eslint-disable-next-line no-alert
+            alert('An error has occurred. Check the developer console.');
+        });
 
         this.setState(defaultState);
     }
@@ -70,5 +87,9 @@ class VerifyRegistration extends React.Component {
     }
 }
 
-export default connect()(VerifyRegistration);
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps)(VerifyRegistration);
 /* eslint-enable react/no-set-state,react/prop-types */
