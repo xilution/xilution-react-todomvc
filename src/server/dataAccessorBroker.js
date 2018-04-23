@@ -1,32 +1,50 @@
 const axios = require('axios');
 
-const putToDo = async (todo) => {
-    const response = await axios.put('https://api.xilution.com/elements-data-accessor-beta/thing', todo);
+const DEFAULT_START_PAGE = 0;
+const DEFAULT_PAGE_SIZE = 100;
 
-    return response.data;
+const buildCommonOptions = (request) => ({
+    headers: {
+        authentication: request.parameters.authentication,
+        'x-api-key': process.env.XilutionApiKey
+    }
+});
+
+const putThingUrl = 'https://api.xilution.com/elements-data-accessor-beta/thing?merge=true';
+const getMeUrl = 'https://api.xilution.com/business-basics-identity-accessor-beta/me';
+
+const buildGetOrDeleteThingUrl = (id) => `https://api.xilution.com/elements-data-accessor-beta/thing/${id}`;
+const buildFetchThingsUrl = (searchCriteriaId, startPage, pageSize) => `https://api.xilution.com/elements-data-accessor-beta/fetch-things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}`;
+
+const getAuthenticatedUser = (request) => axios.get(getMeUrl, buildCommonOptions(request)).body;
+
+const putTodo = async (request) => {
+    const authenticatedUser = await getAuthenticatedUser(request);
+    const todo = request.body.userId ? request.body : {
+        ...request.body,
+        userId: authenticatedUser.id
+    };
+
+    return axios.put(putThingUrl, todo, buildCommonOptions(request));
 };
 
-const getToDo = async (id) => {
-    const response = await axios.put(`https://api.xilution.com/elements-data-accessor-beta/thing/${id}`);
+const getTodo = (request) => axios.get(buildGetOrDeleteThingUrl(request.id), buildCommonOptions(request));
 
-    return response.data;
-};
+const deleteTodo = (request) => axios.delete(buildGetOrDeleteThingUrl(request.id), buildCommonOptions(request));
 
-const deleteToDo = async (id) => {
-    const response = await axios.delete(`https://api.xilution.com/elements-data-accessor-beta/thing/${id}`);
+const fetchTodos = async (request) => {
+    const authenticatedUser = await getAuthenticatedUser(request);
+    const searchCriteria = await axios.put(putThingUrl, {
+        '@type': 'fetch-todo-search-criteria',
+        userId: authenticatedUser.id
+    }, buildCommonOptions(request)).body;
 
-    return response.data;
-};
-
-const fetchToDos = async (userId) => {
-    const response = await axios.get('https://api.xilution.com/elements-data-accessor-beta/fetch-things');
-
-    return response.data;
+    return axios.get(buildFetchThingsUrl(searchCriteria.id, DEFAULT_START_PAGE, DEFAULT_PAGE_SIZE), buildCommonOptions(request));
 };
 
 module.exports = {
-    deleteToDo,
-    fetchToDos,
-    getToDo,
-    putToDo
+    deleteTodo,
+    fetchTodos,
+    getTodo,
+    putTodo
 };

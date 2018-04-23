@@ -55,7 +55,7 @@ reprovision-base:
         --capabilities CAPABILITY_NAMED_IAM
 
 show-client-url:
-	aws cloudformation describe-stacks --stack-name xilution-todomvc-base --query 'Stacks[0].Outputs[0].OutputValue'
+	aws cloudformation describe-stacks --stack-name xilution-todomvc-base --query 'Stacks[0].Outputs[1].OutputValue'
 
 show-server-url:
 	aws cloudformation describe-stacks --stack-name xilution-todomvc-sam --query 'Stacks[0].Outputs[0].OutputValue'

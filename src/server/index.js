@@ -1,61 +1,90 @@
-const identityBroker = require('./identityBroker');
-const dataAccessorBroker = require('./dataAccessorBroker');
+const {brokerRequest} = require('./requestAdapter');
+const {registerUser, verifyUser, authenticate} = require('./identityBroker');
+const {putTodo, getTodo, deleteTodo, fetchTodos} = require('./dataAccessorBroker');
+const {
+    registerUserRequestSchema,
+    verifyUserRequestSchema,
+    authenticateRequestSchema,
+    putTodoRequestSchema,
+    getTodoRequestSchema,
+    deleteTodoRequestSchema,
+    fetchTodosRequestSchema
+} = require('./schemas');
 
-const registerUser = async (event, context, callback) => {
-    const response = await identityBroker.registerUser(event.body);
+const doRegisterUser = async (event, context, callback) => {
+    const registerUserRequest = {body: JSON.parse(event.body)};
+    const proxyResponse = await brokerRequest(registerUserRequest, registerUserRequestSchema, registerUser);
 
-    return callback(null, response);
+    return callback(null, proxyResponse);
 };
 
-const verifyUser = async (event, context, callback) => {
-    const response = await identityBroker.verifyUser(event.body);
+const doVerifyUser = async (event, context, callback) => {
+    const verifyUserRequest = {body: JSON.parse(event.body)};
+    const proxyResponse = await brokerRequest(verifyUserRequest, verifyUserRequestSchema, verifyUser);
 
-    return callback(null, response);
+    return callback(null, proxyResponse);
 };
 
-const authenticate = async (event, context, callback) => {
-    console.log(`event: ${JSON.stringify(event, null, 2)}`);
-    console.log(`context: ${JSON.stringify(context, null, 2)}`);
+const doAuthenticate = async (event, context, callback) => {
+    const authenticateRequest = {body: JSON.parse(event.body)};
+    const proxyResponse = await brokerRequest(authenticateRequest, authenticateRequestSchema, authenticate);
 
-    const body = JSON.parse(event.body);
-    const response = await identityBroker.authenticate({
-        password: body.password,
-        username: body.username
-    });
-
-    return callback(null, response);
+    return callback(null, proxyResponse);
 };
 
-const putToDo = async (event, context, callback) => {
-    const response = await dataAccessorBroker.putToDo(event.body);
+const doPutTodo = async (event, context, callback) => {
+    const putTodoRequest = {
+        body: JSON.parse(event.body),
+        parameters: {
+            authorization: event.headers.authorization
+        }
+    };
+    const proxyResponse = await brokerRequest(putTodoRequest, putTodoRequestSchema, putTodo);
 
-    return callback(null, response);
+    return callback(null, proxyResponse);
 };
 
-const getToDo = async (event, context, callback) => {
-    const response = await dataAccessorBroker.getToDo(event.body);
+const doGetTodo = async (event, context, callback) => {
+    const getTodoRequest = {
+        parameters: {
+            authorization: event.headers.authorization,
+            id: event.pathParameters.id
+        }
+    };
+    const proxyResponse = await brokerRequest(getTodoRequest, getTodoRequestSchema, getTodo);
 
-    return callback(null, response);
+    return callback(null, proxyResponse);
 };
 
-const deleteToDo = async (event, context, callback) => {
-    const response = await dataAccessorBroker.deleteToDo(event.body);
+const doDeleteTodo = async (event, context, callback) => {
+    const deleteTodoRequest = {
+        parameters: {
+            authorization: event.headers.authorization,
+            id: event.pathParameters.id
+        }
+    };
+    const proxyResponse = await brokerRequest(deleteTodoRequest, deleteTodoRequestSchema, deleteTodo);
 
-    return callback(null, response);
+    return callback(null, proxyResponse);
 };
 
-const fetchToDos = async (event, context, callback) => {
-    const response = await dataAccessorBroker.fetchToDos(event.body);
+const doFetchTodos = async (event, context, callback) => {
+    const fetchTodosRequest = {
+        parameters: {
+            authorization: event.headers.authorization
+        }
+    };
+    const proxyResponse = await brokerRequest(fetchTodosRequest, fetchTodosRequestSchema, fetchTodos);
 
-    return callback(null, response);
+    return callback(null, proxyResponse);
 };
 
 module.exports = {
-    authenticate,
-    deleteToDo,
-    fetchToDos,
-    getToDo,
-    putToDo,
-    registerUser,
-    verifyUser
+    doAuthenticate,
+    doDeleteTodo,
+    doFetchTodos,
+    doGetTodo,
+    doPutTodo,
+    doRegisterUser,
+    doVerifyUser
 };

@@ -25,7 +25,7 @@ Resources:
     Properties:
       FunctionName: xilution-todomvc-authenticate-function
       CodeUri: ../../dist/server/
-      Handler: index.authenticate
+      Handler: index.doAuthenticate
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -41,7 +41,7 @@ Resources:
     Properties:
       FunctionName: xilution-todomvc-register-user-function
       CodeUri: ../../dist/server/
-      Handler: index.registerUser
+      Handler: index.doRegisterUser
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -57,7 +57,7 @@ Resources:
     Properties:
       FunctionName: xilution-todomvc-verify-user-function
       CodeUri: ../../dist/server/
-      Handler: index.verifyUser
+      Handler: index.doVerifyUser
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -73,7 +73,7 @@ Resources:
     Properties:
       FunctionName: xilution-todomvc-fetch-todos-function
       CodeUri: ../../dist/server/
-      Handler: index.fetchTodos
+      Handler: index.doFetchTodos
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -89,7 +89,7 @@ Resources:
     Properties:
       FunctionName: xilution-todomvc-put-todo-function
       CodeUri: ../../dist/server/
-      Handler: index.putTodo
+      Handler: index.doPutTodo
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -105,7 +105,7 @@ Resources:
     Properties:
       FunctionName: xilution-todomvc-get-todo-function
       CodeUri: ../../dist/server/
-      Handler: index.getTodo
+      Handler: index.doGetTodo
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
@@ -121,7 +121,7 @@ Resources:
     Properties:
       FunctionName: xilution-todomvc-delete-todo-function
       CodeUri: ../../dist/server/
-      Handler: index.deleteTodo
+      Handler: index.doDeleteTodo
       Role:
         Fn::ImportValue:
           Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
