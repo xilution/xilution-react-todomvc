@@ -9,6 +9,9 @@ Parameters:
   XilutionApiKey:
     Type: String
     Default: FIXME
+  XilutionOrganizationId:
+    Type: String
+    Default: FIXME
 
 Globals:
   Function:
@@ -16,6 +19,7 @@ Globals:
     Environment:
       Variables:
         XilutionApiKey: !Ref XilutionApiKey
+        XilutionOrganizationId: !Ref XilutionOrganizationId
     MemorySize: 128
     Timeout: 10
   Api:
