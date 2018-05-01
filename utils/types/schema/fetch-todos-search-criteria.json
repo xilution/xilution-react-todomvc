@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "string",
+      "enum": [
+        "fetch-todos-search-criteria"
+      ]
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}
