@@ -18,6 +18,7 @@ const brokerRequest = async (request, schema, func) => {
 
         return buildSuccessProxyResponse(response);
     } catch (error) {
+        console.log('here');
         return buildErrorProxyResponse({
             ...request,
             action: func.toString
