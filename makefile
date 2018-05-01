@@ -19,7 +19,7 @@ deploy-client:
 deploy-server:
 	aws cloudformation deploy --stack-name xilution-todomvc-sam \
 		--template-file ./dist/template-sam.yaml \
-		--parameter-overrides XilutionApiKey=$(XILUTION_API_KEY) XilutionOrganizationId=$(XILUTION_ORGANIZATION_ID)
+		--parameter-overrides XilutionApiKey=$(XilutionApiKey) XilutionOrganizationId=$(XilutionOrganizationId)
 
 deprovision:
 	make deprovision-server
@@ -30,6 +30,15 @@ deprovision-base:
 deprovision-server:
 	aws cloudformation delete-stack --stack-name xilution-todomvc-sam
 
+package-sam:
+	aws cloudformation package \
+		--template-file ./aws/cloud-formation/template-sam.yml \
+		--s3-bucket xilution-todomvc-staging-bucket \
+		--output-template-file ./dist/template-sam.yaml
+
+put-types:
+	node ./utils/types/put-types
+
 provision:
 	make provision-base
 
@@ -38,12 +47,6 @@ provision-base:
 		--template-body file://./aws/cloud-formation/template-base.yml \
 		--parameters file://./aws/cloud-formation/parameters.json \
 		--capabilities CAPABILITY_NAMED_IAM
-
-package-sam:
-	aws cloudformation package \
-		--template-file ./aws/cloud-formation/template-sam.yml \
-		--s3-bucket xilution-todomvc-staging-bucket \
-		--output-template-file ./dist/template-sam.yaml
 
 reprovision:
 	make reprovision-base
