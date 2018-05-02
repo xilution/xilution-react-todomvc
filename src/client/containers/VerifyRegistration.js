@@ -7,6 +7,9 @@ import axios from 'axios/index';
 
 import {authenticationSuccess, registerSuccess} from '../actions';
 
+// eslint-disable-next-line no-undef
+const serverUrl = TODOMVC_SERVER_URL;
+
 const defaultState = {
     verificationCode: ''
 };
@@ -41,7 +44,7 @@ class VerifyRegistration extends React.Component {
         }
 
         try {
-            const response = await axios.post('https://jxwfbjjp49.execute-api.us-east-1.amazonaws.com/Prod/verify-user', {
+            const response = await axios.post(`${serverUrl}verify-user`, {
                 code: this.state.verificationCode,
                 userRegistrationToken: this.props.auth.userRegistrationToken
             });

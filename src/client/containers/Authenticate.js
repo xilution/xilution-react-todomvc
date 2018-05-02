@@ -8,6 +8,9 @@ import axios from 'axios/index';
 
 import {authenticationSuccess, fetchTodosSuccess} from '../actions';
 
+// eslint-disable-next-line no-undef
+const serverUrl = TODOMVC_SERVER_URL;
+
 const defaultState = {
     password: '',
     username: ''
@@ -44,8 +47,8 @@ class Authenticate extends React.Component {
         }
 
         try {
-            const authenticateResponse = await axios.post('https://jxwfbjjp49.execute-api.us-east-1.amazonaws.com/Prod/authenticate', this.state);
-            const todosResponse = await axios.get('https://jxwfbjjp49.execute-api.us-east-1.amazonaws.com/Prod/todos', {
+            const authenticateResponse = await axios.post(`${serverUrl}authenticate`, this.state);
+            const todosResponse = await axios.get(`${serverUrl}todos`, {
                 headers: {
                     authorization: authenticateResponse.data.IdToken
                 }

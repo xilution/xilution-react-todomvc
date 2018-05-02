@@ -1,10 +1,11 @@
 const path = require('path');
 
+const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
-    entry: './src/client/index.js',
+module.exports = (env) => ({
+    entry: ['babel-polyfill', './src/client/index.js'],
     module: {
         rules: [
             {
@@ -43,6 +44,9 @@ module.exports = {
         new MiniCssExtractPlugin({
             chunkFilename: '[id].css',
             filename: '[name].css'
+        }),
+        new webpack.DefinePlugin({
+            TODOMVC_SERVER_URL: JSON.stringify(env.TODOMVC_SERVER_URL)
         })
     ]
-};
+});

@@ -21,7 +21,10 @@ const buildErrorProxyResponse = (context, error) => {
 
     return {
         ...commonProperties,
-        body: JSON.stringify({errorId}),
+        body: JSON.stringify({
+            errorId,
+            message: 'Internal Server Error'
+        }),
         headers: commonHeaders,
         statusCode: 500
     };
@@ -36,9 +39,12 @@ const buildInputValidationProxyResponse = (inputValidationResult) => ({
 
 const buildSuccessProxyResponse = (response) => ({
     ...commonProperties,
-    body: JSON.stringify(response.data),
-    headers: commonHeaders,
-    statusCode: 200
+    body: response.data ? JSON.stringify(response.data) : '',
+    headers: {
+        ...commonHeaders,
+        location: response.headers.location
+    },
+    statusCode: response.status
 });
 
 module.exports = {

@@ -8,6 +8,9 @@ import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstra
 
 import {registerSuccess} from '../actions';
 
+// eslint-disable-next-line no-undef
+const serverUrl = TODOMVC_SERVER_URL;
+
 const defaultState = {
     email: '',
     firstName: '',
@@ -51,7 +54,7 @@ class Register extends React.Component {
         }
 
         try {
-            const response = await axios.post('https://jxwfbjjp49.execute-api.us-east-1.amazonaws.com/Prod/register-user', this.state);
+            const response = await axios.post(`${serverUrl}register-user`, this.state);
 
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(response, null, 2));

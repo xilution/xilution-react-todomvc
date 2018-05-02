@@ -69,8 +69,6 @@ const doDeleteTodo = async (event, context, callback) => {
 };
 
 const doFetchTodos = async (event, context, callback) => {
-    //console.log(JSON.stringify(event, null, 2));
-
     const fetchTodosRequest = {
         parameters: {
             authorization: event.headers.Authorization

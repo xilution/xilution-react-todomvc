@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "Xilution - React - TODO MVC",
   "scripts": {
-    "build:client": "webpack-cli --mode production --config ./webpack.client.config.js",
+    "build:client": "webpack-cli --env.TODOMVC_SERVER_URL=$TODOMVC_SERVER_URL --mode production --config ./webpack.client.config.js",
     "build:server": "webpack-cli --mode production --config ./webpack.server.config.js",
-    "dev": "webpack-dev-server --mode development --config ./webpack.client.config.js --open",
+    "dev": "webpack-dev-server --env.TODOMVC_SERVER_URL=$TODOMVC_SERVER_URL --mode development --config ./webpack.client.config.js --open",
     "lint": "eslint ./test/**/*.js ./src/**/*.js",
     "test:unit": "jest --coverage --testPathPattern ./test/unit/"
   },
