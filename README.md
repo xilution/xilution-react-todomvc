@@ -17,8 +17,7 @@ Note: this reference implementation was developed on Mac OSX. You're experience 
 
 ## Installation
 
-* Work In Progress
-* In the meantime, see makefile for installation tasks
+* The installation steps are still a work in progress. In the meantime, see makefile for installation tasks
 
 ## To Test
 
