@@ -8,6 +8,9 @@ import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstra
 
 import {registerSuccess} from '../actions';
 
+// eslint-disable-next-line no-undef
+const serverUrl = TODOMVC_SERVER_URL;
+
 const defaultState = {
     email: '',
     firstName: '',
@@ -37,7 +40,7 @@ class Register extends React.Component {
     }
 
     // eslint-disable-next-line complexity
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
 
         if (
@@ -50,18 +53,20 @@ class Register extends React.Component {
             return;
         }
 
-        axios.post('https://jxwfbjjp49.execute-api.us-east-1.amazonaws.com/Prod/register-user', this.state).then((response) => {
+        try {
+            const response = await axios.post(`${serverUrl}register-user`, this.state);
+
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(response, null, 2));
 
             this.props.dispatch(registerSuccess(response.data.userRegistrationToken));
             this.props.dispatch(push('/verify-registration'));
-        }).catch((error) => {
+        } catch (error) {
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(error, null, 2));
             // eslint-disable-next-line no-alert
             alert('An error has occurred. Check the developer console.');
-        });
+        }
 
         this.setState(defaultState);
     }

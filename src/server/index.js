@@ -36,7 +36,7 @@ const doPutTodo = async (event, context, callback) => {
     const putTodoRequest = {
         body: JSON.parse(event.body),
         parameters: {
-            authorization: event.headers.authorization
+            authorization: event.headers.Authorization
         }
     };
     const proxyResponse = await brokerRequest(putTodoRequest, putTodoRequestSchema, putTodo);
@@ -47,7 +47,7 @@ const doPutTodo = async (event, context, callback) => {
 const doGetTodo = async (event, context, callback) => {
     const getTodoRequest = {
         parameters: {
-            authorization: event.headers.authorization,
+            authorization: event.headers.Authorization,
             id: event.pathParameters.id
         }
     };
@@ -59,7 +59,7 @@ const doGetTodo = async (event, context, callback) => {
 const doDeleteTodo = async (event, context, callback) => {
     const deleteTodoRequest = {
         parameters: {
-            authorization: event.headers.authorization,
+            authorization: event.headers.Authorization,
             id: event.pathParameters.id
         }
     };
@@ -71,7 +71,7 @@ const doDeleteTodo = async (event, context, callback) => {
 const doFetchTodos = async (event, context, callback) => {
     const fetchTodosRequest = {
         parameters: {
-            authorization: event.headers.authorization
+            authorization: event.headers.Authorization
         }
     };
     const proxyResponse = await brokerRequest(fetchTodosRequest, fetchTodosRequestSchema, fetchTodos);

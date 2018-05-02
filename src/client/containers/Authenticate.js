@@ -6,7 +6,10 @@ import {push} from 'react-router-redux';
 import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 import axios from 'axios/index';
 
-import {authenticationSuccess, registerSuccess} from '../actions';
+import {authenticationSuccess, fetchTodosSuccess} from '../actions';
+
+// eslint-disable-next-line no-undef
+const serverUrl = TODOMVC_SERVER_URL;
 
 const defaultState = {
     password: '',
@@ -33,7 +36,7 @@ class Authenticate extends React.Component {
         });
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
 
         if (
@@ -43,18 +46,28 @@ class Authenticate extends React.Component {
             return;
         }
 
-        axios.post('https://jxwfbjjp49.execute-api.us-east-1.amazonaws.com/Prod/authenticate', this.state).then((response) => {
-            // eslint-disable-next-line no-console
-            console.log(JSON.stringify(response, null, 2));
+        try {
+            const authenticateResponse = await axios.post(`${serverUrl}authenticate`, this.state);
+            const todosResponse = await axios.get(`${serverUrl}todos`, {
+                headers: {
+                    authorization: authenticateResponse.data.IdToken
+                }
+            });
 
-            this.props.dispatch(authenticationSuccess(response.data.IdToken));
+            // eslint-disable-next-line no-console
+            console.log(`authenticateResponse: ${JSON.stringify(authenticateResponse, null, 2)}`);
+            // eslint-disable-next-line no-console
+            console.log(`todosResponse: ${JSON.stringify(todosResponse, null, 2)}`);
+
+            this.props.dispatch(fetchTodosSuccess(todosResponse.data));
+            this.props.dispatch(authenticationSuccess(authenticateResponse.data.IdToken));
             this.props.dispatch(push('/todos'));
-        }).catch((error) => {
+        } catch (error) {
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(error, null, 2));
             // eslint-disable-next-line no-alert
             alert('An error has occurred. Check the developer console.');
-        });
+        }
 
         this.setState(defaultState);
     }

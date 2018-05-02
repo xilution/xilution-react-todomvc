@@ -7,6 +7,9 @@ import axios from 'axios/index';
 
 import {authenticationSuccess, registerSuccess} from '../actions';
 
+// eslint-disable-next-line no-undef
+const serverUrl = TODOMVC_SERVER_URL;
+
 const defaultState = {
     verificationCode: ''
 };
@@ -31,7 +34,7 @@ class VerifyRegistration extends React.Component {
         });
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
 
         if (
@@ -40,24 +43,23 @@ class VerifyRegistration extends React.Component {
             return;
         }
 
-        // eslint-disable-next-line no-console
-        console.log(JSON.stringify(this.props, null, 2));
+        try {
+            const response = await axios.post(`${serverUrl}verify-user`, {
+                code: this.state.verificationCode,
+                userRegistrationToken: this.props.auth.userRegistrationToken
+            });
 
-        axios.post('https://jxwfbjjp49.execute-api.us-east-1.amazonaws.com/Prod/verify-user', {
-            code: this.state.verificationCode,
-            userRegistrationToken: this.props.auth.userRegistrationToken
-        }).then((response) => {
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(response, null, 2));
 
             this.props.dispatch(authenticationSuccess(response.data.IdToken));
             this.props.dispatch(push('/todos'));
-        }).catch((error) => {
+        } catch (error) {
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(error, null, 2));
             // eslint-disable-next-line no-alert
             alert('An error has occurred. Check the developer console.');
-        });
+        }
 
         this.setState(defaultState);
     }
