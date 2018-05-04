@@ -5,8 +5,8 @@ const commonProperties = {
 };
 
 const commonHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json'
+    'access-control-allow-origin': '*',
+    'content-type': 'application/json'
 };
 
 const buildErrorProxyResponse = (context, error) => {
@@ -42,6 +42,7 @@ const buildSuccessProxyResponse = (response) => ({
     body: response.data ? JSON.stringify(response.data) : '',
     headers: {
         ...commonHeaders,
+        'access-control-expose-headers': 'location',
         location: response.headers.location
     },
     statusCode: response.status

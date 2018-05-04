@@ -63,9 +63,9 @@ class Register extends React.Component {
             this.props.dispatch(push('/verify-registration'));
         } catch (error) {
             // eslint-disable-next-line no-console
-            console.log(JSON.stringify(error, null, 2));
+            console.log(error);
             // eslint-disable-next-line no-alert
-            alert('An error has occurred. Check the developer console.');
+            alert('An error has occurred. See the developer console for details.');
         }
 
         this.setState(defaultState);

@@ -1,8 +1,5 @@
-let nextTodoId = 0;
-
-export const createTodo = (text) => ({
-    id: nextTodoId++,
-    text,
+export const createTodo = (todo) => ({
+    todo,
     type: 'ADD_TODO'
 });
 

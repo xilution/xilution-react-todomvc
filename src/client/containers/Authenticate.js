@@ -54,19 +54,14 @@ class Authenticate extends React.Component {
                 }
             });
 
-            // eslint-disable-next-line no-console
-            console.log(`authenticateResponse: ${JSON.stringify(authenticateResponse, null, 2)}`);
-            // eslint-disable-next-line no-console
-            console.log(`todosResponse: ${JSON.stringify(todosResponse, null, 2)}`);
-
-            this.props.dispatch(fetchTodosSuccess(todosResponse.data));
+            this.props.dispatch(fetchTodosSuccess(todosResponse.data.content));
             this.props.dispatch(authenticationSuccess(authenticateResponse.data.IdToken));
             this.props.dispatch(push('/todos'));
         } catch (error) {
             // eslint-disable-next-line no-console
-            console.log(JSON.stringify(error, null, 2));
+            console.log(error);
             // eslint-disable-next-line no-alert
-            alert('An error has occurred. Check the developer console.');
+            alert('An error has occurred. See the developer console for details.');
         }
 
         this.setState(defaultState);

@@ -56,7 +56,7 @@ class VerifyRegistration extends React.Component {
             this.props.dispatch(push('/todos'));
         } catch (error) {
             // eslint-disable-next-line no-console
-            console.log(JSON.stringify(error, null, 2));
+            console.log(error);
             // eslint-disable-next-line no-alert
             alert('An error has occurred. Check the developer console.');
         }

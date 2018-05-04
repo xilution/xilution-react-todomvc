@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 import createHistory from 'history/createHashHistory';
 import {Route, Switch} from 'react-router-dom';
@@ -19,13 +19,13 @@ const history = createHistory();
 
 const middleware = routerMiddleware(history);
 
-const store = createStore(
-    combineReducers({
-        ...reducers,
-        router: routerReducer
-    }),
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(combineReducers({
+    ...reducers,
+    router: routerReducer
+}), composeEnhancers(
     applyMiddleware(middleware)
-);
+));
 
 render(
     <Provider store={store}>

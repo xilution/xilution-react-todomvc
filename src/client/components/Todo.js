@@ -1,23 +1,43 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ListGroupItem} from 'react-bootstrap';
+import {Button, ListGroupItem} from 'react-bootstrap';
 
-const Todo = ({onClick, completed, text}) => (
+const Todo = ({toggleTodo, deleteTodo, completed, text}) => (
     <ListGroupItem
-        onClick={onClick}
         style={{
             textDecoration: completed ? 'line-through' : 'none'
         }}
     >
         {text}
+        <Button
+            bsSize="xsmall"
+            bsStyle="danger"
+            onClick={deleteTodo}
+            style={{
+                float: 'right',
+                marginLeft: '10px'
+            }}
+        >
+            {'Delete'}
+        </Button>
+        <Button
+            bsSize="xsmall"
+            onClick={toggleTodo}
+            style={{
+                float: 'right'
+            }}
+        >
+            {completed ? 'Activate' : 'Complete'}
+        </Button>
     </ListGroupItem>
 );
 
 Todo.propTypes = {
     completed: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
-    text: PropTypes.string.isRequired
+    deleteTodo: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
+    toggleTodo: PropTypes.func.isRequired
 };
 
 export default Todo;

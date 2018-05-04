@@ -2,8 +2,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Form, FormGroup, InputGroup, FormControl, Button} from 'react-bootstrap';
+import axios from 'axios/index';
 
 import {createTodo} from '../actions';
+
+// eslint-disable-next-line no-undef
+const serverUrl = TODOMVC_SERVER_URL;
 
 const defaultState = {
     input: ''
@@ -25,7 +29,7 @@ class AddTodo extends React.Component {
         });
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
 
         if (
@@ -34,7 +38,24 @@ class AddTodo extends React.Component {
             return;
         }
 
-        this.props.dispatch(createTodo(this.state.input));
+        const todo = {
+            completed: false,
+            text: this.state.input.trim()
+        };
+
+        const response = await axios.put(`${serverUrl}todos`, todo, {
+            headers: {
+                authorization: this.props.auth.idToken
+            }
+        });
+
+        const location = response.headers.location;
+        const id = location.substring(location.lastIndexOf('/') + 1);
+
+        this.props.dispatch(createTodo({
+            ...todo,
+            id
+        }));
 
         this.setState(defaultState);
     }
@@ -62,5 +83,9 @@ class AddTodo extends React.Component {
     }
 }
 
-export default connect()(AddTodo);
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps)(AddTodo);
 /* eslint-enable react/no-set-state,react/prop-types */
