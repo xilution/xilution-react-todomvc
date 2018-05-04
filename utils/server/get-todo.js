@@ -52,4 +52,4 @@ const run = async () => {
 };
 
 // eslint-disable-next-line no-console
-run().then((response) => console.log(JSON.stringify(response, null, 2))).catch((error) => console.error(error));
+run().then((response) => console.log(`Response: ${JSON.stringify(response, null, 2)}`)).catch((error) => console.error(error));

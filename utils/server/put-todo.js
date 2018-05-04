@@ -25,8 +25,17 @@ const run = async () => {
                 hidden: true,
                 required: true
             },
+            // eslint-disable-next-line sort-keys
+            id: {
+                required: false
+            },
             text: {
                 required: true
+            },
+            // eslint-disable-next-line sort-keys
+            completed: {
+                required: false,
+                type: 'boolean'
             }
         }
     });
@@ -40,6 +49,23 @@ const run = async () => {
 
     const IdToken = JSON.parse(authenticationResponse.body).IdToken;
 
+    const todo = {
+        text: input.text
+    };
+
+    if (input.id) {
+        todo.id = input.id;
+    }
+
+    if (input.completed) {
+        todo.completed = input.completed;
+    } else {
+        todo.completed = false;
+    }
+
+    // eslint-disable-next-line no-console
+    console.log(`Putting: ${JSON.stringify(todo, null, 2)}`);
+
     return doPutTodo({
         body: JSON.stringify({
             completed: false,
@@ -52,4 +78,4 @@ const run = async () => {
 };
 
 // eslint-disable-next-line no-console
-run().then((response) => console.log(JSON.stringify(response, null, 2))).catch((error) => console.error(error));
+run().then((response) => console.log(`Response: ${JSON.stringify(response, null, 2)}`)).catch((error) => console.error(error));

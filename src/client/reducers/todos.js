@@ -1,13 +1,10 @@
+// eslint-disable-next-line complexity
 const todos = (state = [], action) => {
     switch (action.type) {
         case 'ADD_TODO':
             return [
                 ...state,
-                {
-                    completed: false,
-                    id: action.id,
-                    text: action.text
-                }
+                action.todo
             ];
         case 'TOGGLE_TODO':
             return state.map((todo) =>
@@ -18,6 +15,10 @@ const todos = (state = [], action) => {
                     }
                     : todo
             );
+        case 'DELETE_TODO':
+            return state.filter((todo) => todo.id !== action.id);
+        case 'FETCH_TODOS_SUCCESS':
+            return action.todos;
         default:
             return state;
     }

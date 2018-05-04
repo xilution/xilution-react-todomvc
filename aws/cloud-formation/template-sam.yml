@@ -21,7 +21,7 @@ Globals:
         XilutionApiKey: !Ref XilutionApiKey
         XilutionOrganizationId: !Ref XilutionOrganizationId
     MemorySize: 128
-    Timeout: 10
+    Timeout: 60
   Api:
     Cors:
       AllowHeaders: "'content-type, authorization'"
@@ -105,7 +105,7 @@ Resources:
         PostResource:
           Type: Api
           Properties:
-            Path: /todo
+            Path: /todos
             Method: put
 
   GetTodoFunction:
@@ -121,7 +121,7 @@ Resources:
         PostResource:
           Type: Api
           Properties:
-            Path: /todo/{todoId}
+            Path: /todos/{id}
             Method: get
 
   DeleteTodoFunction:
@@ -137,7 +137,7 @@ Resources:
         PostResource:
           Type: Api
           Properties:
-            Path: /todo/{todoId}
+            Path: /todos/{id}
             Method: delete
 
 Outputs:

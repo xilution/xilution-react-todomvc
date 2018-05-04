@@ -11,7 +11,33 @@ const buildAuthorizedOptions = (request) => ({
     }
 });
 
+const buildContextUserAwareOptions = (request, authenticatedUser) => {
+    const options = buildAuthorizedOptions(request);
+
+    return {
+        ...options,
+        headers: {
+            ...options.headers,
+            'x-xilution-context-user-id': authenticatedUser.id
+        }
+    };
+};
+
+const buildTypeAwareOptions = (request, authenticatedUser, type) => {
+    const options = buildContextUserAwareOptions(request, authenticatedUser);
+
+    return {
+        ...options,
+        headers: {
+            ...options.headers,
+            'x-xilution-type': type
+        }
+    };
+};
+
 module.exports = {
     buildAuthorizedOptions,
+    buildContextUserAwareOptions,
+    buildTypeAwareOptions,
     commonOptions
 };

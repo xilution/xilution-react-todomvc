@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const {buildAuthorizedOptions} = require('./brokerUtils');
+const {buildAuthorizedOptions, buildContextUserAwareOptions, buildTypeAwareOptions} = require('./brokerUtils');
 const {getAuthenticatedUser} = require('./identityBroker');
 
 const DEFAULT_START_PAGE = 0;
@@ -15,35 +15,8 @@ const buildFetchThingsUrl = (searchCriteriaId, startPage, pageSize) =>
 
 const buildPutTypesUrl = (name) => `https://api.xilution.com/elements-data-accessor-beta/types/${name}`;
 
-const buildGetSearchCriteriaIdOptions = (request, criteria) => {
-    const options = buildAuthorizedOptions(request);
-
-    return {
-        ...options,
-        headers: {
-            ...options.headers,
-            'x-xilution-context-user-id': criteria.userId
-        }
-    };
-};
-
-const buildFetchTodosOptions = (request) => {
-    const options = buildAuthorizedOptions(request);
-
-    return {
-        ...options,
-        headers: {
-            ...options.headers,
-            'x-xilution-type': 'todo'
-        }
-    };
-};
-
-const getSearchCriteriaId = async (request, searchCriteriaType, criteria) => {
-    const putSearchCriteriaResponse = await axios.put(putThingUrl, {
-        ...criteria,
-        '@type': searchCriteriaType
-    }, buildGetSearchCriteriaIdOptions(request, criteria));
+const getSearchCriteriaId = async (request, user, searchCriteria) => {
+    const putSearchCriteriaResponse = await axios.put(putThingUrl, searchCriteria, buildContextUserAwareOptions(request, user));
 
     const location = putSearchCriteriaResponse.headers.location;
 
@@ -51,31 +24,38 @@ const getSearchCriteriaId = async (request, searchCriteriaType, criteria) => {
 };
 
 const putTodo = async (request) => {
-    const authenticatedUser = await getAuthenticatedUser(request);
+    const user = await getAuthenticatedUser(request);
 
-    const todo = request.body.userId ? request.body : {
-        '@type': 'todo',
+    const todo = {
         ...request.body,
-        owningUserId: authenticatedUser.id,
-        userId: authenticatedUser.id
+        '@type': 'todo',
+        owningUserId: user.id
     };
 
-    return axios.put(putThingUrl, todo, buildAuthorizedOptions(request));
+    return axios.put(putThingUrl, todo, buildContextUserAwareOptions(request, user));
 };
 
-const getTodo = (request) => axios.get(buildGetOrDeleteThingUrl(request.id), buildAuthorizedOptions(request));
+const getTodo = async (request) => {
+    const user = await getAuthenticatedUser(request);
 
-const deleteTodo = (request) => axios.delete(buildGetOrDeleteThingUrl(request.id), buildAuthorizedOptions(request));
+    return axios.get(buildGetOrDeleteThingUrl(request.parameters.id), buildTypeAwareOptions(request, user, 'todo'));
+};
+
+const deleteTodo = async (request) => {
+    const user = await getAuthenticatedUser(request);
+
+    return axios.delete(buildGetOrDeleteThingUrl(request.parameters.id), buildTypeAwareOptions(request, user, 'todo'));
+};
 
 const fetchTodos = async (request) => {
-    const authenticatedUser = await getAuthenticatedUser(request);
+    const user = await getAuthenticatedUser(request);
 
-    const searchCriteriaId = await getSearchCriteriaId(request, 'fetch-todos-search-criteria', {
-        owningUserId: authenticatedUser.id,
-        userId: authenticatedUser.id
+    const searchCriteriaId = await getSearchCriteriaId(request, user, {
+        '@type': 'fetch-todos-search-criteria',
+        owningUserId: user.id
     });
 
-    return axios.get(buildFetchThingsUrl(searchCriteriaId, DEFAULT_START_PAGE, DEFAULT_PAGE_SIZE), buildFetchTodosOptions(request));
+    return axios.get(buildFetchThingsUrl(searchCriteriaId, DEFAULT_START_PAGE, DEFAULT_PAGE_SIZE), buildTypeAwareOptions(request, user, 'todo'));
 };
 
 const putType = async (request) => {
