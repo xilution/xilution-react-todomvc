@@ -4,9 +4,6 @@ This project is a full-stack example of the ubiquitous [TodoMVC app](http://todo
 Follow the instructions below to stand up an example of the app for yourself.
 Within about 1/2 hour you will have a fully functional Todo management app running in AWS.
 
-The project features a serverless backend that uses the [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model) and integrates with [Xilution SaaS](https://prod.xilution.com/products/index.html).
-The app's frontend is built using (React and Redux)[https://github.com/reactjs/react-redux].
-
 ## Features
 
 * Frontend
