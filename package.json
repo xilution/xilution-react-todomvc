@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --env.TODOMVC_BACKEND_URL=$TODOMVC_BACKEND_URL --mode development --config ./webpack.frontend.config.js --open",
     "lint": "eslint ./test/**/*.js ./src/**/*.js",
     "test:unit": "jest --coverage --testPathPattern ./test/unit/",
-    "verify": "yarn lint && yarn test:unit"
+    "test": "yarn lint && yarn test:unit"
   },
   "repository": {
     "type": "git",
