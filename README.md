@@ -7,7 +7,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 <p>
 <p align="center">
   <a href="https://github.com/xilution/xilution-react-todomvc/issues">
-    <img alt="Issues" src="https://github.com/xilution/xilution-react-todomvc/issues">
+    <img alt="Issues" src="https://img.shields.io/github/issues/xilution/xilution-react-todomvc.svg">
   </a>
   <a href="https://github.com/xilution/xilution-react-todomvc/network">
     <img alt="Forks" src="https://img.shields.io/github/forks/xilution/xilution-react-todomvc.svg">
