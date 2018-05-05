@@ -6,10 +6,10 @@ Follow the instructions below to stand up an example of the app for yourself.
 Within about 1/2 hour you will have a fully functional todo management app running in AWS.
 <p>
 <p align="center">
-  <a href="https://travis-ci.org/semantic-release/semantic-release">
+  <a href="https://travis-ci.org/xilution/xilution-react-todomvc">
     <img alt="Travis" src="https://img.shields.io/travis/xilution/xilution-react-todomvc.svg">
   </a>
-  <a href="https://codecov.io/gh/semantic-release/semantic-release">
+  <a href="https://codecov.io/gh/xilution/xilution-react-todomvc">
     <img alt="Codecov" src="https://img.shields.io/codecov/c/github/xilution/xilution-react-todomvc.svg">
   </a>
   <a href="#badge">
