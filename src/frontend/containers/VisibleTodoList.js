@@ -5,7 +5,7 @@ import {deleteTodo, toggleTodo} from '../actions';
 import TodoList from '../components/TodoList';
 
 // eslint-disable-next-line no-undef
-const serverUrl = TODOMVC_SERVER_URL;
+const serverUrl = TODOMVC_BACKEND_URL;
 
 const getVisibleTodos = (todos, filter) => {
     switch (filter) {

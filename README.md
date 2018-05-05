@@ -1,52 +1,181 @@
 # xilution-react-todomvc
 
-Work in Progress
+This project is a full-stack example of the ubiquitous [TodoMVC app](http://todomvc.com/) using a [serverless computing model](https://en.wikipedia.org/wiki/Serverless_computing).
+Follow the instructions below to stand up an example of the app for yourself.
+Within about 1/2 hour you will have a fully functional Todo management app running in AWS.
 
-## Features of this Reference Implementation
+The project features a serverless backend that uses the [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model) and integrates with [Xilution SaaS](https://prod.xilution.com/products/index.html).
+The app's frontend is built using (React and Redux)[https://github.com/reactjs/react-redux].
 
-* AWS
-	* Serverless Application Model (SAM)
-	* Cloudformation
-	* Secrets Manager
-	* Lambda
-	* API Gateway
-* Server (well, sort of)
-	* Serverless Architecture through SAM
-	* NodeJS 8.10.0 Lambda
-	* Webpack build
-	* Integrates with Xilution SaaS
-		* Elements / Data Accessor
-		* Business Basics / Identity
-* Client
-	* React
+## Features
+
+* Frontend
 	* Use Cases
-		* Register User
-		* Authenticate
+		* Register New User (including email verification)
+		* Authenticate User
 		* View Todos
-		* Create/Update Todos
+		* Create/Update/Delete Todos
+	* [Single Page Web Application](https://en.wikipedia.org/wiki/Single-page_application)
+	* [Hosted On AWS S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
+	* [React](https://reactjs.org/) *
+		* [React-Redux](https://github.com/reactjs/react-redux)
+		* [React-Router](https://github.com/ReactTraining/react-router)
+		* [React-Bootstrap](https://react-bootstrap.github.io/)
+	* [Node.js](https://nodejs.org/en/) version 8.10.0 for React Code
+	* [Webpack](https://webpack.js.org/) Build
+	* [Jest](https://facebook.github.io/jest/) Unit Testing
+	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
+		* [Featuring a world class linting strategy.](https://github.com/manovotny/eslint-config-get-off-my-lawn)
 		
+\* React was chosen for this example's frontend b/c of its pervasiveness and (most importantly) its [unit testability](https://facebook.github.io/jest/docs/en/tutorial-react.html).
+
+* Backend *
+	* [RESTful Web Service](https://en.wikipedia.org/wiki/Representational_state_transfer)
+		* Supports Frontend Use Cases
+	* [Amazon Web Services](https://aws.amazon.com/)
+		* [Serverless Application Model (SAM)](https://github.com/awslabs/serverless-application-model)
+		* [Cloudformation](https://aws.amazon.com/cloudformation/)
+		* [Secrets Manager](https://aws.amazon.com/secrets-manager/)
+		* [Lambda (NodeJS)](https://aws.amazon.com/lambda/)
+		* [API Gateway](https://aws.amazon.com/api-gateway/)
+	* [Node.js](https://nodejs.org/en/) version 8.10.0 for Lambda Code
+	* [Webpack](https://webpack.js.org/) Build
+		* Technique used to reduce size of deployed code.
+	* [Jest](https://facebook.github.io/jest/) Unit Testing
+	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
+		* [Featuring a world class linting strategy.](https://github.com/manovotny/eslint-config-get-off-my-lawn)
+	* Integrates with [Xilution SaaS](https://www.xilution.com)
+		* [Xilution - Elements - Data Accessor](https://prod.xilution.com/products/?product=xilution-elements-data-accessor)
+		* [Xilution - Business Basics - Identity](https://prod.xilution.com/products/?product=xilution-business-basics-identity)
+
+\* You may be asking yourself, is a backend necessary?
+Why don't you just integrate directly with Xilution SaaS from the frontend code.
+The purpose of the backend is two fold.
+First, it abstracts domain specific functionality from the frontend.
+For example, some TodoMVC uses cases require the aggregation of a few different Xilution SaaS requests.
+Second, it protects secrets like the Xilution Subscriber API Key and the Xilution Subscriber Organization ID.
+
 ## Prerequisites
 
-Note: this reference implementation was developed on Mac OSX. You're experience on other operating systems will vary. I'll try to update this README and adapt the code as time allows. PRs are welcome.
+This example was developed on [macOS High Sierra](https://www.apple.com/macos/high-sierra/) using [WebStorm](https://www.jetbrains.com/webstorm/).
+Your experience on other development platforms will vary.
+If you find inconsistencies with these instructions and develop a solution for your development platform, please share your experience through a pull request.
 
-1. Create an AWS Account
+For Windows users, I recommend using Git Bash for command line steps.
+Git Bash is included in the Git installation mentioned below.
+For Mac users, the Terminal application is the best way to go for command line steps.
 
-1. Create a Xilution Account
+1. [Create an AWS Account](https://aws.amazon.com/free/)
 
-1. Install AWS-CLI
-	1. You'll need python 3 to get access to the latest AWS-CLI commands.
+1. [Create a Xilution Account](https://www.xilution.com/registration/)
+	* Note your Xilution API Key and Xilution Organization ID when you complete the registration process.
 
-1. Install yq
+1. [Install Git](https://git-scm.com/downloads)
 
-## Installation
+1. [Install AWS CLI](https://aws.amazon.com/cli/)
+	1. You'll need python 3 to get access to the latest AWS CLI commands.
 
-* The installation steps are still a work in progress. In the meantime, see makefile for installation tasks
+1. [Install NVM](https://github.com/creationix/nvm)
+
+1. [Install Yarn](https://yarnpkg.com/)
+
+1. [Install yq](https://stedolan.github.io/jq/)
+
+## One Time Set Up
+
+1. Open a command line app.
+	* Mac: Terminal
+	* Windows: Git Bash
+	
+1. Create an AWS User Account
+	* It's bad practice to use your AWS root account.
+
+1. From the command prompt...
+	1. Run `nvm install 8.10.0` to install the version of Node.js used by the example.
+
+1. From the command prompt...
+	* Some of these steps may be superfluous for experienced developers.
+	For those less experienced coders, I recommend following these steps verbatim.
+	1. Run `cd ~` to navigate to your home directory.
+	1. Run `mkdir Developer` to create a directory to keep development related things.
+	1. Run `cd Developer` to navigate into the Developer directory.
+	1. Run `mkdir git` to create a directory to keep code cloned through git.
+	1. Run `cd git` to navigate into the git directory.
+	1. Run `git clone https://github.com/xilution/xilution-react-todomvc` to download the code for this example.
+	1. Run `cd xilution-react-todomvc` to navigate into the directory where the code for this example has been downloaded.
+		* If you have installed nvm correctly, when you execute this command you should see the message: 'Now using node v8.10.0 (npm v5.6.0)'.
+	1. Run `ls` to see the files that were downloaded.
+	1. Run `yarn` to install Node.Js dependencies.
+
+1. Log Into your AWS User Account
+
+1. Save your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
+
+## Provision and Deploy
+
+1. Open a command line app.
+	* Mac: Terminal
+	* Windows: Git Bash
+
+1. Provision Resources
+	1. Run `make provision-base` to provision the base AWS resources.
+		* See ./aws/cloud-formation/template-base.yml
+	1. Run `make build-backend` to build the backend resources.
+	1. Run `make deploy-backend` to deploy the backend resources to your AWS account.
+		* Provisions API Gateway and Lambda resources.
+		* See ./aws/cloud-formation/template-sam.yml
+	1. Run `make show-backend-url` to see the URL of the backend RESTful web service.
+	1. Run `make put-types` to register JSON schema used by this example with Xilution - Elements - Data Accessor.
+
+1. Deploy Frontend Resource
+	1. Run `make build-frontend` to build the frontend resources.
+	1. Run `make deploy-frontend` to deploy the frontend resources.
+	1. Run `make show-frontend-url` to see the URL of the frontend application.
+	1. Copy the front end URL and paste it into a browser.
+		* You should see the login for for the TodoMVC app.
 
 ## To Test
 
-* Unit Tests...
-	* WIP
+1. Open a command line app.
+	* Mac: Terminal
+	* Windows: Git Bash
 
-* Once installed...
+1. To Run Verify
+	1. Run `yarn verify` to run the linter and run unit tests.
 
-Run `make show-client-url` and enter the result into a browser.
+1. To Run the App Locally
+	1. Run `make dev` to run the app locally.
+		* make is necessary to automatically inject the backend url.
+
+1. User Acceptance Testing
+	1. Run `make show-frontend-url` to see the URL of the frontend application.
+	1. Copy the front end URL and paste it into a browser.
+	1. Run through the different use cases
+		* Register New User (including email verification)
+		* Authenticate User
+		* View Todos
+		* Create/Update/Delete Todos
+
+## Deprovisioning
+
+1. Open a command line app.
+	* Mac: Terminal
+	* Windows: Git Bash
+
+1. Deprovision Resource
+	1. Run `make deprovision-backend` to deprovision backend resources.
+		* See ./aws/cloud-formation/template-sam.yml
+	1. Using the AWS Console, delete the S3 buckets
+		* xilution-todomvc-website-bucket
+		* xilution-todomvc-staging-bucket
+	1. Run `make deprovision-base` to deprovision the base resources.
+		* See ./aws/cloud-formation/template-base.yml
+		
+## About the Author
+
+[Todd Brunia](https://twitter.com/tbrunia) is a Sr. Software Engineer with [Source Allies](https://www.sourceallies.com/) and the founder of [Xilution](https://www.xilution.com).
+
+## Contributions
+
+See something about this example that you thing could be improved? 
+Pull requests are encouraged and greatly appreciated!

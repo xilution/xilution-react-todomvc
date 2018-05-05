@@ -6,10 +6,10 @@ Parameters:
   BaseStackName:
     Type: String
     Default: xilution-todomvc-base
-  XilutionApiKey:
+  XILUTION_SUBSCRIBER_API_KEY:
     Type: String
     Default: FIXME
-  XilutionOrganizationId:
+  XILUTION_SUBSCRIBER_ORG_ID:
     Type: String
     Default: FIXME
 
@@ -18,8 +18,8 @@ Globals:
     Runtime: nodejs8.10
     Environment:
       Variables:
-        XilutionApiKey: !Ref XilutionApiKey
-        XilutionOrganizationId: !Ref XilutionOrganizationId
+        XILUTION_SUBSCRIBER_API_KEY: !Ref XILUTION_SUBSCRIBER_API_KEY
+        XILUTION_SUBSCRIBER_ORG_ID: !Ref XILUTION_SUBSCRIBER_ORG_ID
     MemorySize: 128
     Timeout: 60
   Api:
@@ -32,7 +32,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-authenticate-function
-      CodeUri: ../../dist/server/
+      CodeUri: ../../dist/backend/
       Handler: index.doAuthenticate
       Role:
         Fn::ImportValue:
@@ -48,7 +48,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-register-user-function
-      CodeUri: ../../dist/server/
+      CodeUri: ../../dist/backend/
       Handler: index.doRegisterUser
       Role:
         Fn::ImportValue:
@@ -64,7 +64,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-verify-user-function
-      CodeUri: ../../dist/server/
+      CodeUri: ../../dist/backend/
       Handler: index.doVerifyUser
       Role:
         Fn::ImportValue:
@@ -80,7 +80,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-fetch-todos-function
-      CodeUri: ../../dist/server/
+      CodeUri: ../../dist/backend/
       Handler: index.doFetchTodos
       Role:
         Fn::ImportValue:
@@ -96,7 +96,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-put-todo-function
-      CodeUri: ../../dist/server/
+      CodeUri: ../../dist/backend/
       Handler: index.doPutTodo
       Role:
         Fn::ImportValue:
@@ -112,7 +112,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-get-todo-function
-      CodeUri: ../../dist/server/
+      CodeUri: ../../dist/backend/
       Handler: index.doGetTodo
       Role:
         Fn::ImportValue:
@@ -128,7 +128,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: xilution-todomvc-delete-todo-function
-      CodeUri: ../../dist/server/
+      CodeUri: ../../dist/backend/
       Handler: index.doDeleteTodo
       Role:
         Fn::ImportValue:

@@ -1,4 +1,4 @@
-import todos from '../../../../src/client/reducers/todos';
+import todos from '../../../../src/frontend/reducers/todos';
 
 describe('todos reducer', () => {
     test('should handle initial state', () => {

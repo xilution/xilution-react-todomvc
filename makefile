@@ -1,34 +1,31 @@
-XILUTION_API_KEY := $(shell aws secretsmanager get-secret-value --secret-id XilutionApiKey | jq '.SecretString')
-XILUTION_ORGANIZATION_ID := $(shell aws secretsmanager get-secret-value --secret-id XilutionOrganizationId | jq '.SecretString')
-TODOMVC_CLIENT_URL := $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-base | jq '.Stacks[0].Outputs[1].OutputValue')
-TODOMVC_SERVER_URL := $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-sam | jq '.Stacks[0].Outputs[0].OutputValue')
+XILUTION_API_KEY := $(shell aws secretsmanager get-secret-value --secret-id XILUTION_SUBSCRIBER_API_KEY | jq '.SecretString')
+XILUTION_ORGANIZATION_ID := $(shell aws secretsmanager get-secret-value --secret-id XILUTION_SUBSCRIBER_ORG_ID | jq '.SecretString')
+TODOMVC_FRONTEND_URL := $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-base | jq '.Stacks[0].Outputs[1].OutputValue')
+TODOMVC_BACKEND_URL := $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-sam | jq '.Stacks[0].Outputs[0].OutputValue')
 
-build-client:
-	TODOMVC_SERVER_URL=$(TODOMVC_SERVER_URL) yarn build:client
+build-frontend:
+	TODOMVC_BACKEND_URL=$(TODOMVC_BACKEND_URL) yarn build:frontend
 
-build-server:
-	yarn build:server
+build-backend:
+	yarn build:backend
 	make package-sam
 
-deploy-client:
-	aws s3 cp ./dist/client/ s3://xilution-todomvc-website-bucket/ --recursive --include "*" --acl public-read
+deploy-frontend:
+	aws s3 cp ./dist/frontend/ s3://xilution-todomvc-website-bucket/ --recursive --include "*" --acl public-read
 
-deploy-server:
+deploy-backend:
 	aws cloudformation deploy --stack-name xilution-todomvc-sam \
 		--template-file ./dist/template-sam.yaml \
-		--parameter-overrides XilutionApiKey=$(XILUTION_API_KEY) XilutionOrganizationId=$(XILUTION_ORGANIZATION_ID)
-
-deprovision:
-	make deprovision-server
+		--parameter-overrides XILUTION_SUBSCRIBER_API_KEY=$(XILUTION_API_KEY) XILUTION_SUBSCRIBER_ORG_ID=$(XILUTION_ORGANIZATION_ID)
 
 deprovision-base:
 	aws cloudformation delete-stack --stack-name xilution-todomvc-base
 
-deprovision-server:
+deprovision-backend:
 	aws cloudformation delete-stack --stack-name xilution-todomvc-sam
 
 dev:
-	TODOMVC_SERVER_URL=$(TODOMVC_SERVER_URL) yarn dev
+	TODOMVC_BACKEND_URL=$(TODOMVC_BACKEND_URL) yarn dev
 
 package-sam:
 	aws cloudformation package \
@@ -39,17 +36,11 @@ package-sam:
 put-types:
 	node ./utils/types/put-types
 
-provision:
-	make provision-base
-
 provision-base:
 	aws cloudformation create-stack --stack-name xilution-todomvc-base \
 		--template-body file://./aws/cloud-formation/template-base.yml \
 		--parameters file://./aws/cloud-formation/parameters.json \
 		--capabilities CAPABILITY_NAMED_IAM
-
-reprovision:
-	make reprovision-base
 
 reprovision-base:
 	aws cloudformation update-stack --stack-name xilution-todomvc-base \
@@ -57,11 +48,11 @@ reprovision-base:
 		--parameters file://./aws/cloud-formation/parameters.json \
         --capabilities CAPABILITY_NAMED_IAM
 
-show-client-url:
-	echo $(TODOMVC_CLIENT_URL)
+show-frontend-url:
+	echo $(TODOMVC_FRONTEND_URL)
 
-show-server-url:
-	echo $(TODOMVC_SERVER_URL)
+show-backend-url:
+	echo $(TODOMVC_BACKEND_URL)
 
 show-xilution-api-key:
 	echo $(XILUTION_API_KEY)

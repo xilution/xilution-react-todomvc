@@ -1,4 +1,4 @@
-import * as actions from '../../../../src/client/actions/index';
+import * as actions from '../../../../src/frontend/actions/index';
 
 describe('todo actions', () => {
     test('addTodo should create ADD_TODO action', () => {

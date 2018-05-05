@@ -7,7 +7,7 @@ import axios from 'axios/index';
 import {createTodo} from '../actions';
 
 // eslint-disable-next-line no-undef
-const serverUrl = TODOMVC_SERVER_URL;
+const serverUrl = TODOMVC_BACKEND_URL;
 
 const defaultState = {
     input: ''
