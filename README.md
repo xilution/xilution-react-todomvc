@@ -84,13 +84,13 @@ For Mac users, the Terminal application is the best way to go for command line s
 	* Mac: Terminal
 	* Windows: Git Bash
 	
-1. Create an AWS User Account
+1. [Create an AWS User Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
 	* It's bad practice to use your AWS root account.
 
-1. From the command prompt...
+1. Install Node.js 8.10.0
 	1. Run `nvm install 8.10.0` to install the version of Node.js used by the example.
 
-1. From the command prompt...
+1. Download Project Source Code
 	* Some of these steps may be superfluous for experienced developers.
 	For those less experienced coders, I recommend following these steps verbatim.
 	1. Run `cd ~` to navigate to your home directory.
@@ -104,9 +104,12 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `ls` to see the files that were downloaded.
 	1. Run `yarn` to install Node.Js dependencies.
 
-1. Log Into your AWS User Account
+1. [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
 
 1. Save your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
+	* You can look up your Xilution Subscriber API Key and Organization Id through through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
+	1. Run `aws secretsmanager create-secret --name XILUTION_SUBSCRIBER_API_KEY --description "My Xilution Subscriber API Key" --secret-string REPLACE-WITH-YOUR-API-KEY` to save your Xilution Subscriber API Key to AWS Secrets Manager.
+	1. Run `aws secretsmanager create-secret --name XILUTION_SUBSCRIBER_ORG_ID --description "My Xilution Subscriber Organization ID" --secret-string REPLACE-WITH-YOUR-ORG-ID` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
 
 ## Provision and Deploy
 
@@ -159,7 +162,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 	* Mac: Terminal
 	* Windows: Git Bash
 
-1. Deprovision Resource
+1. Deprovision Resources
 	1. Run `make deprovision-backend` to deprovision backend resources.
 		* See ./aws/cloud-formation/template-sam.yml
 	1. Using the AWS Console, delete the S3 buckets
