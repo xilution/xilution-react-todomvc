@@ -18,9 +18,6 @@ Within about 1/2 hour you will have a fully functional todo management app runni
   <a href="https://github.com/xilution/xilution-react-todomvc/blob/master/LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/xilution/xilution-react-todomvc.svg">
   </a>
-  <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fxilution%2Fxilution-react-todomvc">
-    <img alt="Tweet" src="https://img.shields.io/twitter/url/https/github.com/xilution/xilution-react-todomvc.svg?style=social">
-  </a>
 </p>
 <p align="center">
   <a href="https://travis-ci.org/xilution/xilution-react-todomvc">
@@ -31,6 +28,11 @@ Within about 1/2 hour you will have a fully functional todo management app runni
   </a>
   <a href="#badge">
     <img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
+  </a>
+</p>
+<p align="center">
+  <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fxilution%2Fxilution-react-todomvc">
+    <img alt="Tweet" src="https://img.shields.io/twitter/url/https/github.com/xilution/xilution-react-todomvc.svg?style=social">
   </a>
 </p>
 
