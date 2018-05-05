@@ -1,6 +1,6 @@
 const commonOptions = {
     headers: {
-        'x-api-key': process.env.XilutionApiKey
+        'x-api-key': process.env.XILUTION_SUBSCRIBER_API_KEY
     }
 };
 

@@ -2,8 +2,8 @@ const {promisify} = require('util');
 
 const prompt = require('prompt');
 
-const identityBroker = require('../../src/server/identityBroker');
-const dataAccessorBroker = require('../../src/server/dataAccessorBroker');
+const identityBroker = require('../../src/backend/identityBroker');
+const dataAccessorBroker = require('../../src/backend/dataAccessorBroker');
 
 const promptGetAsync = promisify(prompt.get);
 
@@ -31,8 +31,8 @@ const putType = async (IdToken, type) => {
 };
 
 const run = async () => {
-    if (!process.env.XilutionApiKey) {
-        throw new Error('XilutionApiKey environment variable must be set.');
+    if (!process.env.XILUTION_SUBSCRIBER_API_KEY) {
+        throw new Error('XILUTION_SUBSCRIBER_API_KEY environment variable must be set.');
     }
 
     prompt.start();

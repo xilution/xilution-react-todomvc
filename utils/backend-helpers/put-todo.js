@@ -2,15 +2,15 @@ const {promisify} = require('util');
 
 const prompt = require('prompt');
 
-const index = require('../../src/server/index');
+const index = require('../../src/backend/index');
 
 const promptGetAsync = promisify(prompt.get);
 const doAuthenticateAsync = promisify(index.doAuthenticate);
 const doPutTodo = promisify(index.doPutTodo);
 
 const run = async () => {
-    if (!process.env.XilutionApiKey) {
-        throw new Error('XilutionApiKey environment variable must be set.');
+    if (!process.env.XILUTION_SUBSCRIBER_API_KEY) {
+        throw new Error('XILUTION_SUBSCRIBER_API_KEY environment variable must be set.');
     }
 
     prompt.start();

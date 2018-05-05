@@ -2,20 +2,20 @@ const {promisify} = require('util');
 
 const prompt = require('prompt');
 
-const index = require('../../src/server/index');
+const index = require('../../src/backend/index');
 
 const promptGetAsync = promisify(prompt.get);
 const doAuthenticateAsync = promisify(index.doAuthenticate);
-const doFetchTodosAsync = promisify(index.doFetchTodos);
+const doDeleteTodo = promisify(index.doDeleteTodo);
 
 const run = async () => {
-    if (!process.env.XilutionApiKey) {
-        throw new Error('XilutionApiKey environment variable must be set.');
+    if (!process.env.XILUTION_SUBSCRIBER_API_KEY) {
+        throw new Error('XILUTION_SUBSCRIBER_API_KEY environment variable must be set.');
     }
 
     prompt.start();
 
-    const credentials = await promptGetAsync({
+    const input = await promptGetAsync({
         properties: {
             username: {
                 required: true
@@ -24,19 +24,29 @@ const run = async () => {
             password: {
                 hidden: true,
                 required: true
+            },
+            // eslint-disable-next-line sort-keys
+            id: {
+                required: true
             }
         }
     });
 
     const authenticationResponse = await doAuthenticateAsync({
-        body: JSON.stringify(credentials)
+        body: JSON.stringify({
+            password: input.password,
+            username: input.username
+        })
     }, {});
 
     const IdToken = JSON.parse(authenticationResponse.body).IdToken;
 
-    return doFetchTodosAsync({
+    return doDeleteTodo({
         headers: {
             Authorization: IdToken
+        },
+        pathParameters: {
+            id: input.id
         }
     }, {});
 };

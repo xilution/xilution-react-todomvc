@@ -3,7 +3,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-    entry: ['babel-polyfill', './src/server/index.js'],
+    entry: ['babel-polyfill', './src/backend/index.js'],
     externals: [nodeExternals({
         whitelist: [
             'axios',
@@ -43,7 +43,7 @@ module.exports = {
     output: {
         filename: 'index.js',
         libraryTarget: 'commonjs2',
-        path: path.resolve(__dirname, 'dist/server')
+        path: path.resolve(__dirname, 'dist/backend')
     },
     target: 'node'
 };
