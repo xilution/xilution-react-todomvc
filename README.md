@@ -24,9 +24,7 @@ Within about 1/2 hour you will have a fully functional Todo management app runni
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
 		* [Featuring a world class linting strategy.](https://github.com/manovotny/eslint-config-get-off-my-lawn)
 		
-\* React was chosen for this example's frontend b/c of its pervasiveness and (most importantly) its [unit testability](https://facebook.github.io/jest/docs/en/tutorial-react.html).
-
-* Backend *
+* Backend **
 	* [RESTful Web Service](https://en.wikipedia.org/wiki/Representational_state_transfer)
 		* Supports Frontend Use Cases
 	* [Amazon Web Services](https://aws.amazon.com/)
@@ -45,7 +43,8 @@ Within about 1/2 hour you will have a fully functional Todo management app runni
 		* [Xilution - Elements - Data Accessor](https://prod.xilution.com/products/?product=xilution-elements-data-accessor)
 		* [Xilution - Business Basics - Identity](https://prod.xilution.com/products/?product=xilution-business-basics-identity)
 
-\* You may be asking yourself, is a backend necessary?
+\* React was chosen for this example's frontend b/c of its pervasiveness and (most importantly) its [unit testability](https://facebook.github.io/jest/docs/en/tutorial-react.html).
+\** You may be asking yourself, is a backend necessary?
 Why don't you just integrate directly with Xilution SaaS from the frontend code.
 The purpose of the backend is two fold.
 First, it abstracts domain specific functionality from the frontend.
