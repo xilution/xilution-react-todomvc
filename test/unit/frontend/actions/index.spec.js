@@ -2,9 +2,8 @@ import * as actions from '../../../../src/frontend/actions/index';
 
 describe('todo actions', () => {
     test('addTodo should create ADD_TODO action', () => {
-        expect(actions.createTodo('Use Redux')).toEqual({
-            id: 0,
-            text: 'Use Redux',
+        expect(actions.createTodo({text: 'Use Redux'})).toEqual({
+            todo: {text: 'Use Redux'},
             type: 'ADD_TODO'
         });
     });

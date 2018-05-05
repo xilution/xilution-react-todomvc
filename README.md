@@ -1,8 +1,8 @@
 # xilution-react-todomvc
 
-This project is a full-stack example of the ubiquitous [TodoMVC app](http://todomvc.com/) using a [serverless computing model](https://en.wikipedia.org/wiki/Serverless_computing).
+This is a full-stack example of the ubiquitous [TodoMVC app](http://todomvc.com/) using a [serverless computing model](https://en.wikipedia.org/wiki/Serverless_computing).
 Follow the instructions below to stand up an example of the app for yourself.
-Within about 1/2 hour you will have a fully functional Todo management app running in AWS.
+Within about 1/2 hour you will have a fully functional todo management app running in AWS.
 
 ## Features
 

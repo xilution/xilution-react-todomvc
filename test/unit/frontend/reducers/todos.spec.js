@@ -10,14 +10,13 @@ describe('todos reducer', () => {
     test('should handle ADD_TODO', () => {
         expect(
             todos([], {
-                id: 0,
-                text: 'Run the tests',
+                todo: {
+                    text: 'Run the tests'
+                },
                 type: 'ADD_TODO'
             })
         ).toEqual([
             {
-                completed: false,
-                id: 0,
                 text: 'Run the tests'
             }
         ]);
@@ -25,23 +24,18 @@ describe('todos reducer', () => {
         expect(
             todos([
                 {
-                    completed: false,
-                    id: 0,
                     text: 'Run the tests'
                 }
             ], {
-                id: 1,
-                text: 'Use Redux',
+                todo: {
+                    text: 'Use Redux'
+                },
                 type: 'ADD_TODO'
             })
         ).toEqual([
             {
-                completed: false,
-                id: 0,
                 text: 'Run the tests'
             }, {
-                completed: false,
-                id: 1,
                 text: 'Use Redux'
             }
         ]);
@@ -49,31 +43,22 @@ describe('todos reducer', () => {
         expect(
             todos([
                 {
-                    completed: false,
-                    id: 0,
                     text: 'Run the tests'
                 }, {
-                    completed: false,
-                    id: 1,
                     text: 'Use Redux'
                 }
             ], {
-                id: 2,
-                text: 'Fix the tests',
+                todo: {
+                    text: 'Fix the tests'
+                },
                 type: 'ADD_TODO'
             })
         ).toEqual([
             {
-                completed: false,
-                id: 0,
                 text: 'Run the tests'
             }, {
-                completed: false,
-                id: 1,
                 text: 'Use Redux'
             }, {
-                completed: false,
-                id: 2,
                 text: 'Fix the tests'
             }
         ]);
