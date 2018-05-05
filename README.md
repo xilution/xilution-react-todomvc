@@ -1,5 +1,5 @@
 <h1 align="center" style="border-bottom: none;">xilution-react-todomvc</h1>
-<h3 align="center">A Serverless Implementation of TodoMVC</h3>
+<h3 align="center">A Serverless Example of TodoMVC</h3>
 <p>
 This is a full-stack example of the ubiquitous <a href="http://todomvc.com/">TodoMVC app</a> using a <a href="https://en.wikipedia.org/wiki/Serverless_computing">serverless computing model</a>.
 Follow the instructions below to stand up an example of the app for yourself.
