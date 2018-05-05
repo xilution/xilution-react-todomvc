@@ -1,10 +1,40 @@
-# xilution-react-todomvc
-
-[![Build Status](https://travis-ci.org/tbrunia/xilution-react-todomvc.svg?branch=master)](https://travis-ci.org/tbrunia/xilution-react-todomvc)
-
-This is a full-stack example of the ubiquitous [TodoMVC app](http://todomvc.com/) using a [serverless computing model](https://en.wikipedia.org/wiki/Serverless_computing).
+<h1 align="center" style="border-bottom: none;">xilution-react-todomvc</h1>
+<h3 align="center">A Serverless Example of TodoMVC</h3>
+<p>
+This is a full-stack example of the ubiquitous <a href="http://todomvc.com/">TodoMVC app</a> using a <a href="https://en.wikipedia.org/wiki/Serverless_computing">serverless computing model</a>.
 Follow the instructions below to stand up an example of the app for yourself.
 Within about 1/2 hour you will have a fully functional todo management app running in AWS.
+<p>
+<p align="center">
+  <a href="https://github.com/xilution/xilution-react-todomvc/issues">
+    <img alt="Issues" src="https://img.shields.io/github/issues/xilution/xilution-react-todomvc.svg">
+  </a>
+  <a href="https://github.com/xilution/xilution-react-todomvc/network">
+    <img alt="Forks" src="https://img.shields.io/github/forks/xilution/xilution-react-todomvc.svg">
+  </a>
+  <a href="https://github.com/xilution/xilution-react-todomvc/stargazers">
+    <img alt="Stars" src="https://img.shields.io/github/stars/xilution/xilution-react-todomvc.svg">
+  </a>
+  <a href="https://github.com/xilution/xilution-react-todomvc/blob/master/LICENSE">
+    <img alt="License" src="https://img.shields.io/github/license/xilution/xilution-react-todomvc.svg">
+  </a>
+</p>
+<p align="center">
+  <a href="https://travis-ci.org/xilution/xilution-react-todomvc">
+    <img alt="Travis" src="https://img.shields.io/travis/xilution/xilution-react-todomvc.svg">
+  </a>
+  <a href="https://codecov.io/gh/xilution/xilution-react-todomvc">
+    <img alt="Codecov" src="https://img.shields.io/codecov/c/github/xilution/xilution-react-todomvc.svg">
+  </a>
+  <a href="#badge">
+    <img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
+  </a>
+</p>
+<p align="center">
+  <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fxilution%2Fxilution-react-todomvc">
+    <img alt="Tweet" src="https://img.shields.io/twitter/url/https/github.com/xilution/xilution-react-todomvc.svg?style=social">
+  </a>
+</p>
 
 ## Features
 
