@@ -111,9 +111,6 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. [Create an AWS User Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
 	* It's bad practice to use your AWS root account.
 
-1. Install Node.js 8.10.0
-	1. Run `nvm install` to install the version of Node.js used by the example.
-
 1. Download Project Source Code
 	* Some of these steps may be superfluous for experienced developers.
 	For those less experienced coders, I recommend following these steps verbatim.
@@ -125,9 +122,12 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `git clone https://github.com/xilution/xilution-react-todomvc` to download the code for this example.
 	1. Run `cd xilution-react-todomvc` to navigate into the directory where the code for this example has been downloaded.
 		* If you have installed nvm correctly, when you execute this command you should see the message: 'Now using node v8.10.0 (npm v5.6.0)'.
-	
+
+1. Install Node.js 8.10.0
+	1. From within the 'xilution-react-todomvc' directory, run `nvm install` to install the version of Node.js used by the example.
+
 1. Download Project Dependencies
-	1. Run `yarn` to install Node.Js dependencies.
+	1. From within the 'xilution-react-todomvc' directory, run `yarn` to install Node.Js dependencies.
 
 1. [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
 
