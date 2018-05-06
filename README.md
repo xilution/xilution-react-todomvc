@@ -213,7 +213,7 @@ I also invite you to learn more about how [Xilution SaaS](https://www.xilution.c
 1. 💰 How much does it cost to run this example?
 	* [AWS offers a "free" tier](https://aws.amazon.com/free/) which enables you to gain free, hands-on experience with the AWS platform, products and services.
 	* You may find the [AWS Simple Monthly Calculator](https://calculator.s3.amazonaws.com/index.html) to be useful in calculating your monthly AWS expense as well.
-	* Pricing for AWS Managed Service's used in this example
+	* Pricing for AWS managed services used in this example
 		* [Lambda](https://aws.amazon.com/lambda/pricing/)
 			* Highlight: The first 1 million requests per month are free for all subscribers! 🎉
 		* [API Gateway](https://aws.amazon.com/api-gateway/pricing/)
