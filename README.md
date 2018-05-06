@@ -208,24 +208,25 @@ I also invite you to learn more about how [Xilution SaaS](https://www.xilution.c
 
 1. How much does it cost to run this example?
 	* [AWS offers a "free" tier](https://aws.amazon.com/free/) which enables you to gain free, hands-on experience with the AWS platform, products and services.
-	* AWS Managed Service Pricing
+	* You may find the [AWS Simple Monthly Calculator](https://calculator.s3.amazonaws.com/index.html) to be useful in calculating your monthly AWS expense as well.
+	* Pricing for AWS Managed Service's used in this example
 		* [Lambda](https://aws.amazon.com/lambda/pricing/)
+			* Highlight: The first 1 million requests per month are free for all subscribers! 🎉
 		* [API Gateway](https://aws.amazon.com/api-gateway/pricing/)
 		* [S3](https://aws.amazon.com/s3/pricing/)
 		* [CloudFormation](https://aws.amazon.com/cloudformation/pricing/)
 		* [Secrets Manager](https://aws.amazon.com/secrets-manager/pricing/)
-	* For reference, here is AWS's published pricing for virtual server and managed server services.
-		* [EC2](https://aws.amazon.com/ec2/pricing/)
-		* [ECS](https://aws.amazon.com/ecs/pricing/)
-			* Includes [Fargate](https://aws.amazon.com/fargate/) and EC2 Launch Types Models
-		* [ElasticBeanstalk](https://aws.amazon.com/elasticbeanstalk/pricing/)
-	* You may find the [AWS Simple Monthly Calculator](https://calculator.s3.amazonaws.com/index.html) to be useful in calculating your monthly AWS expense as well.
-	* Xilution SaaS Pricing
+		* For comparison, here is AWS's published pricing for virtual server and managed server services.
+			* [EC2](https://aws.amazon.com/ec2/pricing/)
+			* [ECS](https://aws.amazon.com/ecs/pricing/)
+				* Includes [Fargate](https://aws.amazon.com/fargate/) and EC2 Launch Types Models
+			* [ElasticBeanstalk](https://aws.amazon.com/elasticbeanstalk/pricing/)
+	* Pricing for Xilution SaaS Products used in this example
 		* This example integrates with Xilution's Beta environment which is Free for evaluation purposes.
 		* The Xilution SaaS products highlighted in this example have not yet been released for production consumption.
 		* See [the Xilution SaaS Products page](https://prod.xilution.com/products/index.html) for the latest product phase and pricing details.
-	* For reference, here is AWS's published pricing for data storage services.
-		* [RDS](https://aws.amazon.com/rds/pricing/)
+		* For comparision, here is AWS's published pricing for data storage services.
+			* [RDS](https://aws.amazon.com/rds/pricing/)
 
 1. Why React?
 	* React was chosen for this example's frontend because of its pervasiveness and (most importantly) its [unit testability](https://facebook.github.io/jest/docs/en/tutorial-react.html).
