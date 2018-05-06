@@ -152,10 +152,12 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. Provision Resources
 	1. Run `make provision-base` to provision the base AWS resources.
 		* See ./aws/cloud-formation/template-base.yml
+		* Checkout the 'xilution-todomvc-base' stack using the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home).
 	1. Run `make build-backend` to build the backend resources.
 	1. Run `make deploy-backend` to deploy the backend resources to your AWS account.
 		* Provisions API Gateway and Lambda resources.
 		* See ./aws/cloud-formation/template-sam.yml
+		* Checkout the 'xilution-todomvc-sam' stack using the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home).
 	1. Run `make show-backend-url` to see the URL of the backend RESTful web service.
 	1. Run `make put-types` to register JSON schema used by this example with Xilution - Elements - Data Accessor.
 
@@ -197,7 +199,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. Deprovision Resources
 	1. Run `make deprovision-backend` to deprovision backend resources.
 		* See ./aws/cloud-formation/template-sam.yml
-	1. Using the AWS Console, delete the S3 buckets
+	1. Using the [AWS Console](http://aws.amazon.com/console/home), delete the S3 buckets
 		* xilution-todomvc-website-bucket
 		* xilution-todomvc-staging-bucket
 	1. Run `make deprovision-base` to deprovision the base resources.
