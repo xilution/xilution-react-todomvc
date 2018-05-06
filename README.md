@@ -237,6 +237,16 @@ I also invite you to learn more about how [Xilution SaaS](https://www.xilution.c
       For example, some TodoMVC uses cases require the aggregation of a few different Xilution SaaS requests.
       Second, it protects secrets like the Xilution Subscriber API Key and the Xilution Subscriber Organization ID.
 
+1. Can this example run on other public cloud platforms?
+	* In theory, yes.
+	  [Azure](https://azure.microsoft.com) and [Google Cloud Platform](https://cloud.google.com/) offer similar types of web hosting and compute services needed to run this example.
+	  Eventually, I would like to develop [Terraform by HashiCorp](https://www.terraform.io/) templates for several different public cloud platforms.
+	  If you're passionate about your cloud platform and would like to see it incorporated in this example, I invite you to submit a pull request.
+	
+## Issues
+
+[Issues are managed here.](https://github.com/xilution/xilution-react-todomvc/issues)
+
 ## About the Author
 
 [Todd Brunia](https://twitter.com/tbrunia) is a Sr. Software Engineer with [Source Allies](https://www.sourceallies.com/) and the founder of [Xilution](https://www.xilution.com).
