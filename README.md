@@ -208,6 +208,10 @@ For Mac users, the Terminal application is the best way to go for command line s
 I'm hopeful that this reference implementation inspires you to to use AWS SAM and React for your next web application.
 I also invite you to learn more about how [Xilution SaaS](https://www.xilution.com) can accelerate your next web or mobile application project.
 
+Need help with your serverless project?
+[Hit me up on Twitter.](https://twitter.com/tbrunia)
+I would be happy to pitch in where I can.
+
 ## FAQ
 
 1. 💰 How much does it cost to run this example?
