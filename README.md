@@ -95,11 +95,12 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. [Install AWS CLI](https://aws.amazon.com/cli/)
 	1. You'll need python 3 to get access to the latest AWS CLI commands.
 
-1. [Install NVM](https://github.com/creationix/nvm)
+1. [Install Node Version Manager (nvm)](https://github.com/creationix/nvm)
 
 1. [Install Yarn](https://yarnpkg.com/)
 
-1. [Install yq](https://stedolan.github.io/jq/)
+1. [Install ./jq](https://stedolan.github.io/jq/)
+	* This will quickly become one of your favorite command line utilities. 😎
 
 ## One Time Set Up
 
@@ -160,6 +161,8 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Copy the front end URL and paste it into a browser.
 		* You should see the login for for the TodoMVC app.
 
+👏👏👏 The example should now be up and running in AWS. 👏👏👏
+
 ## To Test
 
 1. Open a command line app.
@@ -206,7 +209,7 @@ I also invite you to learn more about how [Xilution SaaS](https://www.xilution.c
 
 ## FAQ
 
-1. How much does it cost to run this example?
+1. 💰 How much does it cost to run this example?
 	* [AWS offers a "free" tier](https://aws.amazon.com/free/) which enables you to gain free, hands-on experience with the AWS platform, products and services.
 	* You may find the [AWS Simple Monthly Calculator](https://calculator.s3.amazonaws.com/index.html) to be useful in calculating your monthly AWS expense as well.
 	* Pricing for AWS Managed Service's used in this example
