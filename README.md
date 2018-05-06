@@ -121,7 +121,6 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `cd git` to navigate into the git directory.
 	1. Run `git clone https://github.com/xilution/xilution-react-todomvc` to download the code for this example.
 	1. Run `cd xilution-react-todomvc` to navigate into the directory where the code for this example has been downloaded.
-		* If you have installed nvm correctly, when you execute this command you should see the message: 'Now using node v8.10.0 (npm v5.6.0)'.
 
 1. Install Node.js 8.10.0
 	1. From within the 'xilution-react-todomvc' directory, run `nvm install` to install the version of Node.js used by the example.
