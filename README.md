@@ -46,7 +46,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 		* Create/Update/Delete Todos
 	* [Single Page Web Application](https://en.wikipedia.org/wiki/Single-page_application)
 	* [Hosted On AWS S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
-	* [React](https://reactjs.org/) *
+	* [React](https://reactjs.org/)
 		* [React-Redux](https://github.com/reactjs/react-redux)
 		* [React-Router](https://github.com/ReactTraining/react-router)
 		* [React-Bootstrap](https://react-bootstrap.github.io/)
@@ -56,12 +56,13 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
 		* [Featuring a world class linting strategy.](https://github.com/manovotny/eslint-config-get-off-my-lawn)
 		
-* Backend **
+* Backend
+	* [Serverless](https://en.wikipedia.org/wiki/Serverless_computing) Architecture 🤘
 	* [RESTful Web Service](https://en.wikipedia.org/wiki/Representational_state_transfer)
 		* Supports Frontend Use Cases
 	* [Amazon Web Services](https://aws.amazon.com/)
 		* [Serverless Application Model (SAM)](https://github.com/awslabs/serverless-application-model)
-		* [Cloudformation](https://aws.amazon.com/cloudformation/)
+		* [CloudFormation](https://aws.amazon.com/cloudformation/)
 		* [Secrets Manager](https://aws.amazon.com/secrets-manager/)
 		* [Lambda (NodeJS)](https://aws.amazon.com/lambda/)
 		* [API Gateway](https://aws.amazon.com/api-gateway/)
@@ -74,15 +75,6 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* Integrates with [Xilution SaaS](https://www.xilution.com)
 		* [Xilution - Elements - Data Accessor](https://prod.xilution.com/products/?product=xilution-elements-data-accessor)
 		* [Xilution - Business Basics - Identity](https://prod.xilution.com/products/?product=xilution-business-basics-identity)
-
-\* React was chosen for this example's frontend b/c of its pervasiveness and (most importantly) its [unit testability](https://facebook.github.io/jest/docs/en/tutorial-react.html).
-
-\** You may be asking yourself, is a backend necessary?
-Why don't you just integrate directly with Xilution SaaS from the frontend code.
-The purpose of the backend is two fold.
-First, it abstracts domain specific functionality from the frontend.
-For example, some TodoMVC uses cases require the aggregation of a few different Xilution SaaS requests.
-Second, it protects secrets like the Xilution Subscriber API Key and the Xilution Subscriber Organization ID.
 
 ## Prerequisites
 
@@ -104,11 +96,12 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. [Install AWS CLI](https://aws.amazon.com/cli/)
 	1. You'll need python 3 to get access to the latest AWS CLI commands.
 
-1. [Install NVM](https://github.com/creationix/nvm)
+1. [Install Node Version Manager (nvm)](https://github.com/creationix/nvm)
 
 1. [Install Yarn](https://yarnpkg.com/)
 
-1. [Install yq](https://stedolan.github.io/jq/)
+1. [Install ./jq](https://stedolan.github.io/jq/)
+	* This will quickly become one of your favorite command line utilities. 😎
 
 ## One Time Set Up
 
@@ -119,12 +112,10 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. [Create an AWS User Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
 	* It's bad practice to use your AWS root account.
 
-1. Install Node.js 8.10.0
-	1. Run `nvm install` to install the version of Node.js used by the example.
-
 1. Download Project Source Code
 	* Some of these steps may be superfluous for experienced developers.
 	For those less experienced coders, I recommend following these steps verbatim.
+	
 	1. Run `cd ~` to navigate to your home directory.
 	1. Run `mkdir Developer` to create a directory to keep development related things.
 	1. Run `cd Developer` to navigate into the Developer directory.
@@ -132,9 +123,12 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `cd git` to navigate into the git directory.
 	1. Run `git clone https://github.com/xilution/xilution-react-todomvc` to download the code for this example.
 	1. Run `cd xilution-react-todomvc` to navigate into the directory where the code for this example has been downloaded.
-		* If you have installed nvm correctly, when you execute this command you should see the message: 'Now using node v8.10.0 (npm v5.6.0)'.
-	1. Run `ls` to see the files that were downloaded.
-	1. Run `yarn` to install Node.Js dependencies.
+
+1. Install Node.js 8.10.0
+	1. From within the 'xilution-react-todomvc' directory, run `nvm install` to install the version of Node.js used by the example.
+
+1. Download Project Dependencies
+	1. From within the 'xilution-react-todomvc' directory, run `yarn` to install Node.Js dependencies.
 
 1. [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
 
@@ -167,6 +161,8 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `make show-frontend-url` to see the URL of the frontend application.
 	1. Copy the front end URL and paste it into a browser.
 		* You should see the login for for the TodoMVC app.
+
+👏👏👏 The example should now be up and running in AWS. 👏👏👏
 
 ## To Test
 
@@ -204,11 +200,63 @@ For Mac users, the Terminal application is the best way to go for command line s
 		* xilution-todomvc-staging-bucket
 	1. Run `make deprovision-base` to deprovision the base resources.
 		* See ./aws/cloud-formation/template-base.yml
+	1. Run `aws secretsmanager delete-secret --secret-id XILUTION_SUBSCRIBER_API_KEY --recovery-window-in-days 7` to delete your Xilution Subscriber API Key from AWS Secrets Manager.
+	1. Run `aws secretsmanager delete-secret --secret-id XILUTION_SUBSCRIBER_ORG_ID --recovery-window-in-days 7` to delete your Xilution Subscriber Organization ID from AWS Secrets Manager.
 		
 ## Next Steps
 
 I'm hopeful that this reference implementation inspires you to to use AWS SAM and React for your next web application.
 I also invite you to learn more about how [Xilution SaaS](https://www.xilution.com) can accelerate your next web or mobile application project.
+
+## FAQ
+
+1. 💰 How much does it cost to run this example?
+	* [AWS offers a "free" tier](https://aws.amazon.com/free/) which enables you to gain free, hands-on experience with the AWS platform, products and services.
+	* You may find the [AWS Simple Monthly Calculator](https://calculator.s3.amazonaws.com/index.html) to be useful in calculating your monthly AWS expense as well.
+	* Pricing for AWS managed services used in this example
+		* [Lambda](https://aws.amazon.com/lambda/pricing/)
+			* Highlight: The first 1 million requests per month are free for all subscribers! 🎉
+		* [API Gateway](https://aws.amazon.com/api-gateway/pricing/)
+		* [S3](https://aws.amazon.com/s3/pricing/)
+		* [CloudFormation](https://aws.amazon.com/cloudformation/pricing/)
+		* [Secrets Manager](https://aws.amazon.com/secrets-manager/pricing/)
+		* For comparison, here is AWS's published pricing for virtual server and managed server services.
+			* [EC2](https://aws.amazon.com/ec2/pricing/)
+			* [ECS](https://aws.amazon.com/ecs/pricing/)
+				* Includes [Fargate](https://aws.amazon.com/fargate/) and EC2 Launch Types Models
+			* [ElasticBeanstalk](https://aws.amazon.com/elasticbeanstalk/pricing/)
+	* Pricing for Xilution SaaS Products used in this example
+		* This example integrates with Xilution's Beta environment which is Free for evaluation purposes.
+		* The Xilution SaaS products highlighted in this example have not yet been released for production consumption.
+		* See [the Xilution SaaS Products page](https://prod.xilution.com/products/index.html) for the latest product phase and pricing details.
+		* For comparision, here is AWS's published pricing for data storage services.
+			* [RDS](https://aws.amazon.com/rds/pricing/)
+
+1. Why React?
+	* React was chosen for this example's frontend because of its pervasiveness and (most importantly) its [unit testability](https://facebook.github.io/jest/docs/en/tutorial-react.html).
+
+1. Is the backend necessary?
+	* The purpose of the backend is two fold.
+      First, it abstracts domain specific functionality from the frontend.
+      For example, some TodoMVC uses cases require the aggregation of a few different Xilution SaaS requests.
+      Second, it protects secrets like the Xilution Subscriber API Key and the Xilution Subscriber Organization ID.
+
+1. Can this example run on other public cloud platforms?
+	* In theory, yes.
+	  [Azure](https://azure.microsoft.com) and [Google Cloud Platform](https://cloud.google.com/) offer similar types of web hosting and compute services needed to run this example.
+	  Eventually, I would like to develop [Terraform by HashiCorp](https://www.terraform.io/) templates for several different public cloud platforms.
+	  If you're passionate about your cloud platform and would like to see it incorporated in this example, I invite you to submit a pull request.
+
+1. What about the [Serverless](https://serverless.com/) framework?
+	* I personally don't have experience working with the Serverless framework, but I hear good things.
+	  The pervasiveness of the framework warrants a mention in this example's FAQ.
+	  I [applaud the maintainers of the framework](https://serverless.com/company/team/) for their advancement of serverless computing.
+	  I would like to learn more about the framework and how it could be incorporated into this example.
+	  If you're passionate about the Serverless framework or other similar frameworks, I invite you to submit a pull request.
+
+## Issues
+
+[Issues are managed here.](https://github.com/xilution/xilution-react-todomvc/issues)
 
 ## About the Author
 
@@ -216,5 +264,5 @@ I also invite you to learn more about how [Xilution SaaS](https://www.xilution.c
 
 ## Contributions
 
-See something about this example that you thing could be improved? 
+See something about this example that you think could be improved? 
 Pull requests are encouraged and greatly appreciated!
