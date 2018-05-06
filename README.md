@@ -246,7 +246,14 @@ I also invite you to learn more about how [Xilution SaaS](https://www.xilution.c
 	  [Azure](https://azure.microsoft.com) and [Google Cloud Platform](https://cloud.google.com/) offer similar types of web hosting and compute services needed to run this example.
 	  Eventually, I would like to develop [Terraform by HashiCorp](https://www.terraform.io/) templates for several different public cloud platforms.
 	  If you're passionate about your cloud platform and would like to see it incorporated in this example, I invite you to submit a pull request.
-	
+
+1. What about the [Serverless](https://serverless.com/) framework?
+	* I personally don't have experience working with the Serverless framework, but I hear good things.
+	  The pervasiveness of the framework warrants a mention in this example's FAQ.
+	  I [applaud the maintainers of the framework](https://serverless.com/company/team/) for their advancement of serverless computing.
+	  I would like to learn more about the framework and how it could be incorporated into this example.
+	  If you're passionate about the Serverless framework or other similar frameworks, I invite you to submit a pull request.
+
 ## Issues
 
 [Issues are managed here.](https://github.com/xilution/xilution-react-todomvc/issues)
