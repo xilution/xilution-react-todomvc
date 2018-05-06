@@ -114,6 +114,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. Download Project Source Code
 	* Some of these steps may be superfluous for experienced developers.
 	For those less experienced coders, I recommend following these steps verbatim.
+	
 	1. Run `cd ~` to navigate to your home directory.
 	1. Run `mkdir Developer` to create a directory to keep development related things.
 	1. Run `cd Developer` to navigate into the Developer directory.
