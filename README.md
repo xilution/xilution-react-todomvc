@@ -120,7 +120,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 	* It's bad practice to use your AWS root account.
 
 1. Install Node.js 8.10.0
-	1. Run `nvm install 8.10.0` to install the version of Node.js used by the example.
+	1. Run `nvm install` to install the version of Node.js used by the example.
 
 1. Download Project Source Code
 	* Some of these steps may be superfluous for experienced developers.
