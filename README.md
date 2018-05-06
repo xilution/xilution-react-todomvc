@@ -57,6 +57,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 		* [Featuring a world class linting strategy.](https://github.com/manovotny/eslint-config-get-off-my-lawn)
 		
 * Backend
+	* [Serverless](https://en.wikipedia.org/wiki/Serverless_computing) Architecture 🤘
 	* [RESTful Web Service](https://en.wikipedia.org/wiki/Representational_state_transfer)
 		* Supports Frontend Use Cases
 	* [Amazon Web Services](https://aws.amazon.com/)
