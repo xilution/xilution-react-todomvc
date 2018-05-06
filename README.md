@@ -46,7 +46,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 		* Create/Update/Delete Todos
 	* [Single Page Web Application](https://en.wikipedia.org/wiki/Single-page_application)
 	* [Hosted On AWS S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
-	* [React](https://reactjs.org/) *
+	* [React](https://reactjs.org/)
 		* [React-Redux](https://github.com/reactjs/react-redux)
 		* [React-Router](https://github.com/ReactTraining/react-router)
 		* [React-Bootstrap](https://react-bootstrap.github.io/)
@@ -56,12 +56,12 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
 		* [Featuring a world class linting strategy.](https://github.com/manovotny/eslint-config-get-off-my-lawn)
 		
-* Backend **
+* Backend
 	* [RESTful Web Service](https://en.wikipedia.org/wiki/Representational_state_transfer)
 		* Supports Frontend Use Cases
 	* [Amazon Web Services](https://aws.amazon.com/)
 		* [Serverless Application Model (SAM)](https://github.com/awslabs/serverless-application-model)
-		* [Cloudformation](https://aws.amazon.com/cloudformation/)
+		* [CloudFormation](https://aws.amazon.com/cloudformation/)
 		* [Secrets Manager](https://aws.amazon.com/secrets-manager/)
 		* [Lambda (NodeJS)](https://aws.amazon.com/lambda/)
 		* [API Gateway](https://aws.amazon.com/api-gateway/)
@@ -74,15 +74,6 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* Integrates with [Xilution SaaS](https://www.xilution.com)
 		* [Xilution - Elements - Data Accessor](https://prod.xilution.com/products/?product=xilution-elements-data-accessor)
 		* [Xilution - Business Basics - Identity](https://prod.xilution.com/products/?product=xilution-business-basics-identity)
-
-\* React was chosen for this example's frontend b/c of its pervasiveness and (most importantly) its [unit testability](https://facebook.github.io/jest/docs/en/tutorial-react.html).
-
-\** You may be asking yourself, is a backend necessary?
-Why don't you just integrate directly with Xilution SaaS from the frontend code.
-The purpose of the backend is two fold.
-First, it abstracts domain specific functionality from the frontend.
-For example, some TodoMVC uses cases require the aggregation of a few different Xilution SaaS requests.
-Second, it protects secrets like the Xilution Subscriber API Key and the Xilution Subscriber Organization ID.
 
 ## Prerequisites
 
@@ -133,7 +124,8 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `git clone https://github.com/xilution/xilution-react-todomvc` to download the code for this example.
 	1. Run `cd xilution-react-todomvc` to navigate into the directory where the code for this example has been downloaded.
 		* If you have installed nvm correctly, when you execute this command you should see the message: 'Now using node v8.10.0 (npm v5.6.0)'.
-	1. Run `ls` to see the files that were downloaded.
+	
+1. Download Project Dependencies
 	1. Run `yarn` to install Node.Js dependencies.
 
 1. [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
@@ -204,11 +196,45 @@ For Mac users, the Terminal application is the best way to go for command line s
 		* xilution-todomvc-staging-bucket
 	1. Run `make deprovision-base` to deprovision the base resources.
 		* See ./aws/cloud-formation/template-base.yml
+	1. Run `aws secretsmanager delete-secret --secret-id XILUTION_SUBSCRIBER_API_KEY --recovery-window-in-days 7` to delete your Xilution Subscriber API Key from AWS Secrets Manager.
+	1. Run `aws secretsmanager delete-secret --secret-id XILUTION_SUBSCRIBER_ORG_ID --recovery-window-in-days 7` to delete your Xilution Subscriber Organization ID from AWS Secrets Manager.
 		
 ## Next Steps
 
 I'm hopeful that this reference implementation inspires you to to use AWS SAM and React for your next web application.
 I also invite you to learn more about how [Xilution SaaS](https://www.xilution.com) can accelerate your next web or mobile application project.
+
+## FAQ
+
+1. How much does it cost to run this example?
+	* [AWS offers a "free" tier](https://aws.amazon.com/free/) which enables you to gain free, hands-on experience with the AWS platform, products and services.
+	* AWS Managed Service Pricing
+		* [Lambda](https://aws.amazon.com/lambda/pricing/)
+		* [API Gateway](https://aws.amazon.com/api-gateway/pricing/)
+		* [S3](https://aws.amazon.com/s3/pricing/)
+		* [CloudFormation](https://aws.amazon.com/cloudformation/pricing/)
+		* [Secrets Manager](https://aws.amazon.com/secrets-manager/pricing/)
+	* For reference, here is AWS's published pricing for virtual server and managed server services.
+		* [EC2](https://aws.amazon.com/ec2/pricing/)
+		* [ECS](https://aws.amazon.com/ecs/pricing/)
+			* Includes [Fargate](https://aws.amazon.com/fargate/) and EC2 Launch Types Models
+		* [ElasticBeanstalk](https://aws.amazon.com/elasticbeanstalk/pricing/)
+	* You may find the [AWS Simple Monthly Calculator](https://calculator.s3.amazonaws.com/index.html) to be useful in calculating your monthly AWS expense as well.
+	* Xilution SaaS Pricing
+		* This example integrates with Xilution's Beta environment which is Free for evaluation purposes.
+		* The Xilution SaaS products highlighted in this example have not yet been released for production consumption.
+		* See [the Xilution SaaS Products page](https://prod.xilution.com/products/index.html) for the latest product phase and pricing details.
+	* For reference, here is AWS's published pricing for data storage services.
+		* [RDS](https://aws.amazon.com/rds/pricing/)
+
+1. Why React?
+	* React was chosen for this example's frontend because of its pervasiveness and (most importantly) its [unit testability](https://facebook.github.io/jest/docs/en/tutorial-react.html).
+
+1. Is the backend necessary?
+	* The purpose of the backend is two fold.
+      First, it abstracts domain specific functionality from the frontend.
+      For example, some TodoMVC uses cases require the aggregation of a few different Xilution SaaS requests.
+      Second, it protects secrets like the Xilution Subscriber API Key and the Xilution Subscriber Organization ID.
 
 ## About the Author
 
