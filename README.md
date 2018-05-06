@@ -60,6 +60,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* [Serverless](https://en.wikipedia.org/wiki/Serverless_computing) Architecture 🤘
 	* [RESTful Web Service](https://en.wikipedia.org/wiki/Representational_state_transfer)
 		* Supports Frontend Use Cases
+	* Proper [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) [configuration](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/template-sam.yml#L26)
 	* [Amazon Web Services](https://aws.amazon.com/)
 		* [Serverless Application Model (SAM)](https://github.com/awslabs/serverless-application-model)
 		* [CloudFormation](https://aws.amazon.com/cloudformation/)
@@ -257,6 +258,14 @@ I would be happy to pitch in where I can.
 	  I [applaud the maintainers of the framework](https://serverless.com/company/team/) for their advancement of serverless computing.
 	  I would like to learn more about the framework and how it could be incorporated into this example.
 	  If you're passionate about the Serverless framework or other similar frameworks, I invite you to submit a pull request.
+
+1. Do I have to use Xilution SaaS?
+	* Nope.
+	  You can use just about any persistance model in your backend implementation including other API Based SaaS providers.
+	  AWS [RDS](https://aws.amazon.com/rds/) is a valid alternative if you choose to provision and maintain your own persistence infrastructure.
+	  However, I think you'll reconsider investing in a relational database and choose API Based SaaS when you consider the productivity gains that a serverless architecture models has already afforded you.
+	  In a way, API Based SaaS is like the icing on the cake.
+	  If you're interested in learning more about API Based SaaS, [this blog article Ed Shelley](https://blog.chartmogul.com/api-based-saas/) is a good place to start.
 
 ## Issues
 
