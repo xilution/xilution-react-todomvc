@@ -243,5 +243,5 @@ I also invite you to learn more about how [Xilution SaaS](https://www.xilution.c
 
 ## Contributions
 
-See something about this example that you thing could be improved? 
+See something about this example that you think could be improved? 
 Pull requests are encouraged and greatly appreciated!
