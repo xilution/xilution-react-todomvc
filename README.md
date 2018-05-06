@@ -38,6 +38,8 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 
 ## Features
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/xilution/xilution-react-todomvc.svg)](https://greenkeeper.io/)
+
 * Frontend
 	* Use Cases
 		* Register New User (including email verification)
