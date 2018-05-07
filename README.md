@@ -157,6 +157,8 @@ For Mac users, the Terminal application is the best way to go for command line s
 		* Checkout the 'xilution-todomvc-sam' stack using the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home).
 	1. Run `make show-backend-url` to see the URL of the backend RESTful web service.
 	1. Run `make put-types` to register JSON schema used by this example with Xilution - Elements - Data Accessor.
+		* You will be prompted for credentials.
+		  Use the credentials you used to create your Xilution account.
 
 1. Deploy Frontend Resource
 	1. Run `make build-frontend` to build the frontend resources.
