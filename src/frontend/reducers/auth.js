@@ -16,10 +16,7 @@ const auth = (state = {}, action) => {
                 idToken: action.idToken
             };
         case 'SIGN_OUT':
-            return {
-                ...state,
-                idToken: undefined
-            };
+            return {};
         default:
             return state;
     }
