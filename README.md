@@ -88,9 +88,11 @@ Git Bash is included in the Git installation mentioned below.
 For Mac users, the Terminal application is the best way to go for command line steps.
 
 1. [Create an AWS Account](https://aws.amazon.com/free/)
+	* AWS offers a 12 month Free trial.
 
 1. [Create a Xilution Account](https://www.xilution.com/registration/)
-	* Note your Xilution API Key and Xilution Organization ID when you complete the registration process.
+	* Limited access to Xilution's Beta and Test environments is Free for registered users.
+	* Take note of your Xilution API Key and Xilution Organization ID when you complete the registration process.
 
 1. [Install Git](https://git-scm.com/downloads)
 
