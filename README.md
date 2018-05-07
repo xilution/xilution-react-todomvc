@@ -244,12 +244,17 @@ I would be happy to pitch in where I can.
 
 1. Why React?
 	* React was chosen for this example's frontend because of its pervasiveness and (most importantly) its [unit testability](https://facebook.github.io/jest/docs/en/tutorial-react.html).
+	* Other [JavaScript frameworks](https://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks) like [Angular](https://angular.io/) or [Vue.js](https://vuejs.org/) could be used as the frontend for this example.
 
 1. Is the backend necessary?
 	* The purpose of the backend is two fold.
       First, it abstracts domain specific functionality from the frontend.
       For example, some TodoMVC uses cases require the aggregation of a few different Xilution SaaS requests.
       Second, it protects secrets like the Xilution Subscriber API Key and the Xilution Subscriber Organization ID.
+
+1. Why Node.js for the backend? Are there alternative programming languages?
+	* Node.js was selected for the backend of this example to provided a consistent programming experience between the frontend and the backend.
+	* [AWS Lambda supports many other programming languages](https://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) including [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)), [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) and [Go](https://en.wikipedia.org/wiki/Go_(programming_language)).
 
 1. Can this example run on other public cloud platforms?
 	* In theory, yes.
