@@ -63,10 +63,10 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* Proper [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) [configuration](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/template-sam.yml#L26)
 	* [Amazon Web Services](https://aws.amazon.com/)
 		* [Serverless Application Model (SAM)](https://github.com/awslabs/serverless-application-model)
+		* [API Gateway](https://aws.amazon.com/api-gateway/)
+		* [Lambda (NodeJS)](https://aws.amazon.com/lambda/)
 		* [CloudFormation](https://aws.amazon.com/cloudformation/)
 		* [Secrets Manager](https://aws.amazon.com/secrets-manager/)
-		* [Lambda (NodeJS)](https://aws.amazon.com/lambda/)
-		* [API Gateway](https://aws.amazon.com/api-gateway/)
 	* [Node.js](https://nodejs.org/en/) version 8.10.0 for Lambda Code
 	* [Webpack](https://webpack.js.org/) Build
 		* Technique used to reduce size of deployed code.
