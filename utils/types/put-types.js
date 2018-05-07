@@ -1,10 +1,16 @@
 const {promisify} = require('util');
 
+const AWS = require('aws-sdk');
 const prompt = require('prompt');
 
 const identityBroker = require('../../src/backend/identityBroker');
 const dataAccessorBroker = require('../../src/backend/dataAccessorBroker');
 
+const secretsmanager = new AWS.SecretsManager({
+    region: 'us-east-1'
+});
+
+const secretsmanagerGetSecretValueAsync = promisify(secretsmanager.getSecretValue.bind(secretsmanager));
 const promptGetAsync = promisify(prompt.get);
 
 const types = [
@@ -31,9 +37,11 @@ const putType = async (IdToken, type) => {
 };
 
 const run = async () => {
-    if (!process.env.XilutionSubscriberApiKey) {
-        throw new Error('XilutionSubscriberApiKey environment variable must be set.');
-    }
+    const secretsmanagerResponse = await secretsmanagerGetSecretValueAsync({
+        SecretId: 'XilutionSubscriberApiKey'
+    });
+
+    process.env.XilutionSubscriberApiKey = secretsmanagerResponse.SecretString;
 
     prompt.start();
 
