@@ -19,6 +19,8 @@ const todos = (state = [], action) => {
             return state.filter((todo) => todo.id !== action.id);
         case 'FETCH_TODOS_SUCCESS':
             return action.todos;
+        case 'SIGN_OUT':
+            return [];
         default:
             return state;
     }
