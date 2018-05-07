@@ -6,10 +6,10 @@ Parameters:
   BaseStackName:
     Type: String
     Default: xilution-todomvc-base
-  XILUTION_SUBSCRIBER_API_KEY:
+  XilutionSubscriberApiKey:
     Type: String
     Default: FIXME
-  XILUTION_SUBSCRIBER_ORG_ID:
+  XilutionSubscriberOrgId:
     Type: String
     Default: FIXME
 
@@ -18,8 +18,8 @@ Globals:
     Runtime: nodejs8.10
     Environment:
       Variables:
-        XILUTION_SUBSCRIBER_API_KEY: !Ref XILUTION_SUBSCRIBER_API_KEY
-        XILUTION_SUBSCRIBER_ORG_ID: !Ref XILUTION_SUBSCRIBER_ORG_ID
+        XilutionSubscriberApiKey: !Ref XilutionSubscriberApiKey
+        XilutionSubscriberOrgId: !Ref XilutionSubscriberOrgId
     MemorySize: 128
     Timeout: 60
   Api:

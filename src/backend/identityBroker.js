@@ -9,7 +9,7 @@ const getMeUrl = 'https://api.xilution.com/business-basics-identity-beta/me';
 
 const registerUser = (request) => axios.post(registerUserUrl, {
     ...request.body,
-    organizationId: process.env.XILUTION_SUBSCRIBER_ORG_ID
+    organizationId: process.env.XilutionSubscriberOrgId
 }, commonOptions);
 
 const verifyUser = (request) => axios.post(verifyUserUrl, {

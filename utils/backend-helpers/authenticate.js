@@ -8,8 +8,8 @@ const promptGetAsync = promisify(prompt.get);
 const doAuthenticateAsync = promisify(index.doAuthenticate);
 
 const run = async () => {
-    if (!process.env.XILUTION_SUBSCRIBER_API_KEY) {
-        throw new Error('XILUTION_SUBSCRIBER_API_KEY environment variable must be set.');
+    if (!process.env.XilutionSubscriberApiKey) {
+        throw new Error('XilutionSubscriberApiKey environment variable must be set.');
     }
 
     prompt.start();
