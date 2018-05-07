@@ -240,6 +240,7 @@ I would be happy to pitch in where I can.
 		* See [the Xilution SaaS Products page](https://prod.xilution.com/products/index.html) for the latest product phase and pricing details.
 		* For comparision, here is AWS's published pricing for data storage services.
 			* [RDS](https://aws.amazon.com/rds/pricing/)
+			* [DynamoDB](https://aws.amazon.com/dynamodb/pricing/)
 
 1. Why React?
 	* React was chosen for this example's frontend because of its pervasiveness and (most importantly) its [unit testability](https://facebook.github.io/jest/docs/en/tutorial-react.html).
@@ -266,8 +267,8 @@ I would be happy to pitch in where I can.
 1. Do I have to use Xilution SaaS?
 	* Nope.
 	  You can use just about any persistance model in your backend implementation including other API Based SaaS providers.
-	  AWS [RDS](https://aws.amazon.com/rds/) is a valid alternative if you choose to provision and maintain your own persistence infrastructure.
-	  However, I think you'll reconsider investing in a relational database and choose API Based SaaS when you consider the productivity gains that a serverless architecture models has already afforded you.
+	  AWS [RDS](https://aws.amazon.com/rds/) and [DynamoDB](https://aws.amazon.com/dynamodb/) are valid alternatives if you choose to provision and maintain your own persistence infrastructure.
+	  However, I think you'll reconsider investing in a relational or noSQL database and choose API Based SaaS when you consider the productivity gains that a serverless architecture model has already afforded you.
 	  In a way, API Based SaaS is like the icing on the cake.
 	  If you're interested in learning more about API Based SaaS, [this blog article Ed Shelley](https://blog.chartmogul.com/api-based-saas/) is a good place to start.
 
