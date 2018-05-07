@@ -1,12 +1,12 @@
-const commonOptions = {
+const buildCommonOptions = () => ({
     headers: {
         'x-api-key': process.env.XilutionSubscriberApiKey
     }
-};
+});
 
 const buildAuthorizedOptions = (request) => ({
     headers: {
-        ...commonOptions.headers,
+        ...buildCommonOptions().headers,
         Authorization: request.parameters.authorization
     }
 });
@@ -37,7 +37,7 @@ const buildTypeAwareOptions = (request, authenticatedUser, type) => {
 
 module.exports = {
     buildAuthorizedOptions,
+    buildCommonOptions,
     buildContextUserAwareOptions,
-    buildTypeAwareOptions,
-    commonOptions
+    buildTypeAwareOptions
 };
