@@ -175,8 +175,8 @@ For Mac users, the Terminal application is the best way to go for command line s
 	* Mac: Terminal
 	* Windows: Git Bash
 
-1. To Run Verify
-	1. Run `yarn verify` to run the linter and run unit tests.
+1. To Run Linter and Unit Tests
+	1. Run `yarn test` to run the linter and run unit tests.
 
 1. To Run the App Locally
 	1. Run `make dev` to run the app locally.
