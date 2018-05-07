@@ -1,7 +1,7 @@
-XILUTION_API_KEY := $(shell aws secretsmanager get-secret-value --secret-id XILUTION_SUBSCRIBER_API_KEY | jq '.SecretString')
-XILUTION_ORGANIZATION_ID := $(shell aws secretsmanager get-secret-value --secret-id XILUTION_SUBSCRIBER_ORG_ID | jq '.SecretString')
-TODOMVC_FRONTEND_URL := $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-base | jq '.Stacks[0].Outputs[1].OutputValue')
-TODOMVC_BACKEND_URL := $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-sam | jq '.Stacks[0].Outputs[0].OutputValue')
+XILUTION_API_KEY = $(shell aws secretsmanager get-secret-value --secret-id XILUTION_SUBSCRIBER_API_KEY | jq '.SecretString')
+XILUTION_ORGANIZATION_ID = $(shell aws secretsmanager get-secret-value --secret-id XILUTION_SUBSCRIBER_ORG_ID | jq '.SecretString')
+TODOMVC_FRONTEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-base | jq '.Stacks[0].Outputs[1].OutputValue')
+TODOMVC_BACKEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-sam | jq '.Stacks[0].Outputs[0].OutputValue')
 
 build-frontend:
 	TODOMVC_BACKEND_URL=$(TODOMVC_BACKEND_URL) yarn build:frontend
