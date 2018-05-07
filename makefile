@@ -1,5 +1,5 @@
-XILUTION_API_KEY = $(shell aws secretsmanager get-secret-value --secret-id XILUTION_SUBSCRIBER_API_KEY | jq '.SecretString')
-XILUTION_ORGANIZATION_ID = $(shell aws secretsmanager get-secret-value --secret-id XILUTION_SUBSCRIBER_ORG_ID | jq '.SecretString')
+XILUTION_API_KEY = $(shell aws secretsmanager get-secret-value --secret-id XilutionSubscriberApiKey | jq '.SecretString')
+XILUTION_ORGANIZATION_ID = $(shell aws secretsmanager get-secret-value --secret-id XilutionSubscriberOrgId | jq '.SecretString')
 TODOMVC_FRONTEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-base | jq '.Stacks[0].Outputs[1].OutputValue')
 TODOMVC_BACKEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-sam | jq '.Stacks[0].Outputs[0].OutputValue')
 
@@ -16,7 +16,7 @@ deploy-frontend:
 deploy-backend:
 	aws cloudformation deploy --stack-name xilution-todomvc-sam \
 		--template-file ./dist/template-sam.yaml \
-		--parameter-overrides XILUTION_SUBSCRIBER_API_KEY=$(XILUTION_API_KEY) XILUTION_SUBSCRIBER_ORG_ID=$(XILUTION_ORGANIZATION_ID)
+		--parameter-overrides XilutionSubscriberApiKey=$(XILUTION_API_KEY) XilutionSubscriberOrgId=$(XILUTION_ORGANIZATION_ID)
 
 deprovision-base:
 	aws cloudformation delete-stack --stack-name xilution-todomvc-base

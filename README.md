@@ -137,8 +137,8 @@ For Mac users, the Terminal application is the best way to go for command line s
 
 1. Save your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
 	* You can look up your Xilution Subscriber API Key and Organization Id through through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
-	1. Run `aws secretsmanager create-secret --name XILUTION_SUBSCRIBER_API_KEY --description "My Xilution Subscriber API Key" --secret-string REPLACE-WITH-YOUR-API-KEY` to save your Xilution Subscriber API Key to AWS Secrets Manager.
-	1. Run `aws secretsmanager create-secret --name XILUTION_SUBSCRIBER_ORG_ID --description "My Xilution Subscriber Organization ID" --secret-string REPLACE-WITH-YOUR-ORG-ID` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
+	1. Run `aws secretsmanager create-secret --name XilutionSubscriberApiKey --description "My Xilution Subscriber API Key" --secret-string REPLACE-WITH-YOUR-API-KEY` to save your Xilution Subscriber API Key to AWS Secrets Manager.
+	1. Run `aws secretsmanager create-secret --name XilutionSubscriberOrgId --description "My Xilution Subscriber Organization ID" --secret-string REPLACE-WITH-YOUR-ORG-ID` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
 
 ## Provision and Deploy
 
@@ -203,8 +203,8 @@ For Mac users, the Terminal application is the best way to go for command line s
 		* xilution-todomvc-staging-bucket
 	1. Run `make deprovision-base` to deprovision the base resources.
 		* See [./aws/cloud-formation/template-base.yml](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/template-base.yml)
-	1. Run `aws secretsmanager delete-secret --secret-id XILUTION_SUBSCRIBER_API_KEY --recovery-window-in-days 7` to delete your Xilution Subscriber API Key from AWS Secrets Manager.
-	1. Run `aws secretsmanager delete-secret --secret-id XILUTION_SUBSCRIBER_ORG_ID --recovery-window-in-days 7` to delete your Xilution Subscriber Organization ID from AWS Secrets Manager.
+	1. Run `aws secretsmanager delete-secret --secret-id XilutionSubscriberApiKey --recovery-window-in-days 7` to delete your Xilution Subscriber API Key from AWS Secrets Manager.
+	1. Run `aws secretsmanager delete-secret --secret-id XilutionSubscriberOrgId --recovery-window-in-days 7` to delete your Xilution Subscriber Organization ID from AWS Secrets Manager.
 		
 ## Next Steps
 
