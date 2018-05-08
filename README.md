@@ -67,6 +67,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 		* [Lambda (NodeJS)](https://aws.amazon.com/lambda/)
 		* [CloudFormation](https://aws.amazon.com/cloudformation/)
 		* [Secrets Manager](https://aws.amazon.com/secrets-manager/)
+	* Input validation via [Joi](https://github.com/hapijs/joi)
 	* [Node.js](https://nodejs.org/en/) version 8.10.0 for Lambda Code
 	* [Webpack](https://webpack.js.org/) Build
 		* Technique used to reduce size of deployed code.
