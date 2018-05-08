@@ -11,7 +11,7 @@ export const buildAuthorizedOptions = (request) => ({
     }
 });
 
-export const buildContextUserAwareOptions = (request, authenticatedUser) => {
+export const buildAuthenticatedUserAwareOptions = (request, authenticatedUser) => {
     const options = buildAuthorizedOptions(request);
 
     return {
@@ -24,7 +24,7 @@ export const buildContextUserAwareOptions = (request, authenticatedUser) => {
 };
 
 export const buildTypeAwareOptions = (request, authenticatedUser, type) => {
-    const options = buildContextUserAwareOptions(request, authenticatedUser);
+    const options = buildAuthenticatedUserAwareOptions(request, authenticatedUser);
 
     return {
         ...options,
