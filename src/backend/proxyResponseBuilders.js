@@ -1,4 +1,4 @@
-const uuid = require('uuid');
+import uuid from 'uuid';
 
 const commonProperties = {
     isBase64Encoded: false
@@ -9,7 +9,7 @@ const commonHeaders = {
     'content-type': 'application/json'
 };
 
-const buildErrorProxyResponse = (context, error) => {
+export const buildErrorProxyResponse = (context, error) => {
     const errorId = uuid.v4();
 
     // eslint-disable-next-line no-console
@@ -30,14 +30,14 @@ const buildErrorProxyResponse = (context, error) => {
     };
 };
 
-const buildInputValidationProxyResponse = (inputValidationResult) => ({
+export const buildInputValidationProxyResponse = (inputValidationResult) => ({
     ...commonProperties,
     body: JSON.stringify(inputValidationResult.error),
     headers: commonHeaders,
     statusCode: 400
 });
 
-const buildSuccessProxyResponse = (response) => ({
+export const buildSuccessProxyResponse = (response) => ({
     ...commonProperties,
     body: response.data ? JSON.stringify(response.data) : '',
     headers: {
@@ -47,9 +47,3 @@ const buildSuccessProxyResponse = (response) => ({
     },
     statusCode: response.status
 });
-
-module.exports = {
-    buildErrorProxyResponse,
-    buildInputValidationProxyResponse,
-    buildSuccessProxyResponse
-};

@@ -1,6 +1,6 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
-const registerUserRequestSchema = Joi.object().keys({
+export const registerUserRequestSchema = Joi.object().keys({
     body: Joi.object().keys({
         email: Joi.string().email().required(),
         firstName: Joi.string().required(),
@@ -10,21 +10,21 @@ const registerUserRequestSchema = Joi.object().keys({
     })
 });
 
-const verifyUserRequestSchema = Joi.object().keys({
+export const verifyUserRequestSchema = Joi.object().keys({
     body: Joi.object().keys({
         code: Joi.string().required(),
         userRegistrationToken: Joi.string().required()
     })
 });
 
-const authenticateRequestSchema = Joi.object().keys({
+export const authenticateRequestSchema = Joi.object().keys({
     body: Joi.object().keys({
         password: Joi.string().required(),
         username: Joi.string().required()
     })
 });
 
-const putTodoRequestSchema = Joi.object().keys({
+export const putTodoRequestSchema = Joi.object().keys({
     body: Joi.object().keys({
         completed: Joi.bool().required(),
         id: Joi.string(),
@@ -36,32 +36,22 @@ const putTodoRequestSchema = Joi.object().keys({
     })
 });
 
-const getTodoRequestSchema = Joi.object().keys({
+export const getTodoRequestSchema = Joi.object().keys({
     parameters: Joi.object().keys({
         authorization: Joi.string().required(),
         id: Joi.string()
     })
 });
 
-const deleteTodoRequestSchema = Joi.object().keys({
+export const deleteTodoRequestSchema = Joi.object().keys({
     parameters: Joi.object().keys({
         authorization: Joi.string().required(),
         id: Joi.string()
     })
 });
 
-const fetchTodosRequestSchema = Joi.object().keys({
+export const fetchTodosRequestSchema = Joi.object().keys({
     parameters: Joi.object().keys({
         authorization: Joi.string().required()
     })
 });
-
-module.exports = {
-    authenticateRequestSchema,
-    deleteTodoRequestSchema,
-    fetchTodosRequestSchema,
-    getTodoRequestSchema,
-    putTodoRequestSchema,
-    registerUserRequestSchema,
-    verifyUserRequestSchema
-};
