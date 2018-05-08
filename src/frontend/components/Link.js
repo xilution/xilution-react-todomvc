@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Button} from 'react-bootstrap';
@@ -22,4 +21,3 @@ Link.propTypes = {
 };
 
 export default Link;
-/* eslint-enable react/button-has-type */
