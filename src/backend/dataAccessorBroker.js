@@ -1,7 +1,7 @@
-const axios = require('axios');
+import axios from 'axios';
 
-const {buildAuthorizedOptions, buildContextUserAwareOptions, buildTypeAwareOptions} = require('./brokerUtils');
-const {getAuthenticatedUser} = require('./identityBroker');
+import {buildAuthorizedOptions, buildContextUserAwareOptions, buildTypeAwareOptions} from './brokerUtils';
+import {getAuthenticatedUser} from './identityBroker';
 
 const DEFAULT_START_PAGE = 0;
 const DEFAULT_PAGE_SIZE = 100;
@@ -23,7 +23,7 @@ const getSearchCriteriaId = async (request, user, searchCriteria) => {
     return location.substring(location.lastIndexOf('/') + 1);
 };
 
-const putTodo = async (request) => {
+export const putTodo = async (request) => {
     const user = await getAuthenticatedUser(request);
 
     const todo = {
@@ -35,19 +35,19 @@ const putTodo = async (request) => {
     return axios.put(putThingUrl, todo, buildContextUserAwareOptions(request, user));
 };
 
-const getTodo = async (request) => {
+export const getTodo = async (request) => {
     const user = await getAuthenticatedUser(request);
 
     return axios.get(buildGetOrDeleteThingUrl(request.parameters.id), buildTypeAwareOptions(request, user, 'todo'));
 };
 
-const deleteTodo = async (request) => {
+export const deleteTodo = async (request) => {
     const user = await getAuthenticatedUser(request);
 
     return axios.delete(buildGetOrDeleteThingUrl(request.parameters.id), buildTypeAwareOptions(request, user, 'todo'));
 };
 
-const fetchTodos = async (request) => {
+export const fetchTodos = async (request) => {
     const user = await getAuthenticatedUser(request);
 
     const searchCriteriaId = await getSearchCriteriaId(request, user, {
@@ -58,16 +58,8 @@ const fetchTodos = async (request) => {
     return axios.get(buildFetchThingsUrl(searchCriteriaId, DEFAULT_START_PAGE, DEFAULT_PAGE_SIZE), buildTypeAwareOptions(request, user, 'todo'));
 };
 
-const putType = async (request) => {
+export const putType = async (request) => {
     const response = await axios.put(buildPutTypesUrl(request.parameters.name), request.body, buildAuthorizedOptions(request));
 
     return response.data;
-};
-
-module.exports = {
-    deleteTodo,
-    fetchTodos,
-    getTodo,
-    putTodo,
-    putType
 };

@@ -1,12 +1,12 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
-const {
+import {
     buildInputValidationProxyResponse,
     buildSuccessProxyResponse,
     buildErrorProxyResponse
-} = require('./proxyResponseBuilders');
+} from './proxyResponseBuilders';
 
-const brokerRequest = async (request, schema, func) => {
+export const brokerRequest = async (request, schema, func) => {
     const inputValidationResult = Joi.validate(request, schema);
 
     if (inputValidationResult.error) {
@@ -23,8 +23,4 @@ const brokerRequest = async (request, schema, func) => {
             action: func.toString
         }, error);
     }
-};
-
-module.exports = {
-    brokerRequest
 };
