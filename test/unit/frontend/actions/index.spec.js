@@ -1,10 +1,39 @@
+import Chance from 'chance';
+
 import * as actions from '../../../../src/frontend/actions/index';
 
-describe('todo actions', () => {
-    test('addTodo should create ADD_TODO action', () => {
-        expect(actions.createTodo({text: 'Use Redux'})).toEqual({
-            todo: {text: 'Use Redux'},
+const chance = new Chance();
+
+describe('todo action tests', () => {
+    test('createTodo should create ADD_TODO action', () => {
+        const text = chance.sentence();
+
+        expect(actions.createTodo({text})).toEqual({
+            todo: {text},
             type: 'ADD_TODO'
+        });
+    });
+
+    test('deleteTodo should create DELETE_TODO action', () => {
+        const id = chance.string();
+
+        expect(actions.deleteTodo(id)).toEqual({
+            id,
+            type: 'DELETE_TODO'
+        });
+    });
+
+    test('fetchTodosSuccess should create FETCH_TODOS_SUCCESS action', () => {
+        const todos = chance.n(() => ({
+            [chance.string()]: chance.string()
+        }), chance.integer({
+            max: 100,
+            min: 0
+        }));
+
+        expect(actions.fetchTodosSuccess(todos)).toEqual({
+            todos,
+            type: 'FETCH_TODOS_SUCCESS'
         });
     });
 
@@ -16,9 +45,43 @@ describe('todo actions', () => {
     });
 
     test('toggleTodo should create TOGGLE_TODO action', () => {
-        expect(actions.toggleTodo(1)).toEqual({
-            id: 1,
+        const id = chance.string();
+
+        expect(actions.toggleTodo(id)).toEqual({
+            id,
             type: 'TOGGLE_TODO'
+        });
+    });
+
+    test('authenticationSuccess should create AUTHENTICATION_SUCCESS action', () => {
+        const idToken = chance.string();
+
+        expect(actions.authenticationSuccess(idToken)).toEqual({
+            idToken,
+            type: 'AUTHENTICATION_SUCCESS'
+        });
+    });
+
+    test('registerSuccess should create AUTHENTICATION_SUCCESS action', () => {
+        const userRegistrationToken = chance.string();
+
+        expect(actions.registerSuccess(userRegistrationToken)).toEqual({
+            type: 'REGISTER_SUCCESS',
+            userRegistrationToken
+        });
+    });
+
+    test('signOut should create SIGN_OUT action', () => {
+        expect(actions.signOut()).toEqual({
+            type: 'SIGN_OUT'
+        });
+    });
+
+    test('it should have proper visibility filters', () => {
+        expect(actions.VisibilityFilters).toEqual({
+            SHOW_ACTIVE: 'SHOW_ACTIVE',
+            SHOW_ALL: 'SHOW_ALL',
+            SHOW_COMPLETED: 'SHOW_COMPLETED'
         });
     });
 });
