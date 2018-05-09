@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import {v4} from 'uuid';
 
 const commonProperties = {
     isBase64Encoded: false
@@ -10,7 +10,7 @@ const commonHeaders = {
 };
 
 export const buildErrorProxyResponse = (context, error) => {
-    const errorId = uuid.v4();
+    const errorId = v4();
 
     // eslint-disable-next-line no-console
     console.log(JSON.stringify({

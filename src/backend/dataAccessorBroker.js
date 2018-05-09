@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {buildAuthorizedOptions, buildContextUserAwareOptions, buildTypeAwareOptions} from './brokerUtils';
+import {buildAuthorizedOptions, buildAuthenticatedUserAwareOptions, buildTypeAwareOptions} from './brokerUtils';
 import {getAuthenticatedUser} from './identityBroker';
 
 const DEFAULT_START_PAGE = 0;
@@ -16,7 +16,7 @@ const buildFetchThingsUrl = (searchCriteriaId, startPage, pageSize) =>
 const buildPutTypesUrl = (name) => `https://api.xilution.com/elements-data-accessor-beta/types/${name}`;
 
 const getSearchCriteriaId = async (request, user, searchCriteria) => {
-    const putSearchCriteriaResponse = await axios.put(putThingUrl, searchCriteria, buildContextUserAwareOptions(request, user));
+    const putSearchCriteriaResponse = await axios.put(putThingUrl, searchCriteria, buildAuthenticatedUserAwareOptions(request, user));
 
     const location = putSearchCriteriaResponse.headers.location;
 
@@ -32,7 +32,7 @@ export const putTodo = async (request) => {
         owningUserId: user.id
     };
 
-    return axios.put(putThingUrl, todo, buildContextUserAwareOptions(request, user));
+    return axios.put(putThingUrl, todo, buildAuthenticatedUserAwareOptions(request, user));
 };
 
 export const getTodo = async (request) => {
