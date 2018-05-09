@@ -1,4 +1,4 @@
-import axios from 'axios';
+import {get, post} from 'axios';
 
 import {buildAuthorizedOptions, buildCommonOptions} from './brokerUtils';
 
@@ -7,12 +7,12 @@ const verifyUserUrl = 'https://api.xilution.com/business-basics-identity-beta/co
 const authenticateUrl = 'https://api.xilution.com/business-basics-identity-beta/authenticate';
 const getMeUrl = 'https://api.xilution.com/business-basics-identity-beta/me';
 
-export const registerUser = (request) => axios.post(registerUserUrl, {
+export const registerUser = (request) => post(registerUserUrl, {
     ...request.body,
     organizationId: process.env.XilutionSubscriberOrgId
 }, buildCommonOptions());
 
-export const verifyUser = (request) => axios.post(verifyUserUrl, {
+export const verifyUser = (request) => post(verifyUserUrl, {
     ...request.body,
     productSelections: [
         'xilution-elements-data-accessor',
@@ -20,10 +20,10 @@ export const verifyUser = (request) => axios.post(verifyUserUrl, {
     ]
 }, buildCommonOptions());
 
-export const authenticate = (request) => axios.post(authenticateUrl, request.body, buildCommonOptions());
+export const authenticate = (request) => post(authenticateUrl, request.body, buildCommonOptions());
 
 export const getAuthenticatedUser = async (request) => {
-    const response = await axios.get(getMeUrl, buildAuthorizedOptions(request));
+    const response = await get(getMeUrl, buildAuthorizedOptions(request));
 
     return response.data;
 };
