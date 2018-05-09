@@ -137,7 +137,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
 
 1. Save your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
-	* You can look up your Xilution Subscriber API Key and Organization Id through through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
+	* You can look up your Xilution Subscriber API Key and Organization Id through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
 	1. Run `aws secretsmanager create-secret --name XilutionSubscriberApiKey --description "My Xilution Subscriber API Key" --secret-string REPLACE-WITH-YOUR-API-KEY` to save your Xilution Subscriber API Key to AWS Secrets Manager.
 	1. Run `aws secretsmanager create-secret --name XilutionSubscriberOrgId --description "My Xilution Subscriber Organization ID" --secret-string REPLACE-WITH-YOUR-ORG-ID` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
 
@@ -188,7 +188,13 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Copy the front end URL and paste it into a browser.
 	1. Run through the different use cases
 		* Register New User (including email verification)
+			* Creates a new user in your Xilution account.
+			  You can use the same email across multiple users.
+			  User email must be verified.
+			  Usernames must be unique for all users.
+			  You can manage your Xilution account through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
 		* Authenticate User
+			* Use your Xilution user credentials
 		* View Todos
 		* Create/Update/Delete Todos
 
