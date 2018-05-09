@@ -1,4 +1,4 @@
-import axios from 'axios';
+import {get, put, delete as del} from 'axios';
 
 import {buildAuthorizedOptions, buildAuthenticatedUserAwareOptions, buildTypeAwareOptions} from './brokerUtils';
 import {getAuthenticatedUser} from './identityBroker';
@@ -16,7 +16,7 @@ const buildFetchThingsUrl = (searchCriteriaId, startPage, pageSize) =>
 const buildPutTypesUrl = (name) => `https://api.xilution.com/elements-data-accessor-beta/types/${name}`;
 
 const getSearchCriteriaId = async (request, user, searchCriteria) => {
-    const putSearchCriteriaResponse = await axios.put(putThingUrl, searchCriteria, buildAuthenticatedUserAwareOptions(request, user));
+    const putSearchCriteriaResponse = await put(putThingUrl, searchCriteria, buildAuthenticatedUserAwareOptions(request, user));
 
     const location = putSearchCriteriaResponse.headers.location;
 
@@ -32,19 +32,19 @@ export const putTodo = async (request) => {
         owningUserId: user.id
     };
 
-    return axios.put(putThingUrl, todo, buildAuthenticatedUserAwareOptions(request, user));
+    return put(putThingUrl, todo, buildAuthenticatedUserAwareOptions(request, user));
 };
 
 export const getTodo = async (request) => {
     const user = await getAuthenticatedUser(request);
 
-    return axios.get(buildGetOrDeleteThingUrl(request.parameters.id), buildTypeAwareOptions(request, user, 'todo'));
+    return get(buildGetOrDeleteThingUrl(request.parameters.id), buildTypeAwareOptions(request, user, 'todo'));
 };
 
 export const deleteTodo = async (request) => {
     const user = await getAuthenticatedUser(request);
 
-    return axios.delete(buildGetOrDeleteThingUrl(request.parameters.id), buildTypeAwareOptions(request, user, 'todo'));
+    return del(buildGetOrDeleteThingUrl(request.parameters.id), buildTypeAwareOptions(request, user, 'todo'));
 };
 
 export const fetchTodos = async (request) => {
@@ -55,11 +55,11 @@ export const fetchTodos = async (request) => {
         owningUserId: user.id
     });
 
-    return axios.get(buildFetchThingsUrl(searchCriteriaId, DEFAULT_START_PAGE, DEFAULT_PAGE_SIZE), buildTypeAwareOptions(request, user, 'todo'));
+    return get(buildFetchThingsUrl(searchCriteriaId, DEFAULT_START_PAGE, DEFAULT_PAGE_SIZE), buildTypeAwareOptions(request, user, 'todo'));
 };
 
 export const putType = async (request) => {
-    const response = await axios.put(buildPutTypesUrl(request.parameters.name), request.body, buildAuthorizedOptions(request));
+    const response = await put(buildPutTypesUrl(request.parameters.name), request.body, buildAuthorizedOptions(request));
 
     return response.data;
 };
