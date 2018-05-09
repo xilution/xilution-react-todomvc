@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import {validate} from 'joi';
 
 import {
     buildInputValidationProxyResponse,
@@ -7,7 +7,7 @@ import {
 } from './proxyResponseBuilders';
 
 export const brokerRequest = async (request, schema, func) => {
-    const inputValidationResult = Joi.validate(request, schema);
+    const inputValidationResult = validate(request, schema);
 
     if (inputValidationResult.error) {
         return buildInputValidationProxyResponse(inputValidationResult);
