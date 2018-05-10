@@ -35,6 +35,9 @@ Within about 1/2 hour you will have a fully functional todo management app runni
     <img alt="Tweet" src="https://img.shields.io/twitter/url/https/github.com/xilution/xilution-react-todomvc.svg?style=social">
   </a>
 </p>
+<p align="center">
+  <img src="./serverless.png" alt="Serverless"/>
+</p>
 
 ## Features
 
