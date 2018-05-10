@@ -1,3 +1,4 @@
+// eslint-disable-next-line complexity
 const auth = (state = {}, action) => {
     switch (action.type) {
         case 'AUTHENTICATION_SUCCESS':
