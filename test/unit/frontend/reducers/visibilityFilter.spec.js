@@ -4,7 +4,7 @@ import visibilityFilter from '../../../../src/frontend/reducers/visibilityFilter
 
 const chance = new Chance();
 
-describe('visibility filter reducer', () => {
+describe('visibility filter reducer tests', () => {
     let state,
         filter;
 

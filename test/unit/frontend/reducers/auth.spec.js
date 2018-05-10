@@ -4,7 +4,7 @@ import auth from '../../../../src/frontend/reducers/auth';
 
 const chance = new Chance();
 
-describe('auth reducer', () => {
+describe('auth reducer tests', () => {
     let state,
         idToken,
         userRegistrationToken;

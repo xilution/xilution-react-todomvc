@@ -11,7 +11,7 @@ const buildRandomTodos = () => chance.n(() => ({
     min: 0
 }));
 
-describe('todos reducer', () => {
+describe('todos reducer tests', () => {
     let state,
         todo;
 
