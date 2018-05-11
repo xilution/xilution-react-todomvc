@@ -36,7 +36,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
   </a>
 </p>
 <p align="center">
-  <img src="./serverless.png" alt="Serverless"/>
+  <img src="./serverless.png" alt="Is it time to reboot our love affair with servers?"/>
 </p>
 
 ## Features
@@ -116,8 +116,12 @@ For Mac users, the Terminal application is the best way to go for command line s
 	* Mac: Terminal
 	* Windows: Git Bash
 	
-1. [Create an AWS User Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
+1. [Create an AWS IAM User in your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
 	* It's bad practice to use your AWS root account.
+	* I recommend following the console instructions.
+	* When you get to the "Set permissions" step, attach an existing policy and choose "AdministratorAccess".
+	  You can change the access at anytime.
+	  AWS will prompt you when you don't have sufficient access to a resource.
 
 1. Download Project Source Code
 	* Some of these steps may be superfluous for experienced developers.
