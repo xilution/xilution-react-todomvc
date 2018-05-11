@@ -47,6 +47,8 @@
     "babel-preset-react": "^6.24.1",
     "chance": "^1.0.13",
     "css-loader": "^0.28.11",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
     "eslint-config-get-off-my-lawn": "^4.0.0",
     "html-loader": "^0.5.5",
@@ -67,7 +69,8 @@
   },
   "jest": {
     "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "setupFiles": ["./test/unit/frontend/setUp.js"]
   },
   "author": "Todd Brunia <tbrunia@gmail.com> (http://www.github.com/tbrunia)",
   "license": "MIT"

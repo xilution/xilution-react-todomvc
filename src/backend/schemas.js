@@ -51,7 +51,7 @@ export const deleteTodoRequestSchema = Joi.object().keys({
 });
 
 export const fetchTodosRequestSchema = Joi.object().keys({
-    parameters: Joi.object().keys({
+    parameters: Joi.object().required().keys({
         authorization: Joi.string().required()
     })
 });
