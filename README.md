@@ -57,7 +57,6 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* [Webpack](https://webpack.js.org/) Build
 	* [Jest](https://facebook.github.io/jest/) Unit Testing
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
-		* [Featuring a world class linting strategy.](https://github.com/manovotny/eslint-config-get-off-my-lawn)
 		
 * Backend
 	* [Serverless](https://en.wikipedia.org/wiki/Serverless_computing) Architecture 🤘
@@ -76,7 +75,6 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 		* Technique used to reduce size of deployed code.
 	* [Jest](https://facebook.github.io/jest/) Unit Testing
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
-		* [Featuring a world class linting strategy.](https://github.com/manovotny/eslint-config-get-off-my-lawn)
 	* Integrates with [Xilution SaaS](https://www.xilution.com)
 		* [Xilution - Elements - Data Accessor](https://prod.xilution.com/products/?product=xilution-elements-data-accessor)
 		* [Xilution - Business Basics - Identity](https://prod.xilution.com/products/?product=xilution-business-basics-identity)
