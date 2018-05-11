@@ -111,10 +111,6 @@ For Mac users, the Terminal application is the best way to go for command line s
 	* This will quickly become one of your favorite command line utilities. 😎
 
 ## One Time Set Up
-
-1. Open a command line app.
-	* Mac: Terminal
-	* Windows: Git Bash
 	
 1. [Create an AWS IAM User in your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
 	* It's bad practice to use your AWS root account.
@@ -123,6 +119,12 @@ For Mac users, the Terminal application is the best way to go for command line s
 	  You can change the access at anytime.
 	  AWS will prompt you when you don't have sufficient access to a resource.
 
+1. [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
+
+1. Open a command line app.
+	* Mac: Terminal
+	* Windows: Git Bash
+	
 1. Download Project Source Code
 	* Some of these steps may be superfluous for experienced developers.
 	For those less experienced coders, I recommend following these steps verbatim.
@@ -140,8 +142,6 @@ For Mac users, the Terminal application is the best way to go for command line s
 
 1. Download Project Dependencies
 	1. From within the 'xilution-react-todomvc' directory, run `yarn` to install Node.Js dependencies.
-
-1. [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
 
 1. Save your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
 	* You can look up your Xilution Subscriber API Key and Organization Id through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
