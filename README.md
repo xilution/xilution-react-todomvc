@@ -66,7 +66,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* [Amazon Web Services](https://aws.amazon.com/)
 		* [Serverless Application Model (SAM)](https://github.com/awslabs/serverless-application-model)
 		* [API Gateway](https://aws.amazon.com/api-gateway/)
-		* [Lambda (NodeJS)](https://aws.amazon.com/lambda/)
+		* [Lambda (Node.js)](https://aws.amazon.com/lambda/)
 		* [CloudFormation](https://aws.amazon.com/cloudformation/)
 		* [Secrets Manager](https://aws.amazon.com/secrets-manager/)
 	* Input validation via [Joi](https://github.com/hapijs/joi)
