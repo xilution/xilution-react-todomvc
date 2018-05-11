@@ -36,7 +36,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
   </a>
 </p>
 <p align="center">
-  <img src="./serverless.png" alt="Is it time to reboot our love affair with servers?"/>
+  <img src="./images/serverless.png" alt="Is it time to reboot our love affair with servers?"/>
 </p>
 
 ## Features
@@ -66,7 +66,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* [Amazon Web Services](https://aws.amazon.com/)
 		* [Serverless Application Model (SAM)](https://github.com/awslabs/serverless-application-model)
 		* [API Gateway](https://aws.amazon.com/api-gateway/)
-		* [Lambda (NodeJS)](https://aws.amazon.com/lambda/)
+		* [Lambda (Node.js)](https://aws.amazon.com/lambda/)
 		* [CloudFormation](https://aws.amazon.com/cloudformation/)
 		* [Secrets Manager](https://aws.amazon.com/secrets-manager/)
 	* Input validation via [Joi](https://github.com/hapijs/joi)
@@ -78,6 +78,17 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* Integrates with [Xilution SaaS](https://www.xilution.com)
 		* [Xilution - Elements - Data Accessor](https://prod.xilution.com/products/?product=xilution-elements-data-accessor)
 		* [Xilution - Business Basics - Identity](https://prod.xilution.com/products/?product=xilution-business-basics-identity)
+
+<p align="center">
+  <img src="./images/components.png" alt="xilution-react-todomvc components"/>
+</p>
+
+## Great For
+
+* Digital agencies who want to accelerate client project time lines.
+* Frontend developers with backend responsibilities who just want to code awesome web and mobile apps.
+* Technical leaders who are always on the look out for next big productivity accelerator.
+* Backend developers who want to sharpen their technical skill sets.
 
 ## Prerequisites
 
