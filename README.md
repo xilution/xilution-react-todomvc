@@ -155,8 +155,8 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. Save your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
 	* Look up your Xilution Subscriber API Key and Organization Id through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
 	  Use the credentials you used to create your Xilution Subscriber Account.
-	1. Run `aws secretsmanager create-secret --name XilutionSubscriberApiKey --description "My Xilution Subscriber API Key" --secret-string REPLACE-WITH-YOUR-API-KEY` to save your Xilution Subscriber API Key to AWS Secrets Manager.
-	1. Run `aws secretsmanager create-secret --name XilutionSubscriberOrgId --description "My Xilution Subscriber Organization ID" --secret-string REPLACE-WITH-YOUR-ORG-ID` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
+	1. Run `aws secretsmanager create-secret --name XilutionSubscriberApiKey --description "My Xilution Subscriber API Key" --secret-string {REPLACE-WITH-YOUR-API-KEY}` to save your Xilution Subscriber API Key to AWS Secrets Manager.
+	1. Run `aws secretsmanager create-secret --name XilutionSubscriberOrgId --description "My Xilution Subscriber Organization ID" --secret-string {REPLACE-WITH-YOUR-ORG-ID}` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
 
 ## Provision and Deploy
 
@@ -215,6 +215,32 @@ For Mac users, the Terminal application is the best way to go for command line s
 			* Use your Xilution user credentials
 		* View Todos
 		* Create/Update/Delete Todos
+
+## Troubleshooting
+
+1. Backend
+	* CloudWatch Logs
+		* Open the [AWS CloudWatch console](https://console.aws.amazon.com/cloudwatch/home).
+			* Lambdas
+				* Click Logs in the left hand menu.
+				* Search for '/aws/lambda' to see a list of provisioned Lambda functions.
+				* Choose the Lambda function associated with the endpoint giving you trouble.
+				* Browse through the logs for error messages.
+				* I've found it most effective to find error messages by time.
+			* API Gateway
+				* Finding CloudWatch logs for API Gateway is a little trickier than Lambda.
+				* Open the [AWS APIGateway console](https://console.aws.amazon.com/apigateway/home)
+				* Find the API ID for the `xilution-todo-sam` API.
+				* Go back to the AWS CloudWatch console.
+				* Click Logs in the left hand menu.
+				* Search for 'API-Gateway-Execution-Logs_{REPLACE-WITH-API-ID}/Prod'
+
+1. Frontend
+	* Google Chrome
+		* [Open the Chrome Developer Console](https://developers.google.com/web/tools/chrome-devtools/console/)
+		* Errors appear in the Console tab and will have a Error ID.
+		* You can get a more detailed description of the error by finding the Error ID in CloudWatch Logs.
+		* Also use the Network tab to observe how the app is interacting with the API.
 
 ## Deprovisioning
 
