@@ -242,6 +242,9 @@ For Mac users, the Terminal application is the best way to go for command line s
 		* You can get a more detailed description of the error by finding the Error ID in CloudWatch Logs.
 		* Also use the Network tab to observe how the app is interacting with the API.
 
+1. Bugs
+	* If you have found an issue with 'xilution-react-todomvc', [please submit a bug](https://github.com/xilution/xilution-react-todomvc/issues).
+
 ## Deprovisioning
 
 1. Open a command line app.
