@@ -105,7 +105,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 
 1. [Create a Xilution Subscriber Account](https://www.xilution.com/registration/)
 	* Limited access to Xilution's Beta and Test environments is Free for registered users.
-	* When prompted for product selections, choose Elements / Data Accessor and Business Basics / Identity.
+	* When prompted for product selections, choose Elements - Data Accessor and Business Basics - Identity.
 
 1. [Install Git](https://git-scm.com/downloads)
 
@@ -168,6 +168,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `make provision-base` to provision the base AWS resources.
 		* See [./aws/cloud-formation/template-base.yml](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/template-base.yml)
 		* Checkout the 'xilution-todomvc-base' stack using the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home).
+		* This step takes a couple of minutes to complete.
 	1. Run `make build-backend` to build the backend resources.
 	1. Run `make deploy-backend` to deploy the backend resources to your AWS account.
 		* Provisions API Gateway and Lambda resources.
@@ -283,7 +284,7 @@ I would be happy to pitch in where I can.
 1. Can this example run on other public cloud platforms?
 	* In theory, yes.
 	  [Azure](https://azure.microsoft.com) and [Google Cloud Platform](https://cloud.google.com/) offer similar types of web hosting and compute services needed to run this example.
-	  Eventually, I would like to develop [Terraform by HashiCorp](https://www.terraform.io/) templates for several different public cloud platforms.
+	  Eventually, I would like to develop [Terraform](https://www.terraform.io/) templates for several different public cloud platforms.
 	  If you're passionate about your cloud platform and would like to see it incorporated in this example, I invite you to submit a pull request.
 
 1. What about the [Serverless](https://serverless.com/) framework?

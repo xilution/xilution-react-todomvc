@@ -1,9 +1,11 @@
+require('babel-polyfill');
+
 const {promisify} = require('util');
 
 const AWS = require('aws-sdk');
 const prompt = require('prompt');
 
-const index = require('../../src/backend/index');
+const index = require('../../dist/backend/index');
 
 const secretsmanager = new AWS.SecretsManager({
     region: 'us-east-1'
