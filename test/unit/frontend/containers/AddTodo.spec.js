@@ -25,8 +25,6 @@ describe('<AddTodo />', () => {
         button;
 
     const renderComponent = () => {
-        idToken = chance.string();
-        dispatch = jest.fn();
         wrapper = shallow(
             <AddTodo
                 auth={{idToken}}
@@ -44,6 +42,9 @@ describe('<AddTodo />', () => {
     };
 
     beforeEach(() => {
+        idToken = chance.string();
+        dispatch = jest.fn();
+
         renderComponent();
     });
 
@@ -58,7 +59,7 @@ describe('<AddTodo />', () => {
             });
         });
 
-        test('it should render a div ast the root element', () => {
+        test('it should render a div as the root element', () => {
             expect(wrapper.type()).toEqual('div');
         });
 
