@@ -34,7 +34,9 @@ package-sam:
 		--output-template-file ./dist/template-sam.yaml
 
 put-types:
-	node ./utils/types/put-types
+	mkdir -p ./temp
+	npx babel ./src/backend/* --out-dir ./temp
+	node ./utils/types/put-types.js
 
 provision-base:
 	aws cloudformation create-stack --stack-name xilution-todomvc-base \

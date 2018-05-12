@@ -1,10 +1,12 @@
+require('babel-polyfill');
+
 const {promisify} = require('util');
 
 const AWS = require('aws-sdk');
 const prompt = require('prompt');
 
-const identityBroker = require('../../src/backend/identityBroker');
-const dataAccessorBroker = require('../../src/backend/dataAccessorBroker');
+const identityBroker = require('../../temp/src/backend/identityBroker');
+const dataAccessorBroker = require('../../temp/src/backend/dataAccessorBroker');
 
 const secretsmanager = new AWS.SecretsManager({
     region: 'us-east-1'
