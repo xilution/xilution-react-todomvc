@@ -105,6 +105,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 
 1. [Create a Xilution Account](https://www.xilution.com/registration/)
 	* Limited access to Xilution's Beta and Test environments is Free for registered users.
+	* When prompted for product selections, choose Elements / Data Accessor and Business Basics / Identity.
 	* Take note of your Xilution API Key and Xilution Organization ID when you complete the registration process.
 
 1. [Install Git](https://git-scm.com/downloads)
