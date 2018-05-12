@@ -39,6 +39,14 @@ Within about 1/2 hour you will have a fully functional todo management app runni
   <img src="./images/serverless.png" alt="Is it time to reboot our love affair with servers?"/>
 </p>
 
+## Great For
+
+* This example is ideally suited for...
+	* Digital agencies who want to accelerate client project time lines.
+	* Frontend developers with backend responsibilities who just want to code awesome web and mobile apps.
+	* Technical leaders who are always on the look out for next big productivity accelerator.
+	* Backend developers who want to sharpen their technical skill sets.
+
 ## Features
 
 * Frontend
@@ -82,13 +90,6 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 <p align="center">
   <img src="./images/components.png" alt="xilution-react-todomvc components"/>
 </p>
-
-## Great For
-
-* Digital agencies who want to accelerate client project time lines.
-* Frontend developers with backend responsibilities who just want to code awesome web and mobile apps.
-* Technical leaders who are always on the look out for next big productivity accelerator.
-* Backend developers who want to sharpen their technical skill sets.
 
 ## Prerequisites
 
