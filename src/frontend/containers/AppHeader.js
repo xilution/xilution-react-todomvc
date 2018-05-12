@@ -6,7 +6,12 @@ import {Button} from 'react-bootstrap';
 
 import {signOut} from '../actions';
 
-const AppHeader = ({dispatch, auth}) => {
+/* istanbul ignore next */
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export const AppHeader = ({dispatch, auth}) => {
     if (auth.idToken) {
         return (
             <div style={{marginBottom: '20px'}}>
@@ -25,10 +30,6 @@ const AppHeader = ({dispatch, auth}) => {
 
     return <div />;
 };
-
-const mapStateToProps = (state) => ({
-    auth: state.auth
-});
 
 export default connect(mapStateToProps)(AppHeader);
 /* eslint-enable react/prop-types */

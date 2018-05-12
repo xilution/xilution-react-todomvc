@@ -103,9 +103,9 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. [Create an AWS Account](https://aws.amazon.com/free/)
 	* AWS offers a 12 month Free trial.
 
-1. [Create a Xilution Account](https://www.xilution.com/registration/)
+1. [Create a Xilution Subscriber Account](https://www.xilution.com/registration/)
 	* Limited access to Xilution's Beta and Test environments is Free for registered users.
-	* Take note of your Xilution API Key and Xilution Organization ID when you complete the registration process.
+	* When prompted for product selections, choose Elements / Data Accessor and Business Basics / Identity.
 
 1. [Install Git](https://git-scm.com/downloads)
 
@@ -153,7 +153,8 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. From within the 'xilution-react-todomvc' directory, run `yarn` to install Node.Js dependencies.
 
 1. Save your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
-	* You can look up your Xilution Subscriber API Key and Organization Id through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
+	* Look up your Xilution Subscriber API Key and Organization Id through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
+	  Use the credentials you used to create your Xilution Subscriber Account.
 	1. Run `aws secretsmanager create-secret --name XilutionSubscriberApiKey --description "My Xilution Subscriber API Key" --secret-string REPLACE-WITH-YOUR-API-KEY` to save your Xilution Subscriber API Key to AWS Secrets Manager.
 	1. Run `aws secretsmanager create-secret --name XilutionSubscriberOrgId --description "My Xilution Subscriber Organization ID" --secret-string REPLACE-WITH-YOUR-ORG-ID` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
 

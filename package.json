@@ -72,7 +72,7 @@
     "collectCoverage": true,
     "setupFiles": ["./test/unit/frontend/setUp.js"],
     "globals": {
-      "TODOMVC_BACKEND_URL": "https://api.xilution.com/not-really/Prod"
+      "TODOMVC_BACKEND_URL": "https://api.xilution.com/not-really/Prod/"
     }
   },
   "author": "Todd Brunia <tbrunia@gmail.com> (http://www.github.com/tbrunia)",
