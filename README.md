@@ -159,13 +159,17 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `aws secretsmanager create-secret --name XilutionSubscriberApiKey --description "My Xilution Subscriber API Key" --secret-string {REPLACE-WITH-YOUR-API-KEY}` to save your Xilution Subscriber API Key to AWS Secrets Manager.
 	1. Run `aws secretsmanager create-secret --name XilutionSubscriberOrgId --description "My Xilution Subscriber Organization ID" --secret-string {REPLACE-WITH-YOUR-ORG-ID}` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
 
+1. You can also update your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
+	1. Run `aws secretsmanager update-secret --secret-id XilutionSubscriberApiKey --description "My Xilution Subscriber API Key" --secret-string {REPLACE-WITH-YOUR-API-KEY}` to save your Xilution Subscriber API Key to AWS Secrets Manager.
+	1. Run `aws secretsmanager update-secret --secret-id XilutionSubscriberOrgId --description "My Xilution Subscriber Organization ID" --secret-string {REPLACE-WITH-YOUR-ORG-ID}` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
+
 ## Provision and Deploy
 
 1. Open a command line app.
 	* Mac: Terminal
 	* Windows: Git Bash
 
-1. Provision Resources
+1. Provision and Deploy Backend Resources
 	1. Run `make provision-base` to provision the base AWS resources.
 		* See [./aws/cloud-formation/template-base.yml](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/template-base.yml)
 		* Checkout the 'xilution-todomvc-base' stack using the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home).
