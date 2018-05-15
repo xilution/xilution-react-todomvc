@@ -2,13 +2,17 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import Chance from 'chance';
 import {Link} from 'react-router-dom';
+import {push} from 'react-router-redux';
 import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
+import {get, post} from 'axios/index';
 
+import {fetchTodosSuccess, authenticationSuccess} from '../../../../src/frontend/actions';
 import {Authenticate} from '../../../../src/frontend/containers/Authenticate';
 
 const chance = new Chance();
 
 jest.mock('axios/index');
+jest.mock('react-router-redux');
 jest.mock('../../../../src/frontend/actions');
 
 describe('<Authenticate />', () => {
@@ -178,6 +182,108 @@ describe('<Authenticate />', () => {
                 expect(instance.state).toEqual({
                     password: '',
                     username: event.target.value
+                });
+            });
+        });
+    });
+
+    describe('when handling submit', () => {
+        let event,
+            username,
+            password,
+            idToken,
+            content;
+
+        describe('when input validation does not pass', () => {
+            beforeEach(async () => {
+                renderComponent();
+
+                event = {
+                    preventDefault: jest.fn()
+                };
+
+                await instance.handleSubmit(event);
+            });
+
+            test('it should call preventDefault', () => {
+                expect(event.preventDefault).toHaveBeenCalledTimes(1);
+                expect(event.preventDefault).toHaveBeenCalledWith();
+            });
+        });
+
+        describe('when input validation passed', () => {
+            beforeEach(async () => {
+                renderComponent();
+
+                username = chance.string();
+                password = chance.string();
+                instance.setState({
+                    password,
+                    username
+                });
+                idToken = chance.string();
+                post.mockResolvedValue({
+                    data: {
+                        IdToken: idToken
+                    }
+                });
+                content = chance.string();
+                get.mockResolvedValue({
+                    data: {
+                        content
+                    }
+                });
+                event = {
+                    preventDefault: jest.fn()
+                };
+
+                await instance.handleSubmit(event);
+            });
+
+            test('it should call preventDefault', () => {
+                expect(event.preventDefault).toHaveBeenCalledTimes(1);
+                expect(event.preventDefault).toHaveBeenCalledWith();
+            });
+
+            test('it should post the username and password', () => {
+                expect(post).toHaveBeenCalledTimes(1);
+                expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/authenticate', {
+                    password,
+                    username
+                });
+            });
+
+            test('it should get the authenticated users\'s todos', () => {
+                expect(get).toHaveBeenCalledTimes(1);
+                expect(get).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/todos', {
+                    headers: {
+                        authorization: idToken
+                    }
+                });
+            });
+
+            test('it should call fetchTodosSuccess', () => {
+                expect(fetchTodosSuccess).toHaveBeenCalledTimes(1);
+                expect(fetchTodosSuccess).toHaveBeenCalledWith(content);
+            });
+
+            test('it should call authenticationSuccess', () => {
+                expect(authenticationSuccess).toHaveBeenCalledTimes(1);
+                expect(authenticationSuccess).toHaveBeenCalledWith(idToken);
+            });
+
+            test('it should call push', () => {
+                expect(push).toHaveBeenCalledTimes(1);
+            });
+
+            test('it should call dispatch', () => {
+                expect(dispatch).toHaveBeenCalledTimes(3);
+            });
+
+            test('it should leave the component ith the default state', () => {
+                expect(instance.state).toEqual({
+                    password: '',
+                    username: ''
                 });
             });
         });
