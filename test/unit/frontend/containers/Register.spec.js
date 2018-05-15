@@ -4,7 +4,7 @@ import Chance from 'chance';
 import {Link} from 'react-router-dom';
 import {push} from 'react-router-redux';
 import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
-import {get, post} from 'axios/index';
+import {post} from 'axios/index';
 
 import {registerSuccess} from '../../../../src/frontend/actions';
 import {Register} from '../../../../src/frontend/containers/Register';
@@ -49,7 +49,7 @@ describe('<Register />', () => {
 
         h2 = wrapper.children().at(0);
         p = wrapper.children().at(1);
-        form = wrapper.children().at(2)
+        form = wrapper.children().at(2);
         firstNameFormGroup = form.children().at(0);
         firstNameControlLabel = firstNameFormGroup.children().at(0);
         firstNameFormControl = firstNameFormGroup.children().at(1);
@@ -278,7 +278,6 @@ describe('<Register />', () => {
             email,
             username,
             password,
-            idToken,
             userRegistrationToken;
 
         describe('when input validation does not pass', () => {
