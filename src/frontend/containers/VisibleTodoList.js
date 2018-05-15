@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import axios from 'axios/index';
+import {delete as del, put} from 'axios/index';
 
 import {deleteTodo, toggleTodo} from '../actions';
 import TodoList from '../components/TodoList';
@@ -43,7 +43,7 @@ export const mapDispatchToProps = (dispatch) => ({
         try {
             dispatch(deleteTodo(todo.id));
 
-            await axios.delete(`${serverUrl}todos/${todo.id}`, buildOptions(auth));
+            await del(`${serverUrl}todos/${todo.id}`, buildOptions(auth));
         } catch (error) {
             handleError(error);
         }
@@ -52,7 +52,7 @@ export const mapDispatchToProps = (dispatch) => ({
         try {
             dispatch(toggleTodo(todo.id));
 
-            await axios.put(`${serverUrl}todos`, {
+            await put(`${serverUrl}todos`, {
                 completed: !todo.completed,
                 id: todo.id,
                 text: todo.text
