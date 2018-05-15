@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import axios from 'axios/index';
+import {delete as del, put} from 'axios/index';
 
 import {deleteTodo, toggleTodo} from '../actions';
 import TodoList from '../components/TodoList';
@@ -12,9 +12,9 @@ const getVisibleTodos = (todos, filter) => {
         case 'SHOW_ALL':
             return todos;
         case 'SHOW_COMPLETED':
-            return todos.filter((t) => t.completed);
+            return todos.filter((todo) => todo.completed);
         case 'SHOW_ACTIVE':
-            return todos.filter((t) => !t.completed);
+            return todos.filter((todo) => !todo.completed);
         default:
             throw new Error(`Unknown filter: ${filter}`);
     }
@@ -33,17 +33,17 @@ const buildOptions = (auth) => ({
     }
 });
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
     auth: state.auth,
     todos: getVisibleTodos(state.todos, state.visibilityFilter)
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
     deleteTodo: async (auth, todo) => {
         try {
             dispatch(deleteTodo(todo.id));
 
-            await axios.delete(`${serverUrl}todos/${todo.id}`, buildOptions(auth));
+            await del(`${serverUrl}todos/${todo.id}`, buildOptions(auth));
         } catch (error) {
             handleError(error);
         }
@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => ({
         try {
             dispatch(toggleTodo(todo.id));
 
-            await axios.put(`${serverUrl}todos`, {
+            await put(`${serverUrl}todos`, {
                 completed: !todo.completed,
                 id: todo.id,
                 text: todo.text
