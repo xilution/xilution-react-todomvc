@@ -19,7 +19,7 @@ const defaultState = {
     username: ''
 };
 
-class Register extends React.Component {
+export class Register extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -31,7 +31,7 @@ class Register extends React.Component {
 
     handleChange(event) {
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.value;
         const name = target.name;
 
         this.setState({
