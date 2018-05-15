@@ -16,7 +16,7 @@ const defaultState = {
     username: ''
 };
 
-class Authenticate extends React.Component {
+export class Authenticate extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -28,7 +28,7 @@ class Authenticate extends React.Component {
 
     handleChange(event) {
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.value;
         const name = target.name;
 
         this.setState({
