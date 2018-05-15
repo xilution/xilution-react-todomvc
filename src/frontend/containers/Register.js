@@ -56,9 +56,6 @@ export class Register extends React.Component {
         try {
             const response = await axios.post(`${serverUrl}register-user`, this.state);
 
-            // eslint-disable-next-line no-console
-            console.log(JSON.stringify(response, null, 2));
-
             this.props.dispatch(registerSuccess(response.data.userRegistrationToken));
             this.props.dispatch(push('/verify-registration'));
         } catch (error) {

@@ -56,9 +56,6 @@ export class VerifyRegistration extends React.Component {
                 userRegistrationToken: this.props.auth.userRegistrationToken
             });
 
-            // eslint-disable-next-line no-console
-            console.log(JSON.stringify(response, null, 2));
-
             this.props.dispatch(authenticationSuccess(response.data.IdToken));
             this.props.dispatch(push('/todos'));
         } catch (error) {
