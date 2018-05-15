@@ -3,7 +3,13 @@ import {Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-const PrivateRoute = ({component: Component, auth, ...rest}) => (
+/* istanbul ignore next */
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+// eslint-disable-next-line import/exports-last
+export const PrivateRoute = ({component: Component, auth, ...rest}) => (
     <Route
         {...rest}
         render={(props) => {
@@ -20,9 +26,5 @@ PrivateRoute.propTypes = {
     auth: PropTypes.object.isRequired,
     component: PropTypes.func.isRequired
 };
-
-const mapStateToProps = (state) => ({
-    auth: state.auth
-});
 
 export default connect(mapStateToProps)(PrivateRoute);

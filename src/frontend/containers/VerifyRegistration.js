@@ -3,9 +3,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import {Form, FormGroup, ControlLabel, FormControl, Button, HelpBlock} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import axios from 'axios/index';
 
-import {authenticationSuccess, registerSuccess} from '../actions';
+import {authenticationSuccess} from '../actions';
 
 // eslint-disable-next-line no-undef
 const serverUrl = TODOMVC_BACKEND_URL;
@@ -14,7 +15,13 @@ const defaultState = {
     verificationCode: ''
 };
 
-class VerifyRegistration extends React.Component {
+/* istanbul ignore next */
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+// eslint-disable-next-line import/exports-last
+export class VerifyRegistration extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -89,9 +96,9 @@ class VerifyRegistration extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    auth: state.auth
-});
+VerifyRegistration.propTypes = {
+    auth: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps)(VerifyRegistration);
 /* eslint-enable react/no-set-state,react/prop-types */
