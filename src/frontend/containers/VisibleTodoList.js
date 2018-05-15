@@ -12,9 +12,9 @@ const getVisibleTodos = (todos, filter) => {
         case 'SHOW_ALL':
             return todos;
         case 'SHOW_COMPLETED':
-            return todos.filter((t) => t.completed);
+            return todos.filter((todo) => todo.completed);
         case 'SHOW_ACTIVE':
-            return todos.filter((t) => !t.completed);
+            return todos.filter((todo) => !todo.completed);
         default:
             throw new Error(`Unknown filter: ${filter}`);
     }
@@ -33,12 +33,12 @@ const buildOptions = (auth) => ({
     }
 });
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
     auth: state.auth,
     todos: getVisibleTodos(state.todos, state.visibilityFilter)
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
     deleteTodo: async (auth, todo) => {
         try {
             dispatch(deleteTodo(todo.id));
