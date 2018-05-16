@@ -1,3 +1,4 @@
+/* eslint-disable max-nested-callbacks */
 import React from 'react';
 import {shallow} from 'enzyme';
 import Chance from 'chance';
@@ -151,57 +152,111 @@ describe('<VerifyRegistration />', () => {
         });
 
         describe('when input validation passed', () => {
-            beforeEach(async () => {
-                renderComponent();
+            describe('when everything goes right', () => {
+                beforeEach(async () => {
+                    renderComponent();
 
-                verificationCode = chance.string();
-                instance.setState({
-                    verificationCode
+                    verificationCode = chance.string();
+                    instance.setState({
+                        verificationCode
+                    });
+                    idToken = chance.string();
+                    post.mockResolvedValue({
+                        data: {
+                            IdToken: idToken
+                        }
+                    });
+                    event = {
+                        preventDefault: jest.fn()
+                    };
+
+                    await instance.handleSubmit(event);
                 });
-                idToken = chance.string();
-                post.mockResolvedValue({
-                    data: {
-                        IdToken: idToken
-                    }
+
+                test('it should call preventDefault', () => {
+                    expect(event.preventDefault).toHaveBeenCalledTimes(1);
+                    expect(event.preventDefault).toHaveBeenCalledWith();
                 });
-                event = {
-                    preventDefault: jest.fn()
-                };
 
-                await instance.handleSubmit(event);
-            });
+                test('it should post the verification code', () => {
+                    expect(post).toHaveBeenCalledTimes(1);
+                    expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/verify-user', {
+                        code: verificationCode,
+                        userRegistrationToken: auth.userRegistrationToken
+                    });
+                });
 
-            test('it should call preventDefault', () => {
-                expect(event.preventDefault).toHaveBeenCalledTimes(1);
-                expect(event.preventDefault).toHaveBeenCalledWith();
-            });
+                test('it should call authenticationSuccess', () => {
+                    expect(authenticationSuccess).toHaveBeenCalledTimes(1);
+                    expect(authenticationSuccess).toHaveBeenCalledWith(idToken);
+                });
 
-            test('it should post the verification code', () => {
-                expect(post).toHaveBeenCalledTimes(1);
-                expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/verify-user', {
-                    code: verificationCode,
-                    userRegistrationToken: auth.userRegistrationToken
+                test('it should call push', () => {
+                    expect(push).toHaveBeenCalledTimes(1);
+                });
+
+                test('it should call dispatch', () => {
+                    expect(dispatch).toHaveBeenCalledTimes(2);
+                });
+
+                test('it should leave the component ith the default state', () => {
+                    expect(instance.state).toEqual({
+                        verificationCode: ''
+                    });
                 });
             });
 
-            test('it should call authenticationSuccess', () => {
-                expect(authenticationSuccess).toHaveBeenCalledTimes(1);
-                expect(authenticationSuccess).toHaveBeenCalledWith(idToken);
-            });
+            describe('when post raises an error', () => {
+                let error;
 
-            test('it should call push', () => {
-                expect(push).toHaveBeenCalledTimes(1);
-            });
+                beforeEach(async () => {
+                    renderComponent();
 
-            test('it should call dispatch', () => {
-                expect(dispatch).toHaveBeenCalledTimes(2);
-            });
+                    verificationCode = chance.string();
+                    instance.setState({
+                        verificationCode
+                    });
+                    error = new Error(chance.string());
+                    post.mockRejectedValue(error);
+                    global.console.log = jest.fn();
+                    global.alert = jest.fn();
+                    event = {
+                        preventDefault: jest.fn()
+                    };
 
-            test('it should leave the component ith the default state', () => {
-                expect(instance.state).toEqual({
-                    verificationCode: ''
+                    await instance.handleSubmit(event);
+                });
+
+                test('it should call preventDefault', () => {
+                    expect(event.preventDefault).toHaveBeenCalledTimes(1);
+                    expect(event.preventDefault).toHaveBeenCalledWith();
+                });
+
+                test('it should post the verification code', () => {
+                    expect(post).toHaveBeenCalledTimes(1);
+                    expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/verify-user', {
+                        code: verificationCode,
+                        userRegistrationToken: auth.userRegistrationToken
+                    });
+                });
+
+                test('it should leave the component ith the default state', () => {
+                    expect(instance.state).toEqual({
+                        verificationCode: ''
+                    });
+                });
+
+                test('it should call console.log', () => {
+                    expect(global.console.log).toHaveBeenCalledTimes(1);
+                    expect(global.console.log).toHaveBeenCalledWith(error);
+                });
+
+                test('it should call alert', () => {
+                    expect(alert).toHaveBeenCalledTimes(1);
+                    expect(alert).toHaveBeenCalledWith('An error has occurred. See the developer console for details.');
                 });
             });
         });
     });
 });
+/* eslint-enable */

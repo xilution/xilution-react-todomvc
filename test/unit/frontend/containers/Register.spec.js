@@ -1,3 +1,4 @@
+/* eslint-disable max-nested-callbacks */
 import React from 'react';
 import {shallow} from 'enzyme';
 import Chance from 'chance';
@@ -298,72 +299,141 @@ describe('<Register />', () => {
         });
 
         describe('when input validation passed', () => {
-            beforeEach(async () => {
-                renderComponent();
+            describe('when everything goes right', () => {
+                beforeEach(async () => {
+                    renderComponent();
 
-                firstName = chance.string();
-                lastName = chance.string();
-                email = chance.email();
-                username = chance.string();
-                password = chance.string();
-                instance.setState({
-                    email,
-                    firstName,
-                    lastName,
-                    password,
-                    username
+                    firstName = chance.string();
+                    lastName = chance.string();
+                    email = chance.email();
+                    username = chance.string();
+                    password = chance.string();
+                    instance.setState({
+                        email,
+                        firstName,
+                        lastName,
+                        password,
+                        username
+                    });
+                    userRegistrationToken = chance.string();
+                    post.mockResolvedValue({
+                        data: {
+                            userRegistrationToken
+                        }
+                    });
+                    event = {
+                        preventDefault: jest.fn()
+                    };
+
+                    await instance.handleSubmit(event);
                 });
-                userRegistrationToken = chance.string();
-                post.mockResolvedValue({
-                    data: {
-                        userRegistrationToken
-                    }
+
+                test('it should call preventDefault', () => {
+                    expect(event.preventDefault).toHaveBeenCalledTimes(1);
+                    expect(event.preventDefault).toHaveBeenCalledWith();
                 });
-                event = {
-                    preventDefault: jest.fn()
-                };
 
-                await instance.handleSubmit(event);
-            });
+                test('it should post the username and password', () => {
+                    expect(post).toHaveBeenCalledTimes(1);
+                    expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/register-user', {
+                        email,
+                        firstName,
+                        lastName,
+                        password,
+                        username
+                    });
+                });
 
-            test('it should call preventDefault', () => {
-                expect(event.preventDefault).toHaveBeenCalledTimes(1);
-                expect(event.preventDefault).toHaveBeenCalledWith();
-            });
+                test('it should call registerSuccess', () => {
+                    expect(registerSuccess).toHaveBeenCalledTimes(1);
+                    expect(registerSuccess).toHaveBeenCalledWith(userRegistrationToken);
+                });
 
-            test('it should post the username and password', () => {
-                expect(post).toHaveBeenCalledTimes(1);
-                expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/register-user', {
-                    email,
-                    firstName,
-                    lastName,
-                    password,
-                    username
+                test('it should call push', () => {
+                    expect(push).toHaveBeenCalledTimes(1);
+                });
+
+                test('it should call dispatch', () => {
+                    expect(dispatch).toHaveBeenCalledTimes(2);
+                });
+
+                test('it should leave the component ith the default state', () => {
+                    expect(instance.state).toEqual({
+                        email: '',
+                        firstName: '',
+                        lastName: '',
+                        password: '',
+                        username: ''
+                    });
                 });
             });
 
-            test('it should call registerSuccess', () => {
-                expect(registerSuccess).toHaveBeenCalledTimes(1);
-                expect(registerSuccess).toHaveBeenCalledWith(userRegistrationToken);
-            });
+            describe('when post raises an error', () => {
+                let error;
 
-            test('it should call push', () => {
-                expect(push).toHaveBeenCalledTimes(1);
-            });
+                beforeEach(async () => {
+                    renderComponent();
 
-            test('it should call dispatch', () => {
-                expect(dispatch).toHaveBeenCalledTimes(2);
-            });
+                    firstName = chance.string();
+                    lastName = chance.string();
+                    email = chance.email();
+                    username = chance.string();
+                    password = chance.string();
+                    instance.setState({
+                        email,
+                        firstName,
+                        lastName,
+                        password,
+                        username
+                    });
+                    error = new Error(chance.string());
+                    post.mockRejectedValue(error);
+                    global.console.log = jest.fn();
+                    global.alert = jest.fn();
+                    event = {
+                        preventDefault: jest.fn()
+                    };
 
-            test('it should leave the component ith the default state', () => {
-                expect(instance.state).toEqual({
-                    email: '',
-                    firstName: '',
-                    lastName: '',
-                    password: '',
-                    username: ''
+                    await instance.handleSubmit(event);
+                });
+
+                test('it should call preventDefault', () => {
+                    expect(event.preventDefault).toHaveBeenCalledTimes(1);
+                    expect(event.preventDefault).toHaveBeenCalledWith();
+                });
+
+                test('it should post the username and password', () => {
+                    expect(post).toHaveBeenCalledTimes(1);
+                    expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/register-user', {
+                        email,
+                        firstName,
+                        lastName,
+                        password,
+                        username
+                    });
+                });
+
+                test('it should leave the component ith the default state', () => {
+                    expect(instance.state).toEqual({
+                        email: '',
+                        firstName: '',
+                        lastName: '',
+                        password: '',
+                        username: ''
+                    });
+                });
+
+                test('it should call console.log', () => {
+                    expect(global.console.log).toHaveBeenCalledTimes(1);
+                    expect(global.console.log).toHaveBeenCalledWith(error);
+                });
+
+                test('it should call alert', () => {
+                    expect(alert).toHaveBeenCalledTimes(1);
+                    expect(alert).toHaveBeenCalledWith('An error has occurred. See the developer console for details.');
                 });
             });
         });
     });
 });
+/* eslint-enable */

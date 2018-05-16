@@ -50,6 +50,8 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 
 ## Features
 
+* 💯 Unit Test Coverage
+
 * Frontend
 	* Use Cases
 		* Register New User (including email verification)

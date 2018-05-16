@@ -56,7 +56,18 @@ describe('<TodoList />', () => {
                 expect(child.props().completed).toEqual(todos[i].completed);
                 expect(child.props().id).toEqual(todos[i].id);
                 expect(child.props().text).toEqual(todos[i].text);
+
+                expect(typeof child.props().deleteTodo).toEqual('function');
+                child.props().deleteTodo();
+                expect(deleteTodo).toHaveBeenCalledWith(auth, todos[i]);
+
+                expect(typeof child.props().toggleTodo).toEqual('function');
+                child.props().toggleTodo();
+                expect(toggleTodo).toHaveBeenCalledWith(auth, todos[i]);
             }
+
+            expect(deleteTodo).toHaveBeenCalledTimes(wrapper.length);
+            expect(toggleTodo).toHaveBeenCalledTimes(wrapper.length);
         });
     });
 });
