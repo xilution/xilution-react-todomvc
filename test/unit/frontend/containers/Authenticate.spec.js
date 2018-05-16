@@ -1,3 +1,4 @@
+/* eslint-disable max-nested-callbacks */
 import React from 'react';
 import {shallow} from 'enzyme';
 import Chance from 'chance';
@@ -212,80 +213,206 @@ describe('<Authenticate />', () => {
         });
 
         describe('when input validation passed', () => {
-            beforeEach(async () => {
-                renderComponent();
+            describe('when everything goes right', () => {
+                beforeEach(async () => {
+                    renderComponent();
 
-                username = chance.string();
-                password = chance.string();
-                instance.setState({
-                    password,
-                    username
+                    username = chance.string();
+                    password = chance.string();
+                    instance.setState({
+                        password,
+                        username
+                    });
+                    idToken = chance.string();
+                    post.mockResolvedValue({
+                        data: {
+                            IdToken: idToken
+                        }
+                    });
+                    content = chance.string();
+                    get.mockResolvedValue({
+                        data: {
+                            content
+                        }
+                    });
+                    event = {
+                        preventDefault: jest.fn()
+                    };
+
+                    await instance.handleSubmit(event);
                 });
-                idToken = chance.string();
-                post.mockResolvedValue({
-                    data: {
-                        IdToken: idToken
-                    }
+
+                test('it should call preventDefault', () => {
+                    expect(event.preventDefault).toHaveBeenCalledTimes(1);
+                    expect(event.preventDefault).toHaveBeenCalledWith();
                 });
-                content = chance.string();
-                get.mockResolvedValue({
-                    data: {
-                        content
-                    }
+
+                test('it should post the username and password', () => {
+                    expect(post).toHaveBeenCalledTimes(1);
+                    expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/authenticate', {
+                        password,
+                        username
+                    });
                 });
-                event = {
-                    preventDefault: jest.fn()
-                };
 
-                await instance.handleSubmit(event);
-            });
+                test('it should get the authenticated users\'s todos', () => {
+                    expect(get).toHaveBeenCalledTimes(1);
+                    expect(get).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/todos', {
+                        headers: {
+                            authorization: idToken
+                        }
+                    });
+                });
 
-            test('it should call preventDefault', () => {
-                expect(event.preventDefault).toHaveBeenCalledTimes(1);
-                expect(event.preventDefault).toHaveBeenCalledWith();
-            });
+                test('it should call fetchTodosSuccess', () => {
+                    expect(fetchTodosSuccess).toHaveBeenCalledTimes(1);
+                    expect(fetchTodosSuccess).toHaveBeenCalledWith(content);
+                });
 
-            test('it should post the username and password', () => {
-                expect(post).toHaveBeenCalledTimes(1);
-                expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/authenticate', {
-                    password,
-                    username
+                test('it should call authenticationSuccess', () => {
+                    expect(authenticationSuccess).toHaveBeenCalledTimes(1);
+                    expect(authenticationSuccess).toHaveBeenCalledWith(idToken);
+                });
+
+                test('it should call push', () => {
+                    expect(push).toHaveBeenCalledTimes(1);
+                });
+
+                test('it should call dispatch', () => {
+                    expect(dispatch).toHaveBeenCalledTimes(3);
+                });
+
+                test('it should leave the component ith the default state', () => {
+                    expect(instance.state).toEqual({
+                        password: '',
+                        username: ''
+                    });
                 });
             });
 
-            test('it should get the authenticated users\'s todos', () => {
-                expect(get).toHaveBeenCalledTimes(1);
-                expect(get).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/todos', {
-                    headers: {
-                        authorization: idToken
-                    }
+            describe('when post raises an error', () => {
+                let error;
+
+                beforeEach(async () => {
+                    renderComponent();
+
+                    username = chance.string();
+                    password = chance.string();
+                    instance.setState({
+                        password,
+                        username
+                    });
+                    error = new Error(chance.string());
+                    post.mockRejectedValue(error);
+                    global.console.log = jest.fn();
+                    global.alert = jest.fn();
+                    event = {
+                        preventDefault: jest.fn()
+                    };
+
+                    await instance.handleSubmit(event);
+                });
+
+                test('it should call preventDefault', () => {
+                    expect(event.preventDefault).toHaveBeenCalledTimes(1);
+                    expect(event.preventDefault).toHaveBeenCalledWith();
+                });
+
+                test('it should post the username and password', () => {
+                    expect(post).toHaveBeenCalledTimes(1);
+                    expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/authenticate', {
+                        password,
+                        username
+                    });
+                });
+
+                test('it should leave the component with the default state', () => {
+                    expect(instance.state).toEqual({
+                        password: '',
+                        username: ''
+                    });
+                });
+
+                test('it should call console.log', () => {
+                    expect(global.console.log).toHaveBeenCalledTimes(1);
+                    expect(global.console.log).toHaveBeenCalledWith(error);
+                });
+
+                test('it should call alert', () => {
+                    expect(alert).toHaveBeenCalledTimes(1);
+                    expect(alert).toHaveBeenCalledWith('An error has occurred. See the developer console for details.');
                 });
             });
 
-            test('it should call fetchTodosSuccess', () => {
-                expect(fetchTodosSuccess).toHaveBeenCalledTimes(1);
-                expect(fetchTodosSuccess).toHaveBeenCalledWith(content);
-            });
+            describe('when get raises an error', () => {
+                let error;
 
-            test('it should call authenticationSuccess', () => {
-                expect(authenticationSuccess).toHaveBeenCalledTimes(1);
-                expect(authenticationSuccess).toHaveBeenCalledWith(idToken);
-            });
+                beforeEach(async () => {
+                    renderComponent();
 
-            test('it should call push', () => {
-                expect(push).toHaveBeenCalledTimes(1);
-            });
+                    username = chance.string();
+                    password = chance.string();
+                    instance.setState({
+                        password,
+                        username
+                    });
+                    idToken = chance.string();
+                    post.mockResolvedValue({
+                        data: {
+                            IdToken: idToken
+                        }
+                    });
+                    error = new Error(chance.string());
+                    get.mockRejectedValue(error);
+                    global.console.log = jest.fn();
+                    global.alert = jest.fn();
+                    event = {
+                        preventDefault: jest.fn()
+                    };
 
-            test('it should call dispatch', () => {
-                expect(dispatch).toHaveBeenCalledTimes(3);
-            });
+                    await instance.handleSubmit(event);
+                });
 
-            test('it should leave the component ith the default state', () => {
-                expect(instance.state).toEqual({
-                    password: '',
-                    username: ''
+                test('it should call preventDefault', () => {
+                    expect(event.preventDefault).toHaveBeenCalledTimes(1);
+                    expect(event.preventDefault).toHaveBeenCalledWith();
+                });
+
+                test('it should post the username and password', () => {
+                    expect(post).toHaveBeenCalledTimes(1);
+                    expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/authenticate', {
+                        password,
+                        username
+                    });
+                });
+
+                test('it should get the authenticated users\'s todos', () => {
+                    expect(get).toHaveBeenCalledTimes(1);
+                    expect(get).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/todos', {
+                        headers: {
+                            authorization: idToken
+                        }
+                    });
+                });
+
+                test('it should leave the component with the default state', () => {
+                    expect(instance.state).toEqual({
+                        password: '',
+                        username: ''
+                    });
+                });
+
+                test('it should call console.log', () => {
+                    expect(global.console.log).toHaveBeenCalledTimes(1);
+                    expect(global.console.log).toHaveBeenCalledWith(error);
+                });
+
+                test('it should call alert', () => {
+                    expect(alert).toHaveBeenCalledTimes(1);
+                    expect(alert).toHaveBeenCalledWith('An error has occurred. See the developer console for details.');
                 });
             });
         });
     });
 });
+/* eslint-enable */

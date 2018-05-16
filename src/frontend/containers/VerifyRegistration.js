@@ -33,7 +33,7 @@ export class VerifyRegistration extends React.Component {
 
     handleChange(event) {
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const value = target.value;
         const name = target.name;
 
         this.setState({
@@ -62,7 +62,7 @@ export class VerifyRegistration extends React.Component {
             // eslint-disable-next-line no-console
             console.log(error);
             // eslint-disable-next-line no-alert
-            alert('An error has occurred. Check the developer console.');
+            alert('An error has occurred. See the developer console for details.');
         }
 
         this.setState(defaultState);
