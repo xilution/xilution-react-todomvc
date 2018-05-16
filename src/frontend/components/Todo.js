@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Button, ListGroupItem} from 'react-bootstrap';
@@ -41,4 +40,3 @@ Todo.propTypes = {
 };
 
 export default Todo;
-/* eslint-enable jsx-a11y/click-events-have-key-events */
