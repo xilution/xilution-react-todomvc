@@ -107,4 +107,4 @@ export class Authenticate extends React.Component {
 }
 
 export default connect()(Authenticate);
-/* eslint-enable react/no-set-state,react/prop-types */
+/* eslint-enable */

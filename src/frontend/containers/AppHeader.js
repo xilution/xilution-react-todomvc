@@ -31,4 +31,4 @@ export const AppHeader = ({dispatch, auth}) => {
 };
 
 export default connect(mapStateToProps)(AppHeader);
-/* eslint-enable react/prop-types */
+/* eslint-enable */

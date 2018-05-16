@@ -1,4 +1,4 @@
-/* eslint-disable react/no-set-state,react/prop-types */
+/* eslint-disable react/no-set-state,react/prop-types,import/exports-last */
 import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
@@ -19,7 +19,6 @@ export const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-// eslint-disable-next-line import/exports-last
 export class VerifyRegistration extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -97,4 +96,4 @@ VerifyRegistration.propTypes = {
 };
 
 export default connect(mapStateToProps)(VerifyRegistration);
-/* eslint-enable react/no-set-state,react/prop-types */
+/* eslint-enable */

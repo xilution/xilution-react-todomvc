@@ -1,3 +1,4 @@
+/* eslint-disable import/exports-last */
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -7,7 +8,6 @@ export const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-// eslint-disable-next-line import/exports-last
 export const PrivateRoute = ({component: Component, auth, ...rest}) => (
     <Route
         {...rest}
@@ -27,3 +27,4 @@ PrivateRoute.propTypes = {
 };
 
 export default connect(mapStateToProps)(PrivateRoute);
+/* eslint-enable */

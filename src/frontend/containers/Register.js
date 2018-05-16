@@ -138,4 +138,4 @@ export class Register extends React.Component {
 }
 
 export default connect()(Register);
-/* eslint-enable react/no-set-state,react/prop-types */
+/* eslint-enable */

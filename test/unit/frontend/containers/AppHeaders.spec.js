@@ -5,7 +5,7 @@ import {push} from 'react-router-redux';
 import {Button} from 'react-bootstrap';
 
 import {signOut} from '../../../../src/frontend/actions';
-import {AppHeader} from '../../../../src/frontend/containers/AppHeader';
+import {AppHeader, mapStateToProps} from '../../../../src/frontend/containers/AppHeader';
 
 const chance = new Chance();
 
@@ -38,6 +38,25 @@ describe('<AppHeader />', () => {
 
     afterEach(() => {
         jest.resetAllMocks();
+    });
+
+    describe('when mapping state to props', () => {
+        let state,
+            mappedProps;
+
+        beforeEach(() => {
+            state = {
+                auth: chance.string()
+            };
+
+            mappedProps = mapStateToProps(state);
+        });
+
+        test('it should map properly', () => {
+            expect(mappedProps).toEqual({
+                auth: state.auth
+            });
+        });
     });
 
     describe('when the component renders', () => {
