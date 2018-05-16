@@ -7,7 +7,7 @@ import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstra
 import {post} from 'axios/index';
 
 import {authenticationSuccess} from '../../../../src/frontend/actions';
-import {VerifyRegistration} from '../../../../src/frontend/containers/VerifyRegistration';
+import {VerifyRegistration, mapStateToProps} from '../../../../src/frontend/containers/VerifyRegistration';
 
 const chance = new Chance();
 
@@ -55,6 +55,25 @@ describe('<VerifyRegistration />', () => {
 
     afterEach(() => {
         jest.resetAllMocks();
+    });
+
+    describe('when mapping state to props', () => {
+        let state,
+            mappedProps;
+
+        beforeEach(() => {
+            state = {
+                auth: chance.string()
+            };
+
+            mappedProps = mapStateToProps(state);
+        });
+
+        test('it should map properly', () => {
+            expect(mappedProps).toEqual({
+                auth: state.auth
+            });
+        });
     });
 
     describe('when the component renders', () => {

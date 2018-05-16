@@ -3,7 +3,7 @@ import {Route, Redirect} from 'react-router-dom';
 import {shallow} from 'enzyme';
 import Chance from 'chance';
 
-import {PrivateRoute} from '../../../../src/frontend/containers/PrivateRoute';
+import {PrivateRoute, mapStateToProps} from '../../../../src/frontend/containers/PrivateRoute';
 
 const chance = new Chance();
 
@@ -35,6 +35,25 @@ describe('<PrivateRoute /> ', () => {
         randomProp2Value = chance.string();
 
         renderComponent();
+    });
+
+    describe('when mapping state to props', () => {
+        let state,
+            mappedProps;
+
+        beforeEach(() => {
+            state = {
+                auth: chance.string()
+            };
+
+            mappedProps = mapStateToProps(state);
+        });
+
+        test('it should map properly', () => {
+            expect(mappedProps).toEqual({
+                auth: state.auth
+            });
+        });
     });
 
     describe('when the component renders', () => {

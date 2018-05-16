@@ -5,7 +5,7 @@ import {Form, FormGroup, InputGroup, FormControl, Button} from 'react-bootstrap'
 import {put} from 'axios/index';
 
 import {createTodo} from '../../../../src/frontend/actions';
-import {AddTodo} from '../../../../src/frontend/containers/AddTodo';
+import {AddTodo, mapStateToProps} from '../../../../src/frontend/containers/AddTodo';
 
 const chance = new Chance();
 
@@ -50,6 +50,25 @@ describe('<AddTodo />', () => {
 
     afterEach(() => {
         jest.resetAllMocks();
+    });
+
+    describe('when mapping state to props', () => {
+        let state,
+            mappedProps;
+
+        beforeEach(() => {
+            state = {
+                auth: chance.string()
+            };
+
+            mappedProps = mapStateToProps(state);
+        });
+
+        test('it should map properly', () => {
+            expect(mappedProps).toEqual({
+                auth: state.auth
+            });
+        });
     });
 
     describe('when the component renders', () => {

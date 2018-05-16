@@ -6,8 +6,7 @@ import {Button} from 'react-bootstrap';
 
 import {signOut} from '../actions';
 
-/* istanbul ignore next */
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
@@ -32,4 +31,4 @@ export const AppHeader = ({dispatch, auth}) => {
 };
 
 export default connect(mapStateToProps)(AppHeader);
-/* eslint-enable react/prop-types */
+/* eslint-enable */
