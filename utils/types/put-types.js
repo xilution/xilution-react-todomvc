@@ -8,13 +8,13 @@ const prompt = require('prompt');
 const identityBroker = require('../../temp/src/backend/identityBroker');
 const dataAccessorBroker = require('../../temp/src/backend/dataAccessorBroker');
 
-const parameters = require('../../aws/cloud-formation/parameters.json');
+const secretsConfig = require('../../aws/cloud-formation/secrets-config.json');
 
-console.log("Using AWS Secrets Manager in region: " + parameters[3].SecretsRegion);
+console.log("Using AWS Secrets Manager in region: " + secretsConfig.SecretsRegion);
 
 const secretsmanager = new AWS.SecretsManager({
-    // Retrieve the Secrets Manager region from parameters.json
-    region: parameters[3].SecretsRegion
+    // Retrieve the Secrets Manager region from secrets-config.json
+    region: secretsConfig.SecretsRegion
 });
 
 const secretsmanagerGetSecretValueAsync = promisify(secretsmanager.getSecretValue.bind(secretsmanager));
@@ -78,7 +78,7 @@ const run = async () => {
 // eslint-disable-next-line no-console
 run().then(() => console.log('All Done!')).catch((error) => {
     if (error.name == 'ResourceNotFoundException') { // Unable to find secrets in region.
-    console.error(`Error: AWS Secrets Manager was unable locate your Xilution Subscriber API Key in the "${parameters[3].SecretsRegion}" region.`);
+    console.error(`Error: AWS Secrets Manager was unable locate your Xilution Subscriber API Key in the "${secretsConfig.SecretsRegion}" region.`);
     console.error('-----> Please check that the correct "SecretsRegion" value is in the "parameters.json" file!');
     } else {
         console.error(error);
