@@ -3,6 +3,11 @@ XILUTION_ORGANIZATION_ID = $(shell aws secretsmanager get-secret-value --secret-
 TODOMVC_FRONTEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-base | jq '.Stacks[0].Outputs[1].OutputValue')
 TODOMVC_BACKEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-sam | jq '.Stacks[0].Outputs[0].OutputValue')
 
+AWS_CLI_HAS_SECRETS_MANAGER = $(shell aws help | grep secretsmanager)
+ifndef AWS_CLI_HAS_SECRETS_MANAGER
+$(error Please upgrade aws-cli to proceed! https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-configure-cli.html)
+endif
+
 build-frontend:
 	TODOMVC_BACKEND_URL=$(TODOMVC_BACKEND_URL) yarn build:frontend
 
