@@ -133,6 +133,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 	  AWS will prompt you when you don't have sufficient access to a resource.
 
 1. [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
+	* Remember your region for configuration later.
 
 1. Open a command line app.
 	* Mac: Terminal
@@ -173,6 +174,9 @@ For Mac users, the Terminal application is the best way to go for command line s
 	* Windows: Git Bash
 
 1. Provision and Deploy Backend Resources
+	1. Change template defaults.
+		* S3 Bucket Names: [./aws/cloud-formation/parameters.json](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/parameters.json)
+		* Secrets Manager region where Xilution API Key and Organization ID resides: [./aws/cloud-formation/secrets-config.json](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/secrets-config.json)
 	1. Run `make provision-base` to provision the base AWS resources.
 		* See [./aws/cloud-formation/template-base.yml](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/template-base.yml)
 		* Checkout the 'xilution-todomvc-base' stack using the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home).
