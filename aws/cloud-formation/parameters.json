@@ -10,8 +10,5 @@
   {
     "ParameterKey": "LambdaExecutionRole",
     "ParameterValue": "xilution-todomvc-lambda-execution-role"
-  },
-  {
-    "SecretsRegion": "us-east-1"
   }
 ]
