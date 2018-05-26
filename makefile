@@ -2,6 +2,8 @@ XILUTION_API_KEY = $(shell aws secretsmanager get-secret-value --secret-id Xilut
 XILUTION_ORGANIZATION_ID = $(shell aws secretsmanager get-secret-value --secret-id XilutionSubscriberOrgId | jq '.SecretString')
 TODOMVC_FRONTEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-base | jq '.Stacks[0].Outputs[1].OutputValue')
 TODOMVC_BACKEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-sam | jq '.Stacks[0].Outputs[0].OutputValue')
+AWS_STAGING_BUCKET = $(shell jq '.[1].ParameterValue' ./aws/cloud-formation/parameters.json)
+AWS_WEBSITE_BUCKET = $(shell jq '.[0].ParameterValue' ./aws/cloud-formation/parameters.json)
 
 build-frontend:
 	TODOMVC_BACKEND_URL=$(TODOMVC_BACKEND_URL) yarn build:frontend
@@ -11,7 +13,7 @@ build-backend:
 	make package-sam
 
 deploy-frontend:
-	aws s3 cp ./dist/frontend/ s3://xilution-todomvc-website-bucket/ --recursive --include "*" --acl public-read
+	aws s3 cp ./dist/frontend/ s3://$(AWS_WEBSITE_BUCKET)/ --recursive --include "*" --acl public-read
 
 deploy-backend:
 	aws cloudformation deploy --stack-name xilution-todomvc-sam \
@@ -30,7 +32,7 @@ dev:
 package-sam:
 	aws cloudformation package \
 		--template-file ./aws/cloud-formation/template-sam.yml \
-		--s3-bucket xilution-todomvc-staging-bucket \
+		--s3-bucket $(AWS_STAGING_BUCKET) \
 		--output-template-file ./dist/template-sam.yaml
 
 put-types:
