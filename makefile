@@ -51,10 +51,10 @@ reprovision-base:
         --capabilities CAPABILITY_NAMED_IAM
 
 show-frontend-url:
-	echo $(TODOMVC_FRONTEND_URL)
+	@echo $(TODOMVC_FRONTEND_URL)
 
 show-backend-url:
-	echo $(TODOMVC_BACKEND_URL)
+	@echo $(TODOMVC_BACKEND_URL)
 
 show-xilution-api-key:
-	echo $(XILUTION_API_KEY)
+	@echo $(XILUTION_API_KEY)
