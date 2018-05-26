@@ -1,14 +1,17 @@
 [
   {
     "ParameterKey": "WebsiteBucketName",
-    "ParameterValue": "xilution-todomvc-website-bucket"
+    "ParameterValue": "nverno-todomvc-website-bucket"
   },
   {
     "ParameterKey": "StagingBucketName",
-    "ParameterValue": "xilution-todomvc-staging-bucket"
+    "ParameterValue": "nverno-todomvc-staging-bucket"
   },
   {
     "ParameterKey": "LambdaExecutionRole",
-    "ParameterValue": "xilution-todomvc-lambda-execution-role"
+    "ParameterValue": "nverno-todomvc-lambda-execution-role"
+  },
+  {
+    "SecretsRegion": "us-east-2"
   }
 ]
