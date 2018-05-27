@@ -11,6 +11,8 @@ build-frontend:
 build-backend:
 	yarn build:backend
 	make package-sam
+	@echo "^Do not use that last suggested command!^ Execute the following command instead:"
+	@echo "make deploy-backend"
 
 deploy-frontend:
 	aws s3 cp ./dist/frontend/ s3://$(AWS_WEBSITE_BUCKET)/ --recursive --include "*" --acl public-read
