@@ -5,12 +5,19 @@ TODOMVC_BACKEND_URL = $(shell aws cloudformation describe-stacks --stack-name xi
 AWS_STAGING_BUCKET = $(shell jq '.[1].ParameterValue' ./aws/cloud-formation/parameters.json)
 AWS_WEBSITE_BUCKET = $(shell jq '.[0].ParameterValue' ./aws/cloud-formation/parameters.json)
 
+AWS_CLI_HAS_SECRETS_MANAGER = $(shell aws help | grep secretsmanager)
+ifndef AWS_CLI_HAS_SECRETS_MANAGER
+$(error Please upgrade aws-cli to proceed! https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-configure-cli.html)
+endif
+
 build-frontend:
 	TODOMVC_BACKEND_URL=$(TODOMVC_BACKEND_URL) yarn build:frontend
 
 build-backend:
 	yarn build:backend
 	make package-sam
+	@echo "^Do not use that last suggested command!^ Execute the following command instead:"
+	@echo "make deploy-backend"
 
 deploy-frontend:
 	aws s3 cp ./dist/frontend/ s3://$(AWS_WEBSITE_BUCKET)/ --recursive --include "*" --acl public-read
@@ -53,10 +60,10 @@ reprovision-base:
         --capabilities CAPABILITY_NAMED_IAM
 
 show-frontend-url:
-	echo $(TODOMVC_FRONTEND_URL)
+	@echo $(TODOMVC_FRONTEND_URL)
 
 show-backend-url:
-	echo $(TODOMVC_BACKEND_URL)
+	@echo $(TODOMVC_BACKEND_URL)
 
 show-xilution-api-key:
-	echo $(XILUTION_API_KEY)
+	@echo $(XILUTION_API_KEY)
