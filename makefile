@@ -4,6 +4,7 @@ TODOMVC_FRONTEND_URL = $(shell aws cloudformation describe-stacks --stack-name x
 TODOMVC_BACKEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-sam | jq '.Stacks[0].Outputs[0].OutputValue')
 AWS_STAGING_BUCKET = $(shell jq '.[1].ParameterValue' ./aws/cloud-formation/parameters.json)
 AWS_WEBSITE_BUCKET = $(shell jq '.[0].ParameterValue' ./aws/cloud-formation/parameters.json)
+AWS_REGION = $(shell jq '.SecretsRegion' ./aws/cloud-formation/secrets-config.json)
 
 AWS_CLI_HAS_SECRETS_MANAGER = $(shell aws help | grep secretsmanager)
 ifndef AWS_CLI_HAS_SECRETS_MANAGER
@@ -67,3 +68,6 @@ show-backend-url:
 
 show-xilution-api-key:
 	@echo $(XILUTION_API_KEY)
+	
+show-frontend-ssl-url:
+	@echo https://s3.$(AWS_REGION).amazonaws.com/$(AWS_WEBSITE_BUCKET)/index.html
