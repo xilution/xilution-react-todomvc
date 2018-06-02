@@ -1,17 +1,19 @@
 /* eslint-disable react/no-set-state,react/prop-types */
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
-import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import { Form, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios/index';
+import LoadingIndicator from '../components/Loading';
 
-import {authenticationSuccess, fetchTodosSuccess} from '../actions';
+import { authenticationSuccess, fetchTodosSuccess } from '../actions';
 
 // eslint-disable-next-line no-undef
 const serverUrl = TODOMVC_BACKEND_URL;
 
 const defaultState = {
+    loading: false,
     password: '',
     username: ''
 };
@@ -39,25 +41,28 @@ export class Authenticate extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
 
-        if (
-            !this.state.username.trim() ||
+        if (!this.state.username.trim() ||
             !this.state.password.trim()
         ) {
             return;
         }
 
         try {
-            const authenticateResponse = await axios.post(`${serverUrl}authenticate`, this.state);
+            this.setState({ loading: true });
+            
+            const credentials = { password: this.state.password, username: this.state.username };
+            const authenticateResponse = await axios.post(`${serverUrl}authenticate`, credentials);
+
             const todosResponse = await axios.get(`${serverUrl}todos`, {
                 headers: {
                     authorization: authenticateResponse.data.IdToken
                 }
             });
-
             this.props.dispatch(fetchTodosSuccess(todosResponse.data.content));
             this.props.dispatch(authenticationSuccess(authenticateResponse.data.IdToken));
             this.props.dispatch(push('/todos'));
-        } catch (error) {
+        }
+        catch (error) {
             // eslint-disable-next-line no-console
             console.log(error);
             // eslint-disable-next-line no-alert
@@ -68,17 +73,17 @@ export class Authenticate extends React.Component {
     }
 
     render() {
+        const isLoading = this.state.loading;
+
         return (
             <div>
+                {isLoading && <LoadingIndicator /> }
                 <h2>{'Sign In'}</h2>
                 <p>
                     {'Don\'t have an account?'}{' '}
                     <Link to="/register">{'Register'}</Link>
                 </p>
-                <Form
-                    horizontal
-                    onSubmit={this.handleSubmit}
-                >
+                <Form horizontal onSubmit={this.handleSubmit}>
                     <FormGroup controlId="username">
                         <ControlLabel>{'Username'}</ControlLabel>
                         <FormControl
