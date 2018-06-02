@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Form, FormGroup, InputGroup, FormControl, Button} from 'react-bootstrap';
 import {put} from 'axios/index';
+import LoadingIndicator from '../components/Loading';
 
 import {createTodo} from '../actions';
 
@@ -10,7 +11,8 @@ import {createTodo} from '../actions';
 const serverUrl = TODOMVC_BACKEND_URL;
 
 const defaultState = {
-    input: ''
+    input: '',
+    loading: false
 };
 
 export const mapStateToProps = (state) => ({
@@ -39,7 +41,9 @@ export class AddTodo extends React.Component {
         if (!this.state.input.trim()) {
             return;
         }
-
+        
+        this.setState({ loading: true });
+        
         const todo = {
             completed: false,
             text: this.state.input.trim()
@@ -63,8 +67,10 @@ export class AddTodo extends React.Component {
     }
 
     render() {
+        const isLoading = this.state.loading;
         return (
             <div>
+                {isLoading && <LoadingIndicator /> }
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup controlId="input">
                         <InputGroup>
