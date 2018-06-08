@@ -1,13 +1,13 @@
 /* eslint-disable react/no-set-state,react/prop-types */
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import { Form, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
+import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 import axios from 'axios/index';
 import LoadingIndicator from '../components/Loading';
 
-import { authenticationSuccess, fetchTodosSuccess } from '../actions';
+import {authenticationSuccess, fetchTodosSuccess} from '../actions';
 
 // eslint-disable-next-line no-undef
 const serverUrl = TODOMVC_BACKEND_URL;
@@ -41,7 +41,8 @@ export class Authenticate extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
 
-        if (!this.state.username.trim() ||
+        if (
+            !this.state.username.trim() ||
             !this.state.password.trim()
         ) {
             return;
