@@ -74,7 +74,8 @@ describe('<AddTodo />', () => {
     describe('when the component renders', () => {
         test('it should have an initial state', () => {
             expect(instance.state).toEqual({
-                input: ''
+                input: '',
+                loading: false
             });
         });
 
@@ -131,7 +132,8 @@ describe('<AddTodo />', () => {
 
         test('it should update the state', () => {
             expect(instance.state).toEqual({
-                input: event.target.value
+                input: event.target.value,
+                loading: false
             });
         });
     });
@@ -213,7 +215,8 @@ describe('<AddTodo />', () => {
 
             test('it should leave the component ith the default state', () => {
                 expect(instance.state).toEqual({
-                    input: ''
+                    input: '',
+                    loading: false
                 });
             });
         });

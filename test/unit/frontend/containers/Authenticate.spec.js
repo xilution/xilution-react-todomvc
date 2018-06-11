@@ -64,6 +64,7 @@ describe('<Authenticate />', () => {
     describe('when the component renders', () => {
         test('it should have an initial state', () => {
             expect(instance.state).toEqual({
+                loading: false,
                 password: '',
                 username: ''
             });
@@ -159,6 +160,7 @@ describe('<Authenticate />', () => {
 
             test('it should update the state', () => {
                 expect(instance.state).toEqual({
+                    loading: false,
                     password: event.target.value,
                     username: ''
                 });
@@ -181,6 +183,7 @@ describe('<Authenticate />', () => {
 
             test('it should update the state', () => {
                 expect(instance.state).toEqual({
+                    loading: false,
                     password: '',
                     username: event.target.value
                 });
@@ -284,6 +287,7 @@ describe('<Authenticate />', () => {
 
                 test('it should leave the component ith the default state', () => {
                     expect(instance.state).toEqual({
+                        loading: false,
                         password: '',
                         username: ''
                     });
@@ -328,6 +332,7 @@ describe('<Authenticate />', () => {
 
                 test('it should leave the component with the default state', () => {
                     expect(instance.state).toEqual({
+                        loading: false,
                         password: '',
                         username: ''
                     });
@@ -397,6 +402,7 @@ describe('<Authenticate />', () => {
 
                 test('it should leave the component with the default state', () => {
                     expect(instance.state).toEqual({
+                        loading: false,
                         password: '',
                         username: ''
                     });
