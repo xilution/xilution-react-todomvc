@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 import axios from 'axios/index';
-import LoadingIndicator from '../components/Loading';
 
+import LoadingIndicator from '../components/Loading';
 import {authenticationSuccess, fetchTodosSuccess} from '../actions';
 
 // eslint-disable-next-line no-undef
@@ -49,9 +49,12 @@ export class Authenticate extends React.Component {
         }
 
         try {
-            this.setState({ loading: true });
-            
-            const credentials = { password: this.state.password, username: this.state.username };
+            this.setState({loading: true});
+
+            const credentials = {
+                password: this.state.password,
+                username: this.state.username
+            };
             const authenticateResponse = await axios.post(`${serverUrl}authenticate`, credentials);
 
             const todosResponse = await axios.get(`${serverUrl}todos`, {
@@ -59,11 +62,11 @@ export class Authenticate extends React.Component {
                     authorization: authenticateResponse.data.IdToken
                 }
             });
+
             this.props.dispatch(fetchTodosSuccess(todosResponse.data.content));
             this.props.dispatch(authenticationSuccess(authenticateResponse.data.IdToken));
             this.props.dispatch(push('/todos'));
-        }
-        catch (error) {
+        } catch (error) {
             // eslint-disable-next-line no-console
             console.log(error);
             // eslint-disable-next-line no-alert
@@ -84,7 +87,10 @@ export class Authenticate extends React.Component {
                     {'Don\'t have an account?'}{' '}
                     <Link to="/register">{'Register'}</Link>
                 </p>
-                <Form horizontal onSubmit={this.handleSubmit}>
+                <Form
+                    horizontal
+                    onSubmit={this.handleSubmit}
+                >
                     <FormGroup controlId="username">
                         <ControlLabel>{'Username'}</ControlLabel>
                         <FormControl
