@@ -86,9 +86,9 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 		* Technique used to reduce size of deployed code.
 	* [Jest](https://facebook.github.io/jest/) Unit Testing
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
-	* Integrates with [Xilution SaaS](https://www.xilution.com)
-		* [Xilution - Elements - Data Accessor](https://prod.xilution.com/products/?product=xilution-elements-data-accessor)
-		* [Xilution - Business Basics - Identity](https://prod.xilution.com/products/?product=xilution-business-basics-identity)
+	* Integrates with [Xilution SaaS](https://xilution.com)
+		* [Xilution - Elements - Data Accessor](https://products.xilution.com/elements/data-accessor)
+		* [Xilution - Business Basics - Identity](https://products.xilution.com/business-basics/identity)
 
 <p align="center">
   <img src="./images/components.png" alt="xilution-react-todomvc components"/>
@@ -107,7 +107,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. [Create an AWS Account](https://aws.amazon.com/free/)
 	* AWS offers a 12 month Free trial.
 
-1. [Create a Xilution Subscriber Account](https://www.xilution.com/registration/)
+1. [Create a Xilution Subscriber Account](https://register.xilution.com)
 	* Limited access to Xilution's Beta and Test environments is Free for registered users.
 	* When prompted for product selections, choose Elements - Data Accessor and Business Basics - Identity.
 
@@ -158,7 +158,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. From within the 'xilution-react-todomvc' directory, run `yarn` to install Node.Js dependencies.
 
 1. Save your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
-	* Look up your Xilution Subscriber API Key and Organization Id through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
+	* Look up your Xilution Subscriber API Key and Organization Id through the [Xilution Customer Admin Portal](https://portal.xilution.com).
 	  Use the credentials you used to create your Xilution Subscriber Account.
 	1. Run `aws secretsmanager create-secret --name XilutionSubscriberApiKey --description "My Xilution Subscriber API Key" --secret-string {REPLACE-WITH-YOUR-API-KEY}` to save your Xilution Subscriber API Key to AWS Secrets Manager.
 	1. Run `aws secretsmanager create-secret --name XilutionSubscriberOrgId --description "My Xilution Subscriber Organization ID" --secret-string {REPLACE-WITH-YOUR-ORG-ID}` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
@@ -222,7 +222,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 			  You can use the same email across multiple users.
 			  User email must be verified.
 			  Usernames must be unique for all users.
-			  You can manage your Xilution account through the [Xilution Customer Admin Portal](https://prod.xilution.com/portal/index.html).
+			  You can manage your Xilution account through the [Xilution Customer Admin Portal](https://portal.xilution.com).
 		* Authenticate User
 			* Use your Xilution user credentials
 		* View Todos
@@ -277,7 +277,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 ## Next Steps
 
 I'm hopeful that this reference implementation inspires you to to use AWS SAM and React for your next web application.
-I also invite you to learn more about how [Xilution SaaS](https://www.xilution.com) can accelerate your next web or mobile application project.
+I also invite you to learn more about how [Xilution SaaS](https://xilution.com) can accelerate your next web or mobile application project.
 
 Need help with your serverless project?
 [Hit me up on Twitter.](https://twitter.com/tbrunia)
@@ -303,7 +303,7 @@ I would be happy to pitch in where I can.
 	* Pricing for Xilution SaaS Products used in this example
 		* This example integrates with Xilution's Beta environment which is Free for evaluation purposes.
 		* The Xilution SaaS products highlighted in this example have not yet been released for production consumption.
-		* See [the Xilution SaaS Products page](https://prod.xilution.com/products/index.html) for the latest product phase and pricing details.
+		* See [the Xilution SaaS Products page](https://products.xilution.com) for the latest product phase and pricing details.
 		* For comparision, here is AWS's published pricing for data storage services.
 			* [RDS](https://aws.amazon.com/rds/pricing/)
 			* [DynamoDB](https://aws.amazon.com/dynamodb/pricing/)
@@ -349,7 +349,7 @@ I would be happy to pitch in where I can.
 
 ## About the Author
 
-[Todd Brunia](https://twitter.com/tbrunia) is a Sr. Software Engineer with [Source Allies](https://www.sourceallies.com/) and the founder of [Xilution](https://www.xilution.com).
+[Todd Brunia](https://twitter.com/tbrunia) is a Sr. Software Engineer with [Source Allies](https://www.sourceallies.com/) and the founder of [Xilution](https://xilution.com).
 
 ## Contributions
 
