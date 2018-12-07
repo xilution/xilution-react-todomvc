@@ -56,7 +56,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^22.4.3",
-    "mini-css-extract-plugin": "^0.4.0",
+    "mini-css-extract-plugin": "^0.5.0",
     "prompt": "^1.0.0",
     "util": "^0.11.0",
     "webpack": "^4.5.0",
