@@ -81,7 +81,7 @@ describe('identity broker tests', () => {
             expect(post).toHaveBeenCalledWith('https://api.xilution.com/business-basics-identity-beta/confirm-user-registration', {
                 ...request.body,
                 productSelections: [
-                    'xilution-elements-data-accessor',
+                    '58c8ae6b6a794b38adcdfcd1c2848e13',
                     'xilution-business-basics-identity'
                 ]
             }, commonOptions);

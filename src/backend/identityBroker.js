@@ -15,7 +15,7 @@ export const registerUser = (request) => post(registerUserUrl, {
 export const verifyUser = (request) => post(verifyUserUrl, {
     ...request.body,
     productSelections: [
-        'xilution-elements-data-accessor',
+        '58c8ae6b6a794b38adcdfcd1c2848e13',
         'xilution-business-basics-identity'
     ]
 }, buildCommonOptions());
