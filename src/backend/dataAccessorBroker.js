@@ -6,14 +6,14 @@ import {getAuthenticatedUser} from './identityBroker';
 const DEFAULT_START_PAGE = 0;
 const DEFAULT_PAGE_SIZE = 100;
 
-const putThingUrl = 'https://api.xilution.com/elements-data-accessor-beta/things';
+const putThingUrl = 'https://api.xilution.com/elements-neon-beta/things';
 
-const buildGetOrDeleteThingUrl = (id) => `https://api.xilution.com/elements-data-accessor-beta/things/${id}`;
+const buildGetOrDeleteThingUrl = (id) => `https://api.xilution.com/elements-neon-beta/things/${id}`;
 
 const buildFetchThingsUrl = (searchCriteriaId, startPage, pageSize) =>
-    `https://api.xilution.com/elements-data-accessor-beta/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}`;
+    `https://api.xilution.com/elements-neon-beta/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}`;
 
-const buildPutTypesUrl = (name) => `https://api.xilution.com/elements-data-accessor-beta/types/${name}`;
+const buildPutTypesUrl = (name) => `https://api.xilution.com/elements-neon-beta/types/${name}`;
 
 const getSearchCriteriaId = async (request, user, searchCriteria) => {
     const putSearchCriteriaResponse = await put(putThingUrl, searchCriteria, buildAuthenticatedUserAwareOptions(request, user));

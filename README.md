@@ -87,7 +87,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* [Jest](https://facebook.github.io/jest/) Unit Testing
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
 	* Integrates with [Xilution SaaS](https://xilution.com)
-		* [Xilution - Elements - Data Accessor](https://products.xilution.com/elements/data-accessor)
+		* [Xilution - Elements - Neon](https://products.xilution.com/elements/neon)
 		* [Xilution - Business Basics - Identity](https://products.xilution.com/business-basics/identity)
 
 <p align="center">
@@ -109,7 +109,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 
 1. [Create a Xilution Subscriber Account](https://register.xilution.com)
 	* Limited access to Xilution's Beta and Test environments is Free for registered users.
-	* When prompted for product selections, choose Elements - Data Accessor and Business Basics - Identity.
+	* When prompted for product selections, choose Elements - Neon and Business Basics - Identity.
 
 1. [Install Git](https://git-scm.com/downloads)
 
@@ -187,7 +187,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 		* See [./aws/cloud-formation/template-sam.yml](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/template-sam.yml)
 		* Checkout the 'xilution-todomvc-sam' stack using the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home).
 	1. Run `make show-backend-url` to see the URL of the backend RESTful web service.
-	1. Run `make put-types` to register JSON schema used by this example with Xilution - Elements - Data Accessor.
+	1. Run `make put-types` to register JSON schema used by this example with Xilution - Elements - Neon.
 		* You will be prompted for credentials.
 		  Use the credentials you used to create your Xilution account.
 
