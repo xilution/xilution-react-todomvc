@@ -72,7 +72,7 @@ describe('data access broker tests', () => {
 
         test('it should call put', () => {
             expect(put).toHaveBeenCalledTimes(1);
-            expect(put).toHaveBeenCalledWith('https://api.xilution.com/elements-neon-beta/things', {
+            expect(put).toHaveBeenCalledWith('https://api.xilution.com/basics-beagily-beta/things', {
                 ...request.body,
                 '@type': 'todo',
                 owningUserId: user.id
@@ -105,7 +105,7 @@ describe('data access broker tests', () => {
 
         test('it should call get', () => {
             expect(get).toHaveBeenCalledTimes(1);
-            expect(get).toHaveBeenCalledWith(`https://api.xilution.com/elements-neon-beta/things/${request.parameters.id}`, typeAwareOptions);
+            expect(get).toHaveBeenCalledWith(`https://api.xilution.com/basics-beagily-beta/things/${request.parameters.id}`, typeAwareOptions);
         });
     });
 
@@ -134,7 +134,7 @@ describe('data access broker tests', () => {
 
         test('it should call del', () => {
             expect(del).toHaveBeenCalledTimes(1);
-            expect(del).toHaveBeenCalledWith(`https://api.xilution.com/elements-neon-beta/things/${request.parameters.id}`, typeAwareOptions);
+            expect(del).toHaveBeenCalledWith(`https://api.xilution.com/basics-beagily-beta/things/${request.parameters.id}`, typeAwareOptions);
         });
     });
 
@@ -178,7 +178,7 @@ describe('data access broker tests', () => {
 
         test('it should call put', () => {
             expect(put).toHaveBeenCalledTimes(1);
-            expect(put).toHaveBeenCalledWith('https://api.xilution.com/elements-neon-beta/things', {
+            expect(put).toHaveBeenCalledWith('https://api.xilution.com/basics-beagily-beta/things', {
                 '@type': 'fetch-todos-search-criteria',
                 owningUserId: user.id
             }, authenticatedUserAwareOptions);
@@ -191,7 +191,7 @@ describe('data access broker tests', () => {
 
         test('it should call get', () => {
             expect(get).toHaveBeenCalledTimes(1);
-            expect(get).toHaveBeenCalledWith(`https://api.xilution.com/elements-neon-beta/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}`, typeAwareOptions);
+            expect(get).toHaveBeenCalledWith(`https://api.xilution.com/basics-beagily-beta/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}`, typeAwareOptions);
         });
     });
 
@@ -214,7 +214,7 @@ describe('data access broker tests', () => {
 
         test('it should call put', () => {
             expect(put).toHaveBeenCalledTimes(1);
-            expect(put).toHaveBeenCalledWith(`https://api.xilution.com/elements-neon-beta/types/${request.parameters.name}`, request.body, authorizedOptions);
+            expect(put).toHaveBeenCalledWith(`https://api.xilution.com/basics-beagily-beta/types/${request.parameters.name}`, request.body, authorizedOptions);
         });
     });
 });
