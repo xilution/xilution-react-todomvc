@@ -28,11 +28,6 @@ export const authenticationSuccess = (accessToken) => ({
     type: 'AUTHENTICATION_SUCCESS'
 });
 
-export const registerSuccess = (userRegistrationToken) => ({
-    type: 'REGISTER_SUCCESS',
-    userRegistrationToken
-});
-
 export const signOut = () => ({
     type: 'SIGN_OUT'
 });

@@ -83,10 +83,6 @@ export class Authenticate extends React.Component {
             <div>
                 {isLoading && <LoadingIndicator /> }
                 <h2>{'Sign In'}</h2>
-                <p>
-                    {'Don\'t have an account?'}{' '}
-                    <Link to="/register">{'Register'}</Link>
-                </p>
                 <Form
                     horizontal
                     onSubmit={this.handleSubmit}

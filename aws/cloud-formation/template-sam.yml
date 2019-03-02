@@ -44,38 +44,6 @@ Resources:
             Path: /authenticate
             Method: post
 
-  RegisterUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: xilution-todomvc-register-user-function
-      CodeUri: ../../dist/backend/
-      Handler: index.doRegisterUser
-      Role:
-        Fn::ImportValue:
-          Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
-      Events:
-        PostResource:
-          Type: Api
-          Properties:
-            Path: /register-user
-            Method: post
-
-  VerifyUserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: xilution-todomvc-verify-user-function
-      CodeUri: ../../dist/backend/
-      Handler: index.doVerifyUser
-      Role:
-        Fn::ImportValue:
-          Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
-      Events:
-        PostResource:
-          Type: Api
-          Properties:
-            Path: /verify-user
-            Method: post
-
   FetchTodosFunction:
     Type: AWS::Serverless::Function
     Properties:

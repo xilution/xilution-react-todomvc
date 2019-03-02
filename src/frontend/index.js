@@ -8,8 +8,6 @@ import {ConnectedRouter, routerReducer, routerMiddleware} from 'react-router-red
 
 import reducers from './reducers';
 import Authenticate from './containers/Authenticate';
-import Register from './containers/Register';
-import VerifyRegistration from './containers/VerifyRegistration';
 import Todos from './components/Todos';
 import PrivateRoute from './containers/PrivateRoute';
 import AppHeader from './containers/AppHeader';
@@ -42,14 +40,6 @@ render(
                     <Route
                         component={Authenticate}
                         path="/authenticate"
-                    />
-                    <Route
-                        component={Register}
-                        path="/register"
-                    />
-                    <Route
-                        component={VerifyRegistration}
-                        path="/verify-registration"
                     />
                     <PrivateRoute
                         component={Todos}

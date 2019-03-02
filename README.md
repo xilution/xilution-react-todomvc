@@ -54,7 +54,6 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 
 * Frontend
 	* Use Cases
-		* Register New User (including email verification)
 		* Authenticate User
 		* View Todos
 		* Create/Update/Delete Todos
@@ -88,9 +87,8 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
 	* Integrates with [Xilution SaaS](https://xilution.com)
 		* [Xilution - Basics - Beagily](https://products.xilution.com/basics/beagily)
-		* [Xilution - Core - Registration](https://products.xilution.com/core/registration)
-		* [Xilution - Core - Account Management](https://products.xilution.com/core/account-management)
 		* [Xilution - Core - Authentication](https://products.xilution.com/core/authentication)
+		* [Xilution - Core - Account Management](https://products.xilution.com/core/account-management)
 
 <p align="center">
   <img src="./images/components.png" alt="xilution-react-todomvc components"/>
@@ -218,12 +216,6 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `make show-frontend-url` to see the URL of the frontend application.
 	1. Copy the front end URL and paste it into a browser.
 	1. Run through the different use cases
-		* Register New User (including email verification)
-			* Creates a new user in your Xilution account.
-			  You can use the same email across multiple users.
-			  User email must be verified.
-			  Usernames must be unique for all users.
-			  You can manage your Xilution account through the [Xilution Customer Admin Portal](https://portal.xilution.com).
 		* Authenticate User
 			* Use your Xilution user credentials
 		* View Todos

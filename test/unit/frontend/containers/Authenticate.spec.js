@@ -2,7 +2,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import Chance from 'chance';
-import {Link} from 'react-router-dom';
 import {push} from 'react-router-redux';
 import {Form, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 import {get, post} from 'axios/index';
@@ -21,7 +20,6 @@ describe('<Authenticate />', () => {
         wrapper,
         instance,
         h2,
-        p,
         form,
         userNameFormGroup,
         userNameControlLabel,
@@ -40,8 +38,7 @@ describe('<Authenticate />', () => {
         instance = wrapper.instance();
 
         h2 = wrapper.children().at(0);
-        p = wrapper.children().at(1);
-        form = wrapper.children().at(2);
+        form = wrapper.children().at(1);
         userNameFormGroup = form.children().at(0);
         userNameControlLabel = userNameFormGroup.children().at(0);
         userNameFormControl = userNameFormGroup.children().at(1);
@@ -77,17 +74,6 @@ describe('<Authenticate />', () => {
         test('it should render a h2 element', () => {
             expect(h2.type()).toEqual('h2');
             expect(h2.children().at(0).text()).toEqual('Sign In');
-        });
-
-        test('it should render a p element', () => {
-            expect(p.type()).toEqual('p');
-            expect(p.children().at(0).text()).toEqual('Don\'t have an account?');
-            expect(p.children().at(1).text()).toEqual(' ');
-            const link = p.children().at(2);
-
-            expect(link.type()).toEqual(Link);
-            expect(link.props().to).toEqual('/register');
-            expect(link.children().at(0).text()).toEqual('Register');
         });
 
         test('it should render a Form element', () => {

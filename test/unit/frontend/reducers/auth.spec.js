@@ -6,13 +6,11 @@ const chance = new Chance();
 
 describe('auth reducer tests', () => {
     let state,
-        accessToken,
-        userRegistrationToken;
+        accessToken;
 
     beforeEach(() => {
         state = {};
         accessToken = chance.string();
-        userRegistrationToken = chance.string();
     });
 
     test('should handle initial state', () => {
@@ -23,26 +21,6 @@ describe('auth reducer tests', () => {
         expect(auth(state, {
             accessToken,
             type: 'AUTHENTICATION_SUCCESS'
-        })).toEqual({
-            ...state,
-            accessToken
-        });
-    });
-
-    test('should handle REGISTER_SUCCESS', () => {
-        expect(auth(state, {
-            type: 'REGISTER_SUCCESS',
-            userRegistrationToken
-        })).toEqual({
-            ...state,
-            userRegistrationToken
-        });
-    });
-
-    test('should handle VERIFY_REGISTRATION_SUCCESS', () => {
-        expect(auth(state, {
-            accessToken,
-            type: 'VERIFY_REGISTRATION_SUCCESS'
         })).toEqual({
             ...state,
             accessToken

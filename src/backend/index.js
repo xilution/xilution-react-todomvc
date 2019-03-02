@@ -1,30 +1,13 @@
 import {brokerRequest} from './requestAdapter';
-import {registerUser, verifyUser} from './registrationBroker';
 import {authenticate} from './authenticationBroker';
 import {putTodo, getTodo, deleteTodo, fetchTodos} from './beagilyBroker';
 import {
-    registerUserRequestSchema,
-    verifyUserRequestSchema,
     authenticateRequestSchema,
     putTodoRequestSchema,
     getTodoRequestSchema,
     deleteTodoRequestSchema,
     fetchTodosRequestSchema
 } from './schemas';
-
-export const doRegisterUser = async (event, context, callback) => {
-    const registerUserRequest = {body: JSON.parse(event.body)};
-    const proxyResponse = await brokerRequest(registerUserRequest, registerUserRequestSchema, registerUser);
-
-    callback(null, proxyResponse);
-};
-
-export const doVerifyUser = async (event, context, callback) => {
-    const verifyUserRequest = {body: JSON.parse(event.body)};
-    const proxyResponse = await brokerRequest(verifyUserRequest, verifyUserRequestSchema, verifyUser);
-
-    callback(null, proxyResponse);
-};
 
 export const doAuthenticate = async (event, context, callback) => {
     const authenticateRequest = {body: JSON.parse(event.body)};

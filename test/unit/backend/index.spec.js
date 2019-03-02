@@ -6,17 +6,12 @@ import {
     doDeleteTodo,
     doFetchTodos,
     doGetTodo,
-    doPutTodo,
-    doRegisterUser,
-    doVerifyUser
+    doPutTodo
 } from '../../../src/backend/index';
 import {brokerRequest} from '../../../src/backend/requestAdapter';
-import {registerUser, verifyUser} from '../../../src/backend/registrationBroker';
 import {authenticate} from '../../../src/backend/authenticationBroker';
 import {putTodo, getTodo, deleteTodo, fetchTodos} from '../../../src/backend/beagilyBroker';
 import {
-    registerUserRequestSchema,
-    verifyUserRequestSchema,
     authenticateRequestSchema,
     putTodoRequestSchema,
     getTodoRequestSchema,
@@ -44,64 +39,6 @@ describe('index tests', () => {
 
     afterEach(() => {
         jest.resetAllMocks();
-    });
-
-    describe('when registering a user', () => {
-        beforeEach((done) => {
-            event = {
-                body: JSON.stringify({
-                    [chance.string()]: chance.string()
-                })
-            };
-
-            doRegisterUser(event, context, (error, response) => {
-                actualError = error;
-                actualResponse = response;
-                done();
-            });
-        });
-
-        test('should not raise an error', () => {
-            expect(actualError).toBeNull();
-        });
-
-        test('should yield the expected response', () => {
-            expect(actualResponse).toEqual(expectedResponse);
-        });
-
-        test('should call brokerRequest once with the proper params', () => {
-            expect(brokerRequest).toHaveBeenCalledTimes(1);
-            expect(brokerRequest).toHaveBeenCalledWith({body: JSON.parse(event.body)}, registerUserRequestSchema, registerUser);
-        });
-    });
-
-    describe('when verifying user', () => {
-        beforeEach((done) => {
-            event = {
-                body: JSON.stringify({
-                    [chance.string()]: chance.string()
-                })
-            };
-
-            doVerifyUser(event, context, (error, response) => {
-                actualError = error;
-                actualResponse = response;
-                done();
-            });
-        });
-
-        test('should not raise an error', () => {
-            expect(actualError).toBeNull();
-        });
-
-        test('should yield the expected response', () => {
-            expect(actualResponse).toEqual(expectedResponse);
-        });
-
-        test('should call brokerRequest once with the proper params', () => {
-            expect(brokerRequest).toHaveBeenCalledTimes(1);
-            expect(brokerRequest).toHaveBeenCalledWith({body: JSON.parse(event.body)}, verifyUserRequestSchema, verifyUser);
-        });
     });
 
     describe('when authenticating', () => {

@@ -1,22 +1,5 @@
 import Joi from 'joi';
 
-export const registerUserRequestSchema = Joi.object().keys({
-    body: Joi.object().required().keys({
-        email: Joi.string().email().required(),
-        firstName: Joi.string().required(),
-        lastName: Joi.string().required(),
-        password: Joi.string().required(),
-        username: Joi.string().required()
-    })
-});
-
-export const verifyUserRequestSchema = Joi.object().keys({
-    body: Joi.object().required().keys({
-        code: Joi.string().required(),
-        userRegistrationToken: Joi.string().required()
-    })
-});
-
 export const authenticateRequestSchema = Joi.object().keys({
     body: Joi.object().required().keys({
         password: Joi.string().required(),

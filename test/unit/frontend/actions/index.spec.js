@@ -62,15 +62,6 @@ describe('todo action tests', () => {
         });
     });
 
-    test('registerSuccess should create AUTHENTICATION_SUCCESS action', () => {
-        const userRegistrationToken = chance.string();
-
-        expect(actions.registerSuccess(userRegistrationToken)).toEqual({
-            type: 'REGISTER_SUCCESS',
-            userRegistrationToken
-        });
-    });
-
     test('signOut should create SIGN_OUT action', () => {
         expect(actions.signOut()).toEqual({
             type: 'SIGN_OUT'
