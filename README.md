@@ -342,7 +342,8 @@ I would be happy to pitch in where I can.
 
 ## About the Author
 
-[Todd Brunia](https://twitter.com/tbrunia) is a Sr. Software Engineer with [Source Allies](https://www.sourceallies.com/) and the founder of [Xilution](https://xilution.com).
+[Todd Brunia](https://twitter.com/tbrunia) is the founder of [Xilution](https://xilution.com).
+Xilution creates and markets API based software as a service (SaaS).
 
 ## Contributions
 
