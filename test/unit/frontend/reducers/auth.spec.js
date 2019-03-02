@@ -6,12 +6,12 @@ const chance = new Chance();
 
 describe('auth reducer tests', () => {
     let state,
-        idToken,
+        accessToken,
         userRegistrationToken;
 
     beforeEach(() => {
         state = {};
-        idToken = chance.string();
+        accessToken = chance.string();
         userRegistrationToken = chance.string();
     });
 
@@ -21,11 +21,11 @@ describe('auth reducer tests', () => {
 
     test('should handle AUTHENTICATION_SUCCESS', () => {
         expect(auth(state, {
-            idToken,
+            accessToken,
             type: 'AUTHENTICATION_SUCCESS'
         })).toEqual({
             ...state,
-            idToken
+            accessToken
         });
     });
 
@@ -41,11 +41,11 @@ describe('auth reducer tests', () => {
 
     test('should handle VERIFY_REGISTRATION_SUCCESS', () => {
         expect(auth(state, {
-            idToken,
+            accessToken,
             type: 'VERIFY_REGISTRATION_SUCCESS'
         })).toEqual({
             ...state,
-            idToken
+            accessToken
         });
     });
 

@@ -17,7 +17,7 @@ describe('<TodoList />', () => {
 
     const renderComponent = () => {
         auth = {
-            idToken: chance.string()
+            accessToken: chance.string()
         };
         deleteTodo = jest.fn();
         todos = chance.n(() => ({

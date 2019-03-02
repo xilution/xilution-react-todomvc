@@ -117,7 +117,7 @@ describe('<VisibleTodoList />', () => {
 
             beforeEach(() => {
                 auth = {
-                    idToken: chance.string()
+                    accessToken: chance.string()
                 };
                 todo = {
                     id: chance.string()
@@ -146,7 +146,7 @@ describe('<VisibleTodoList />', () => {
                     expect(del).toHaveBeenCalledTimes(1);
                     expect(del).toHaveBeenCalledWith(`https://api.xilution.com/not-really/Prod/todos/${todo.id}`, {
                         headers: {
-                            authorization: auth.idToken
+                            authorization: auth.accessToken
                         }
                     });
                 });
@@ -180,7 +180,7 @@ describe('<VisibleTodoList />', () => {
                     expect(del).toHaveBeenCalledTimes(1);
                     expect(del).toHaveBeenCalledWith(`https://api.xilution.com/not-really/Prod/todos/${todo.id}`, {
                         headers: {
-                            authorization: auth.idToken
+                            authorization: auth.accessToken
                         }
                     });
                 });
@@ -204,7 +204,7 @@ describe('<VisibleTodoList />', () => {
 
             beforeEach(() => {
                 auth = {
-                    idToken: chance.string()
+                    accessToken: chance.string()
                 };
                 todo = {
                     id: chance.string()
@@ -237,7 +237,7 @@ describe('<VisibleTodoList />', () => {
                         text: todo.text
                     }, {
                         headers: {
-                            authorization: auth.idToken
+                            authorization: auth.accessToken
                         }
                     });
                 });
@@ -275,7 +275,7 @@ describe('<VisibleTodoList />', () => {
                         text: todo.text
                     }, {
                         headers: {
-                            authorization: auth.idToken
+                            authorization: auth.accessToken
                         }
                     });
                 });

@@ -11,7 +11,7 @@ export const mapStateToProps = (state) => ({
 });
 
 export const AppHeader = ({dispatch, auth}) => {
-    if (auth.idToken) {
+    if (auth.accessToken) {
         return (
             <div style={{marginBottom: '20px'}}>
                 <Button

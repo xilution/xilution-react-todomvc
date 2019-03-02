@@ -13,7 +13,7 @@ jest.mock('axios/index');
 jest.mock('../../../../src/frontend/actions');
 
 describe('<AddTodo />', () => {
-    let idToken,
+    let accessToken,
         dispatch,
         wrapper,
         instance,
@@ -27,7 +27,7 @@ describe('<AddTodo />', () => {
     const renderComponent = () => {
         wrapper = shallow(
             <AddTodo
-                auth={{idToken}}
+                auth={{accessToken}}
                 dispatch={dispatch}
             />
         );
@@ -42,7 +42,7 @@ describe('<AddTodo />', () => {
     };
 
     beforeEach(() => {
-        idToken = chance.string();
+        accessToken = chance.string();
         dispatch = jest.fn();
 
         renderComponent();
@@ -194,7 +194,7 @@ describe('<AddTodo />', () => {
                     text: input
                 }, {
                     headers: {
-                        authorization: idToken
+                        authorization: accessToken
                     }
                 });
             });

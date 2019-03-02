@@ -4,4 +4,11 @@ import {buildCommonOptions} from './brokerUtils';
 
 const authenticateUrl = 'https://test.authentication.core.api.xilution.com/oauth/token';
 
-export const authenticate = (request) => post(authenticateUrl, request.body, buildCommonOptions());
+const CLIENT_ID = 'replace-with-your-client-id';
+
+export const authenticate = (request) => post(authenticateUrl, {
+    ...request.body,
+    'client_id': CLIENT_ID,
+    'grant_type': 'password',
+    'scope': 'read write'
+}, buildCommonOptions());

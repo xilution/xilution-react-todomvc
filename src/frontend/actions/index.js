@@ -23,8 +23,8 @@ export const toggleTodo = (id) => ({
     type: 'TOGGLE_TODO'
 });
 
-export const authenticationSuccess = (idToken) => ({
-    idToken,
+export const authenticationSuccess = (accessToken) => ({
+    accessToken,
     type: 'AUTHENTICATION_SUCCESS'
 });
 

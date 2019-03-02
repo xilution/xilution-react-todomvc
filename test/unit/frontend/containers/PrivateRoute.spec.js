@@ -27,7 +27,7 @@ describe('<PrivateRoute /> ', () => {
 
     beforeEach(() => {
         auth = {
-            idToken: chance.string()
+            accessToken: chance.string()
         };
         // eslint-disable-next-line react/display-name
         component = () => <div />;
@@ -64,7 +64,7 @@ describe('<PrivateRoute /> ', () => {
             expect(typeof wrapper.props().render).toEqual('function');
         });
 
-        describe('when idToken is present', () => {
+        describe('when accessToken is present', () => {
             let props,
                 render;
 
@@ -82,7 +82,7 @@ describe('<PrivateRoute /> ', () => {
             });
         });
 
-        describe('when idToken is not present', () => {
+        describe('when accessToken is not present', () => {
             let props,
                 render;
 

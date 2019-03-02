@@ -51,7 +51,7 @@ export class AddTodo extends React.Component {
 
         const response = await put(`${serverUrl}todos`, todo, {
             headers: {
-                authorization: this.props.auth.idToken
+                authorization: this.props.auth.accessToken
             }
         });
 

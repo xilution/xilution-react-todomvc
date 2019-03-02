@@ -151,7 +151,7 @@ describe('<VerifyRegistration />', () => {
     describe('when handling submit', () => {
         let event,
             verificationCode,
-            idToken;
+            accessToken;
 
         describe('when input validation does not pass', () => {
             beforeEach(async () => {
@@ -179,10 +179,10 @@ describe('<VerifyRegistration />', () => {
                     instance.setState({
                         verificationCode
                     });
-                    idToken = chance.string();
+                    accessToken = chance.string();
                     post.mockResolvedValue({
                         data: {
-                            IdToken: idToken
+                            IdToken: accessToken
                         }
                     });
                     event = {
@@ -207,7 +207,7 @@ describe('<VerifyRegistration />', () => {
 
                 test('it should call authenticationSuccess', () => {
                     expect(authenticationSuccess).toHaveBeenCalledTimes(1);
-                    expect(authenticationSuccess).toHaveBeenCalledWith(idToken);
+                    expect(authenticationSuccess).toHaveBeenCalledWith(accessToken);
                 });
 
                 test('it should call push', () => {

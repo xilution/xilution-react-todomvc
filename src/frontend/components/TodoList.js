@@ -19,7 +19,7 @@ const TodoList = ({auth, todos, toggleTodo, deleteTodo}) => (
 
 TodoList.propTypes = {
     auth: PropTypes.shape({
-        idToken: PropTypes.string.isRequired
+        accessToken: PropTypes.string.isRequired
     }).isRequired,
     deleteTodo: PropTypes.func.isRequired,
     todos: PropTypes.arrayOf(PropTypes.shape({

@@ -54,10 +54,10 @@ describe('todo action tests', () => {
     });
 
     test('authenticationSuccess should create AUTHENTICATION_SUCCESS action', () => {
-        const idToken = chance.string();
+        const accessToken = chance.string();
 
-        expect(actions.authenticationSuccess(idToken)).toEqual({
-            idToken,
+        expect(actions.authenticationSuccess(accessToken)).toEqual({
+            accessToken,
             type: 'AUTHENTICATION_SUCCESS'
         });
     });

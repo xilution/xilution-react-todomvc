@@ -13,7 +13,7 @@ jest.mock('../../../../src/frontend/actions');
 jest.mock('react-router-redux');
 
 describe('<AppHeader />', () => {
-    let idToken,
+    let accessToken,
         dispatch,
         wrapper,
         button;
@@ -21,7 +21,7 @@ describe('<AppHeader />', () => {
     const renderComponent = () => {
         wrapper = shallow(
             <AppHeader
-                auth={{idToken}}
+                auth={{accessToken}}
                 dispatch={dispatch}
             />
         );
@@ -30,7 +30,7 @@ describe('<AppHeader />', () => {
     };
 
     beforeEach(() => {
-        idToken = chance.string();
+        accessToken = chance.string();
         dispatch = jest.fn();
 
         renderComponent();
@@ -60,7 +60,7 @@ describe('<AppHeader />', () => {
     });
 
     describe('when the component renders', () => {
-        describe('when the idToken is present', () => {
+        describe('when the accessToken is present', () => {
             test('it should render a div as the root element', () => {
                 expect(wrapper.type()).toEqual('div');
                 expect(wrapper.props().style).toEqual({marginBottom: '20px'});
@@ -73,9 +73,9 @@ describe('<AppHeader />', () => {
             });
         });
 
-        describe('when the idToken is not present', () => {
+        describe('when the accessToken is not present', () => {
             beforeEach(() => {
-                idToken = undefined;
+                accessToken = undefined;
 
                 renderComponent();
             });

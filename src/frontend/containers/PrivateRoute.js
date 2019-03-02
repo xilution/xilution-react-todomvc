@@ -12,7 +12,7 @@ export const PrivateRoute = ({component: Component, auth, ...rest}) => (
     <Route
         {...rest}
         render={(props) => {
-            if (auth.idToken) {
+            if (auth.accessToken) {
                 return <Component {...props} />;
             }
 

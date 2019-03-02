@@ -50,7 +50,12 @@ describe('identity broker tests', () => {
 
         test('it should call post', () => {
             expect(post).toHaveBeenCalledTimes(1);
-            expect(post).toHaveBeenCalledWith('https://test.authentication.core.api.xilution.com/oauth/token', request.body, commonOptions);
+            expect(post).toHaveBeenCalledWith('https://test.authentication.core.api.xilution.com/oauth/token', {
+                ...request.body,
+                'client_id': 'replace-with-your-client-id',
+                'grant_type': 'password',
+                'scope': 'read write'
+            }, commonOptions);
         });
     });
 });

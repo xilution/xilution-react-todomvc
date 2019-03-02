@@ -195,7 +195,7 @@ describe('<Authenticate />', () => {
         let event,
             username,
             password,
-            idToken,
+            accessToken,
             content;
 
         describe('when input validation does not pass', () => {
@@ -226,10 +226,10 @@ describe('<Authenticate />', () => {
                         password,
                         username
                     });
-                    idToken = chance.string();
+                    accessToken = chance.string();
                     post.mockResolvedValue({
                         data: {
-                            IdToken: idToken
+                            IdToken: accessToken
                         }
                     });
                     content = chance.string();
@@ -262,7 +262,7 @@ describe('<Authenticate />', () => {
                     expect(get).toHaveBeenCalledTimes(1);
                     expect(get).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/todos', {
                         headers: {
-                            authorization: idToken
+                            authorization: accessToken
                         }
                     });
                 });
@@ -274,7 +274,7 @@ describe('<Authenticate />', () => {
 
                 test('it should call authenticationSuccess', () => {
                     expect(authenticationSuccess).toHaveBeenCalledTimes(1);
-                    expect(authenticationSuccess).toHaveBeenCalledWith(idToken);
+                    expect(authenticationSuccess).toHaveBeenCalledWith(accessToken);
                 });
 
                 test('it should call push', () => {
@@ -361,10 +361,10 @@ describe('<Authenticate />', () => {
                         password,
                         username
                     });
-                    idToken = chance.string();
+                    accessToken = chance.string();
                     post.mockResolvedValue({
                         data: {
-                            IdToken: idToken
+                            IdToken: accessToken
                         }
                     });
                     error = new Error(chance.string());
@@ -395,7 +395,7 @@ describe('<Authenticate />', () => {
                     expect(get).toHaveBeenCalledTimes(1);
                     expect(get).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/todos', {
                         headers: {
-                            authorization: idToken
+                            authorization: accessToken
                         }
                     });
                 });

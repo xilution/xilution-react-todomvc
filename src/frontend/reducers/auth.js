@@ -4,7 +4,7 @@ const auth = (state = {}, action) => {
         case 'AUTHENTICATION_SUCCESS':
             return {
                 ...state,
-                idToken: action.idToken
+                accessToken: action.accessToken
             };
         case 'REGISTER_SUCCESS':
             return {
@@ -14,7 +14,7 @@ const auth = (state = {}, action) => {
         case 'VERIFY_REGISTRATION_SUCCESS':
             return {
                 ...state,
-                idToken: action.idToken
+                accessToken: action.accessToken
             };
         case 'SIGN_OUT':
             return {};

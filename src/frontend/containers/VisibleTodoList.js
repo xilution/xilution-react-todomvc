@@ -29,7 +29,7 @@ const handleError = (error) => {
 
 const buildOptions = (auth) => ({
     headers: {
-        authorization: auth.idToken
+        authorization: auth.accessToken
     }
 });
 
