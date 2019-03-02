@@ -1,26 +1,27 @@
-import {validate} from 'joi';
+import { validate } from 'joi';
 
 import {
-    buildInputValidationProxyResponse,
-    buildSuccessProxyResponse,
-    buildErrorProxyResponse
+  buildInputValidationProxyResponse,
+  buildSuccessProxyResponse,
+  buildErrorProxyResponse,
 } from './proxyResponseBuilders';
 
+// eslint-disable-next-line import/prefer-default-export
 export const brokerRequest = async (request, schema, func) => {
-    const inputValidationResult = validate(request, schema);
+  const inputValidationResult = validate(request, schema);
 
-    if (inputValidationResult.error) {
-        return buildInputValidationProxyResponse(inputValidationResult);
-    }
+  if (inputValidationResult.error) {
+    return buildInputValidationProxyResponse(inputValidationResult);
+  }
 
-    try {
-        const response = await func(request);
+  try {
+    const response = await func(request);
 
-        return buildSuccessProxyResponse(response);
-    } catch (error) {
-        return buildErrorProxyResponse({
-            ...request,
-            action: func.toString
-        }, error);
-    }
+    return buildSuccessProxyResponse(response);
+  } catch (error) {
+    return buildErrorProxyResponse({
+      ...request,
+      action: func.toString,
+    }, error);
+  }
 };

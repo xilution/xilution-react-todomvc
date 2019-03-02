@@ -2,21 +2,23 @@
 import Chance from 'chance';
 
 import {
-    doAuthenticate,
-    doDeleteTodo,
-    doFetchTodos,
-    doGetTodo,
-    doPutTodo
+  doAuthenticate,
+  doDeleteTodo,
+  doFetchTodos,
+  doGetTodo,
+  doPutTodo,
 } from '../../../src/backend/index';
-import {brokerRequest} from '../../../src/backend/requestAdapter';
-import {authenticate} from '../../../src/backend/authenticationBroker';
-import {putTodo, getTodo, deleteTodo, fetchTodos} from '../../../src/backend/beagilyBroker';
+import { brokerRequest } from '../../../src/backend/requestAdapter';
+import { authenticate } from '../../../src/backend/authenticationBroker';
 import {
-    authenticateRequestSchema,
-    putTodoRequestSchema,
-    getTodoRequestSchema,
-    deleteTodoRequestSchema,
-    fetchTodosRequestSchema
+  putTodo, getTodo, deleteTodo, fetchTodos,
+} from '../../../src/backend/beagilyBroker';
+import {
+  authenticateRequestSchema,
+  putTodoRequestSchema,
+  getTodoRequestSchema,
+  deleteTodoRequestSchema,
+  fetchTodosRequestSchema,
 } from '../../../src/backend/schemas';
 
 jest.mock('../../../src/backend/requestAdapter');
@@ -24,197 +26,197 @@ jest.mock('../../../src/backend/requestAdapter');
 const chance = new Chance();
 
 describe('index tests', () => {
-    let event,
-        context,
-        expectedResponse,
-        actualError,
-        actualResponse;
+  let event;
+  let context;
+  let expectedResponse;
+  let actualError;
+  let actualResponse;
 
-    beforeEach(() => {
-        event = {};
-        context = {};
+  beforeEach(() => {
+    event = {};
+    context = {};
 
-        brokerRequest.mockResolvedValue(expectedResponse);
+    brokerRequest.mockResolvedValue(expectedResponse);
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  describe('when authenticating', () => {
+    beforeEach((done) => {
+      event = {
+        body: JSON.stringify({
+          [chance.string()]: chance.string(),
+        }),
+      };
+
+      doAuthenticate(event, context, (error, response) => {
+        actualError = error;
+        actualResponse = response;
+        done();
+      });
     });
 
-    afterEach(() => {
-        jest.resetAllMocks();
+    test('should not raise an error', () => {
+      expect(actualError).toBeNull();
     });
 
-    describe('when authenticating', () => {
-        beforeEach((done) => {
-            event = {
-                body: JSON.stringify({
-                    [chance.string()]: chance.string()
-                })
-            };
-
-            doAuthenticate(event, context, (error, response) => {
-                actualError = error;
-                actualResponse = response;
-                done();
-            });
-        });
-
-        test('should not raise an error', () => {
-            expect(actualError).toBeNull();
-        });
-
-        test('should yield the expected response', () => {
-            expect(actualResponse).toEqual(expectedResponse);
-        });
-
-        test('should call brokerRequest once with the proper params', () => {
-            expect(brokerRequest).toHaveBeenCalledTimes(1);
-            expect(brokerRequest).toHaveBeenCalledWith({body: JSON.parse(event.body)}, authenticateRequestSchema, authenticate);
-        });
+    test('should yield the expected response', () => {
+      expect(actualResponse).toEqual(expectedResponse);
     });
 
-    describe('when putting a todo', () => {
-        beforeEach((done) => {
-            event = {
-                body: JSON.stringify({
-                    [chance.string()]: chance.string()
-                }),
-                headers: {
-                    Authorization: chance.string()
-                }
-            };
+    test('should call brokerRequest once with the proper params', () => {
+      expect(brokerRequest).toHaveBeenCalledTimes(1);
+      expect(brokerRequest).toHaveBeenCalledWith({ body: JSON.parse(event.body) }, authenticateRequestSchema, authenticate);
+    });
+  });
 
-            doPutTodo(event, context, (error, response) => {
-                actualError = error;
-                actualResponse = response;
-                done();
-            });
-        });
+  describe('when putting a todo', () => {
+    beforeEach((done) => {
+      event = {
+        body: JSON.stringify({
+          [chance.string()]: chance.string(),
+        }),
+        headers: {
+          Authorization: chance.string(),
+        },
+      };
 
-        test('should not raise an error', () => {
-            expect(actualError).toBeNull();
-        });
-
-        test('should yield the expected response', () => {
-            expect(actualResponse).toEqual(expectedResponse);
-        });
-
-        test('should call brokerRequest once with the proper params', () => {
-            expect(brokerRequest).toHaveBeenCalledTimes(1);
-            expect(brokerRequest).toHaveBeenCalledWith({
-                body: JSON.parse(event.body),
-                parameters: {
-                    authorization: event.headers.Authorization
-                }
-            }, putTodoRequestSchema, putTodo);
-        });
+      doPutTodo(event, context, (error, response) => {
+        actualError = error;
+        actualResponse = response;
+        done();
+      });
     });
 
-    describe('when getting a todo', () => {
-        beforeEach((done) => {
-            event = {
-                headers: {
-                    Authorization: chance.string()
-                },
-                pathParameters: {
-                    id: chance.string()
-                }
-            };
-
-            doGetTodo(event, context, (error, response) => {
-                actualError = error;
-                actualResponse = response;
-                done();
-            });
-        });
-
-        test('should not raise an error', () => {
-            expect(actualError).toBeNull();
-        });
-
-        test('should yield the expected response', () => {
-            expect(actualResponse).toEqual(expectedResponse);
-        });
-
-        test('should call brokerRequest once with the proper params', () => {
-            expect(brokerRequest).toHaveBeenCalledTimes(1);
-            expect(brokerRequest).toHaveBeenCalledWith({
-                parameters: {
-                    authorization: event.headers.Authorization,
-                    id: event.pathParameters.id
-                }
-            }, getTodoRequestSchema, getTodo);
-        });
+    test('should not raise an error', () => {
+      expect(actualError).toBeNull();
     });
 
-    describe('when deleting a todo', () => {
-        beforeEach((done) => {
-            event = {
-                headers: {
-                    Authorization: chance.string()
-                },
-                pathParameters: {
-                    id: chance.string()
-                }
-            };
-
-            doDeleteTodo(event, context, (error, response) => {
-                actualError = error;
-                actualResponse = response;
-                done();
-            });
-        });
-
-        test('should not raise an error', () => {
-            expect(actualError).toBeNull();
-        });
-
-        test('should yield the expected response', () => {
-            expect(actualResponse).toEqual(expectedResponse);
-        });
-
-        test('should call brokerRequest once with the proper params', () => {
-            expect(brokerRequest).toHaveBeenCalledTimes(1);
-            expect(brokerRequest).toHaveBeenCalledWith({
-                parameters: {
-                    authorization: event.headers.Authorization,
-                    id: event.pathParameters.id
-                }
-            }, deleteTodoRequestSchema, deleteTodo);
-        });
+    test('should yield the expected response', () => {
+      expect(actualResponse).toEqual(expectedResponse);
     });
 
-    describe('when fetching todos', () => {
-        beforeEach((done) => {
-            event = {
-                headers: {
-                    Authorization: chance.string()
-                },
-                pathParameters: {
-                    id: chance.string()
-                }
-            };
-
-            doFetchTodos(event, context, (error, response) => {
-                actualError = error;
-                actualResponse = response;
-                done();
-            });
-        });
-
-        test('should not raise an error', () => {
-            expect(actualError).toBeNull();
-        });
-
-        test('should yield the expected response', () => {
-            expect(actualResponse).toEqual(expectedResponse);
-        });
-
-        test('should call brokerRequest once with the proper params', () => {
-            expect(brokerRequest).toHaveBeenCalledTimes(1);
-            expect(brokerRequest).toHaveBeenCalledWith({
-                parameters: {
-                    authorization: event.headers.Authorization
-                }
-            }, fetchTodosRequestSchema, fetchTodos);
-        });
+    test('should call brokerRequest once with the proper params', () => {
+      expect(brokerRequest).toHaveBeenCalledTimes(1);
+      expect(brokerRequest).toHaveBeenCalledWith({
+        body: JSON.parse(event.body),
+        parameters: {
+          authorization: event.headers.Authorization,
+        },
+      }, putTodoRequestSchema, putTodo);
     });
+  });
+
+  describe('when getting a todo', () => {
+    beforeEach((done) => {
+      event = {
+        headers: {
+          Authorization: chance.string(),
+        },
+        pathParameters: {
+          id: chance.string(),
+        },
+      };
+
+      doGetTodo(event, context, (error, response) => {
+        actualError = error;
+        actualResponse = response;
+        done();
+      });
+    });
+
+    test('should not raise an error', () => {
+      expect(actualError).toBeNull();
+    });
+
+    test('should yield the expected response', () => {
+      expect(actualResponse).toEqual(expectedResponse);
+    });
+
+    test('should call brokerRequest once with the proper params', () => {
+      expect(brokerRequest).toHaveBeenCalledTimes(1);
+      expect(brokerRequest).toHaveBeenCalledWith({
+        parameters: {
+          authorization: event.headers.Authorization,
+          id: event.pathParameters.id,
+        },
+      }, getTodoRequestSchema, getTodo);
+    });
+  });
+
+  describe('when deleting a todo', () => {
+    beforeEach((done) => {
+      event = {
+        headers: {
+          Authorization: chance.string(),
+        },
+        pathParameters: {
+          id: chance.string(),
+        },
+      };
+
+      doDeleteTodo(event, context, (error, response) => {
+        actualError = error;
+        actualResponse = response;
+        done();
+      });
+    });
+
+    test('should not raise an error', () => {
+      expect(actualError).toBeNull();
+    });
+
+    test('should yield the expected response', () => {
+      expect(actualResponse).toEqual(expectedResponse);
+    });
+
+    test('should call brokerRequest once with the proper params', () => {
+      expect(brokerRequest).toHaveBeenCalledTimes(1);
+      expect(brokerRequest).toHaveBeenCalledWith({
+        parameters: {
+          authorization: event.headers.Authorization,
+          id: event.pathParameters.id,
+        },
+      }, deleteTodoRequestSchema, deleteTodo);
+    });
+  });
+
+  describe('when fetching todos', () => {
+    beforeEach((done) => {
+      event = {
+        headers: {
+          Authorization: chance.string(),
+        },
+        pathParameters: {
+          id: chance.string(),
+        },
+      };
+
+      doFetchTodos(event, context, (error, response) => {
+        actualError = error;
+        actualResponse = response;
+        done();
+      });
+    });
+
+    test('should not raise an error', () => {
+      expect(actualError).toBeNull();
+    });
+
+    test('should yield the expected response', () => {
+      expect(actualResponse).toEqual(expectedResponse);
+    });
+
+    test('should call brokerRequest once with the proper params', () => {
+      expect(brokerRequest).toHaveBeenCalledTimes(1);
+      expect(brokerRequest).toHaveBeenCalledWith({
+        parameters: {
+          authorization: event.headers.Authorization,
+        },
+      }, fetchTodosRequestSchema, fetchTodos);
+    });
+  });
 });
 /* eslint-enable */

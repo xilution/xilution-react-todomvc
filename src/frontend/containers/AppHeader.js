@@ -1,33 +1,33 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
-import {Button} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import { Button } from 'react-bootstrap';
 
-import {signOut} from '../actions';
+import { signOut } from '../actions';
 
-export const mapStateToProps = (state) => ({
-    auth: state.auth
+export const mapStateToProps = state => ({
+  auth: state.auth,
 });
 
-export const AppHeader = ({dispatch, auth}) => {
-    if (auth.accessToken) {
-        return (
-            <div style={{marginBottom: '20px'}}>
-                <Button
-                    onClick={() => {
-                        dispatch(signOut());
-                        dispatch(push('/authenticate'));
-                    }}
-                    type="button"
-                >
-                    {'Log Out'}
-                </Button>
-            </div>
-        );
-    }
+export const AppHeader = ({ dispatch, auth }) => {
+  if (auth.accessToken) {
+    return (
+      <div style={{ marginBottom: '20px' }}>
+        <Button
+          onClick={() => {
+            dispatch(signOut());
+            dispatch(push('/authenticate'));
+          }}
+          type="button"
+        >
+          {'Log Out'}
+        </Button>
+      </div>
+    );
+  }
 
-    return <div />;
+  return <div />;
 };
 
 export default connect(mapStateToProps)(AppHeader);

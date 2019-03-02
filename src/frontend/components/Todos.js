@@ -6,11 +6,11 @@ import VisibleTodoList from '../containers/VisibleTodoList';
 import TodoFilters from './TodoFilters';
 
 const Todos = () => (
-    <div>
-        <AddTodo />
-        <VisibleTodoList />
-        <TodoFilters />
-    </div>
+  <div>
+    <AddTodo />
+    <VisibleTodoList />
+    <TodoFilters />
+  </div>
 );
 
 export default Todos;

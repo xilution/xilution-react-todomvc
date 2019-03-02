@@ -3,7 +3,7 @@ import todos from './todos';
 import visibilityFilter from './visibilityFilter';
 
 export default {
-    auth,
-    todos,
-    visibilityFilter
+  auth,
+  todos,
+  visibilityFilter,
 };
