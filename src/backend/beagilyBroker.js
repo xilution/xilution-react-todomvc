@@ -1,19 +1,19 @@
 import {get, put, delete as del} from 'axios';
 
 import {buildAuthorizedOptions, buildAuthenticatedUserAwareOptions, buildTypeAwareOptions} from './brokerUtils';
-import {getAuthenticatedUser} from './identityBroker';
+import {getAuthenticatedUser} from './accountManagementBroker';
 
 const DEFAULT_START_PAGE = 0;
 const DEFAULT_PAGE_SIZE = 100;
 
-const putThingUrl = 'https://api.xilution.com/basics-beagily-beta/things';
+const putThingUrl = 'https://test.beagily.basics.api.xilution.com/things';
 
-const buildGetOrDeleteThingUrl = (id) => `https://api.xilution.com/basics-beagily-beta/things/${id}`;
+const buildGetOrDeleteThingUrl = (id) => `https://test.beagily.basics.api.xilution.com/things/${id}`;
 
 const buildFetchThingsUrl = (searchCriteriaId, startPage, pageSize) =>
-    `https://api.xilution.com/basics-beagily-beta/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}`;
+    `https://test.beagily.basics.api.xilution.com/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}`;
 
-const buildPutTypesUrl = (name) => `https://api.xilution.com/basics-beagily-beta/types/${name}`;
+const buildPutTypesUrl = (name) => `https://test.beagily.basics.api.xilution.com/types/${name}`;
 
 const getSearchCriteriaId = async (request, user, searchCriteria) => {
     const putSearchCriteriaResponse = await put(putThingUrl, searchCriteria, buildAuthenticatedUserAwareOptions(request, user));

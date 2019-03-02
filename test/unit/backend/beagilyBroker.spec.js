@@ -1,19 +1,19 @@
 import Chance from 'chance';
 import {get, put, delete as del} from 'axios';
 
-import {putTodo, getTodo, deleteTodo, fetchTodos, putType} from '../../../src/backend/dataAccessorBroker';
+import {putTodo, getTodo, deleteTodo, fetchTodos, putType} from '../../../src/backend/beagilyBroker';
 import {
     buildAuthorizedOptions,
     buildAuthenticatedUserAwareOptions,
     buildTypeAwareOptions
 } from '../../../src/backend/brokerUtils';
-import {getAuthenticatedUser} from '../../../src/backend/identityBroker';
+import {getAuthenticatedUser} from '../../../src/backend/accountManagementBroker';
 
 const chance = new Chance();
 
 jest.mock('axios');
 jest.mock('../../../src/backend/brokerUtils');
-jest.mock('../../../src/backend/identityBroker');
+jest.mock('../../../src/backend/accountManagementBroker');
 
 describe('data access broker tests', () => {
     let request,
@@ -72,7 +72,7 @@ describe('data access broker tests', () => {
 
         test('it should call put', () => {
             expect(put).toHaveBeenCalledTimes(1);
-            expect(put).toHaveBeenCalledWith('https://api.xilution.com/basics-beagily-beta/things', {
+            expect(put).toHaveBeenCalledWith('https://test.beagily.basics.api.xilution.com/things', {
                 ...request.body,
                 '@type': 'todo',
                 owningUserId: user.id
@@ -105,7 +105,7 @@ describe('data access broker tests', () => {
 
         test('it should call get', () => {
             expect(get).toHaveBeenCalledTimes(1);
-            expect(get).toHaveBeenCalledWith(`https://api.xilution.com/basics-beagily-beta/things/${request.parameters.id}`, typeAwareOptions);
+            expect(get).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}`, typeAwareOptions);
         });
     });
 
@@ -134,7 +134,7 @@ describe('data access broker tests', () => {
 
         test('it should call del', () => {
             expect(del).toHaveBeenCalledTimes(1);
-            expect(del).toHaveBeenCalledWith(`https://api.xilution.com/basics-beagily-beta/things/${request.parameters.id}`, typeAwareOptions);
+            expect(del).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}`, typeAwareOptions);
         });
     });
 
@@ -178,7 +178,7 @@ describe('data access broker tests', () => {
 
         test('it should call put', () => {
             expect(put).toHaveBeenCalledTimes(1);
-            expect(put).toHaveBeenCalledWith('https://api.xilution.com/basics-beagily-beta/things', {
+            expect(put).toHaveBeenCalledWith('https://test.beagily.basics.api.xilution.com/things', {
                 '@type': 'fetch-todos-search-criteria',
                 owningUserId: user.id
             }, authenticatedUserAwareOptions);
@@ -191,7 +191,7 @@ describe('data access broker tests', () => {
 
         test('it should call get', () => {
             expect(get).toHaveBeenCalledTimes(1);
-            expect(get).toHaveBeenCalledWith(`https://api.xilution.com/basics-beagily-beta/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}`, typeAwareOptions);
+            expect(get).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}`, typeAwareOptions);
         });
     });
 
@@ -214,7 +214,7 @@ describe('data access broker tests', () => {
 
         test('it should call put', () => {
             expect(put).toHaveBeenCalledTimes(1);
-            expect(put).toHaveBeenCalledWith(`https://api.xilution.com/basics-beagily-beta/types/${request.parameters.name}`, request.body, authorizedOptions);
+            expect(put).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/types/${request.parameters.name}`, request.body, authorizedOptions);
         });
     });
 });

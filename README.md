@@ -88,7 +88,9 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
 	* Integrates with [Xilution SaaS](https://xilution.com)
 		* [Xilution - Basics - Beagily](https://products.xilution.com/basics/beagily)
-		* [Xilution - Business Basics - Identity](https://products.xilution.com/business-basics/identity)
+		* [Xilution - Core - Registration](https://products.xilution.com/core/registration)
+		* [Xilution - Core - Account Management](https://products.xilution.com/core/account-management)
+		* [Xilution - Core - Authentication](https://products.xilution.com/core/authentication)
 
 <p align="center">
   <img src="./images/components.png" alt="xilution-react-todomvc components"/>
@@ -107,9 +109,8 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. [Create an AWS Account](https://aws.amazon.com/free/)
 	* AWS offers a 12 month Free trial.
 
-1. [Create a Xilution Subscriber Account](https://register.xilution.com)
-	* Limited access to Xilution's Beta and Test environments is Free for registered users.
-	* When prompted for product selections, choose Basics - Beagily and Business Basics - Identity.
+1. [Create a Xilution Account](https://register.xilution.com)
+	* Limited access to Xilution's Test environments is Free for registered users.
 
 1. [Install Git](https://git-scm.com/downloads)
 
@@ -301,7 +302,7 @@ I would be happy to pitch in where I can.
 				* Includes [Fargate](https://aws.amazon.com/fargate/) and EC2 Launch Types Models
 			* [ElasticBeanstalk](https://aws.amazon.com/elasticbeanstalk/pricing/)
 	* Pricing for Xilution SaaS Products used in this example
-		* This example integrates with Xilution's Beta environment which is Free for evaluation purposes.
+		* This example integrates with Xilution's Test environment which is Free for evaluation purposes.
 		* The Xilution SaaS products highlighted in this example have not yet been released for production consumption.
 		* See [the Xilution SaaS Products page](https://products.xilution.com) for the latest product phase and pricing details.
 		* For comparision, here is AWS's published pricing for data storage services.

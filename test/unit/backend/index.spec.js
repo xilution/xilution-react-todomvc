@@ -11,8 +11,9 @@ import {
     doVerifyUser
 } from '../../../src/backend/index';
 import {brokerRequest} from '../../../src/backend/requestAdapter';
-import {registerUser, verifyUser, authenticate} from '../../../src/backend/identityBroker';
-import {putTodo, getTodo, deleteTodo, fetchTodos} from '../../../src/backend/dataAccessorBroker';
+import {registerUser, verifyUser} from '../../../src/backend/registrationBroker';
+import {authenticate} from '../../../src/backend/authenticationBroker';
+import {putTodo, getTodo, deleteTodo, fetchTodos} from '../../../src/backend/beagilyBroker';
 import {
     registerUserRequestSchema,
     verifyUserRequestSchema,

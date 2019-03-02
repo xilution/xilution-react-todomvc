@@ -1,6 +1,7 @@
 import {brokerRequest} from './requestAdapter';
-import {registerUser, verifyUser, authenticate} from './identityBroker';
-import {putTodo, getTodo, deleteTodo, fetchTodos} from './dataAccessorBroker';
+import {registerUser, verifyUser} from './registrationBroker';
+import {authenticate} from './authenticationBroker';
+import {putTodo, getTodo, deleteTodo, fetchTodos} from './beagilyBroker';
 import {
     registerUserRequestSchema,
     verifyUserRequestSchema,
