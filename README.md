@@ -343,7 +343,7 @@ I would be happy to pitch in where I can.
 ## About the Author
 
 [Todd Brunia](https://twitter.com/tbrunia) is the founder of [Xilution](https://xilution.com).
-Xilution creates and markets API based software as a service (SaaS).
+Xilution creates and markets API as a Service products.
 
 ## Contributions
 
