@@ -22,7 +22,7 @@
     "dist"
   ],
   "dependencies": {
-    "aws-sdk": "^2.224.1",
+    "aws-sdk": "^2.420.0",
     "axios": "^0.18.0",
     "history": "^4.7.2",
     "joi": "^14.0.0",
