@@ -42,7 +42,7 @@ Within about a 1/2 hour you will have a fully functional todo management app run
 ## Great For
 
 * This example is ideally suited for...
-	* Digital agencies who want to accelerate client project time lines.
+	* Digital agencies who want to accelerate client project time lines and extend their technical capabilities.
 	* Hackathon teams who want a complete full-stack example upon which they can base their projects.
 	* Frontend developers with backend responsibilities who just want to code awesome web and mobile apps.
 	* Technical leaders who are always on the look out for next big productivity accelerator.
