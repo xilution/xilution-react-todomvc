@@ -84,7 +84,7 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 		* Technique used to reduce size of deployed code.
 	* [Jest](https://facebook.github.io/jest/) Unit Testing
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
-	* Integrates with [Xilution SaaS](https://test.xilution.com)
+	* Integrates with [Xilution APIaaS](https://test.xilution.com)
 		* [Xilution - Basics - Beagily](https://test.products.xilution.com/basics/beagily)
 		* [Xilution - Core - Authentication](https://test.products.xilution.com/core/authentication)
 		* [Xilution - Core - Account Management](https://test.products.xilution.com/core/account-management)
@@ -268,7 +268,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 ## Next Steps
 
 I'm hopeful that this reference implementation inspires you to to use AWS SAM and React for your next web application.
-I also invite you to learn more about how [Xilution SaaS](https://test.xilution.com) can accelerate your next web or mobile application project.
+I also invite you to learn more about how [Xilution APIaaS](https://test.xilution.com) can accelerate your next web or mobile application project.
 
 Need help with your serverless project?
 [Hit me up on Twitter.](https://twitter.com/tbrunia)
@@ -290,10 +290,10 @@ I would be happy to pitch in where I can.
 			* [ECS](https://aws.amazon.com/ecs/pricing/)
 				* Includes [Fargate](https://aws.amazon.com/fargate/) and EC2 Launch Types Models
 			* [ElasticBeanstalk](https://aws.amazon.com/elasticbeanstalk/pricing/)
-	* Pricing for Xilution SaaS Products used in this example
+	* Pricing for Xilution APIaaS Products used in this example
 		* This example integrates with Xilution's Test environment which is Free for evaluation purposes.
-		* The Xilution SaaS products highlighted in this example have not yet been released for production consumption.
-		* See [the Xilution SaaS Products page](https://test.products.xilution.com) for the latest product phase and pricing details.
+		* The Xilution APIaaS products highlighted in this example have not yet been released for production consumption.
+		* See [the Xilution APIaaS Products page](https://test.products.xilution.com) for the latest product phase and pricing details.
 		* For comparision, here is AWS's published pricing for data storage services.
 			* [RDS](https://aws.amazon.com/rds/pricing/)
 			* [DynamoDB](https://aws.amazon.com/dynamodb/pricing/)
@@ -322,13 +322,13 @@ I would be happy to pitch in where I can.
 	  I would like to learn more about the framework and how it could be incorporated into this example.
 	  If you're passionate about the Serverless framework or other similar frameworks, I invite you to submit a pull request.
 
-1. Do I have to use Xilution SaaS?
+1. Do I have to use Xilution APIaaS?
 	* Nope.
-	  You can use just about any persistance model in your backend implementation including other API Based SaaS providers.
+	  You can use just about any persistance model in your backend implementation including other API as a Service providers.
 	  AWS [RDS](https://aws.amazon.com/rds/) and [DynamoDB](https://aws.amazon.com/dynamodb/) are valid alternatives if you choose to provision and maintain your own persistence infrastructure.
-	  However, I think you'll reconsider investing in a relational or noSQL database and choose API Based SaaS when you consider the productivity gains that a serverless architecture model has already afforded you.
-	  In a way, API Based SaaS is like the icing on the cake.
-	  If you're interested in learning more about API Based SaaS, [this blog article Ed Shelley](https://blog.chartmogul.com/api-based-saas/) is a good place to start.
+	  However, I think you'll reconsider investing in a relational or noSQL database and choose API as a Service when you consider the productivity gains that a serverless architecture model has already afforded you.
+	  In a way, API as a Service is like the icing on the cake.
+	  If you're interested in learning more about API as a Service, [this blog article Ed Shelley](https://blog.chartmogul.com/api-based-saas/) is a good place to start.
 
 ## Issues
 
