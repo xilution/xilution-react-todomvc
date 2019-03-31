@@ -3,7 +3,7 @@
 <p>
 This is a full-stack example of the ubiquitous <a href="http://todomvc.com/">TodoMVC app</a> using a <a href="https://en.wikipedia.org/wiki/Serverless_computing">serverless computing model</a>.
 Follow the instructions below to stand up an example of the app for yourself.
-Within about 1/2 hour you will have a fully functional todo management app running in AWS.
+Within about a 1/2 hour you will have a fully functional todo management app running in AWS.
 <p>
 <p align="center">
   <a href="https://github.com/xilution/xilution-react-todomvc/issues">
