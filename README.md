@@ -107,7 +107,6 @@ For Mac users, the Terminal application is the best way to go for command line s
 	* AWS offers a 12 month Free trial.
 
 1. [Create a Xilution Account in our Test Environment](https://test.register.xilution.com)
-	* This will create an account in our Test environment.
 	* Limited access to Xilution's Test environments is Free for registered users.
 	* Open https://register.xilution.com, to create an account in our Production environment.
 		* At this time, Test and Production accounts don't synchronize.
