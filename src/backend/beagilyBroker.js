@@ -1,6 +1,6 @@
 import { get, put, delete as del } from 'axios';
 
-import { buildAuthorizedOptions, buildAuthenticatedUserAwareOptions, buildTypeAwareOptions } from './brokerUtils';
+import { buildAuthorizedOptions, buildTypeAwareOptions } from './brokerUtils';
 import { getAuthenticatedUser } from './accountManagementBroker';
 
 const DEFAULT_START_PAGE = 0;
@@ -15,7 +15,7 @@ const buildFetchThingsUrl = (searchCriteriaId, startPage, pageSize) => `https://
 const buildPutTypesUrl = name => `https://test.beagily.basics.api.xilution.com/types/${name}`;
 
 const getSearchCriteriaId = async (request, user, searchCriteria) => {
-  const putSearchCriteriaResponse = await put(putThingUrl, searchCriteria, buildAuthenticatedUserAwareOptions(request, user));
+  const putSearchCriteriaResponse = await put(putThingUrl, searchCriteria, buildAuthorizedOptions(request, user));
 
   const { location } = putSearchCriteriaResponse.headers;
 
@@ -31,7 +31,7 @@ export const putTodo = async (request) => {
     owningUserId: user.id,
   };
 
-  return put(putThingUrl, todo, buildAuthenticatedUserAwareOptions(request, user));
+  return put(putThingUrl, todo, buildAuthorizedOptions(request, user));
 };
 
 export const getTodo = async (request) => {

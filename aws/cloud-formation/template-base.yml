@@ -2,11 +2,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
 Parameters:
+  LambdaExecutionRole:
+    Type: String
+    Default: xilution-todomvc-lambda-execution-role
   StagingBucketName:
     Type: String
   WebsiteBucketName:
-    Type: String
-  LambdaExecutionRole:
     Type: String
 
 Resources:

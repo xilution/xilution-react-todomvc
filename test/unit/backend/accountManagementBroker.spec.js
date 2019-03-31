@@ -23,12 +23,12 @@ describe('identity broker tests', () => {
     expectedResponse = {
       data: chance.string(),
     };
-    process.env.XilutionSubscriberOrgId = chance.string();
+    process.env.XilutionSubscriberOrganizationId = chance.string();
   });
 
   afterEach(() => {
     jest.resetAllMocks();
-    delete process.env.XilutionSubscriberOrgId;
+    delete process.env.XilutionSubscriberOrganizationId;
   });
 
   describe('when getting authenticated user', () => {

@@ -78,7 +78,6 @@ Within about 1/2 hour you will have a fully functional todo management app runni
 		* [API Gateway](https://aws.amazon.com/api-gateway/)
 		* [Lambda (Node.js)](https://aws.amazon.com/lambda/)
 		* [CloudFormation](https://aws.amazon.com/cloudformation/)
-		* [Secrets Manager](https://aws.amazon.com/secrets-manager/)
 	* Input validation via [Joi](https://github.com/hapijs/joi)
 	* [Node.js](https://nodejs.org/en/) version 8.10.0 for Lambda Code
 	* [Webpack](https://webpack.js.org/) Build
@@ -159,15 +158,16 @@ For Mac users, the Terminal application is the best way to go for command line s
 1. Download Project Dependencies
 	1. From within the 'xilution-react-todomvc' directory, run `yarn` to install Node.Js dependencies.
 
-1. Save your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
-	* Look up your Xilution Subscriber API Key and Organization Id through the [Xilution Customer Admin Portal](https://test.portal.xilution.com).
+1. Create a `config.mk` file to hold build settings
+	* Look up your Xilution Client Id through the [Xilution Customer Admin Portal](https://test.portal.xilution.com).
 	  Use the credentials you used to create your Xilution Subscriber Account.
-	1. Run `aws secretsmanager create-secret --name XilutionSubscriberApiKey --description "My Xilution Subscriber API Key" --secret-string {REPLACE-WITH-YOUR-API-KEY}` to save your Xilution Subscriber API Key to AWS Secrets Manager.
-	1. Run `aws secretsmanager create-secret --name XilutionSubscriberOrgId --description "My Xilution Subscriber Organization ID" --secret-string {REPLACE-WITH-YOUR-ORG-ID}` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
-
-1. You can also update your Xilution Subscriber API Key and Organization ID in AWS Secrets Manager
-	1. Run `aws secretsmanager update-secret --secret-id XilutionSubscriberApiKey --description "My Xilution Subscriber API Key" --secret-string {REPLACE-WITH-YOUR-API-KEY}` to save your Xilution Subscriber API Key to AWS Secrets Manager.
-	1. Run `aws secretsmanager update-secret --secret-id XilutionSubscriberOrgId --description "My Xilution Subscriber Organization ID" --secret-string {REPLACE-WITH-YOUR-ORG-ID}` to save your Xilution Subscriber Organization ID to AWS Secrets Manager.
+	1. Run `touch config.mk` to create the file.
+	1. Run `echo XILUTION_CLIENT_ID={REPLACE-WITH-YOUR-CLIENT-ID} >> config.mk` to save your xilution client identifier to the config.
+	1. Run `echo AWS_STAGING_BUCKET={REPLACE-WITH-A-UNIQUE-STAGING-BUCKET-NAME} >> config.mk` to save a staging bucket name to the config.
+		* AWS S3 bucket names must be unique across all AWS S3 buckets. We recommend prefixing your bucket name with your organization name to prevent naming conflicts.
+	1. Run `echo AWS_WEBSITE_BUCKET={REPLACE-WITH-A-UNIQUE-WEBSITE-BUCKET-NAME} >> config.mk` to save a website bucket name to the config.
+		* AWS S3 bucket names must be unique across all AWS S3 buckets. We recommend prefixing your bucket name with your organization name to prevent naming conflicts.
+	1. Run `echo AWS_REGION={REPLACE-WITH-YOUR-AWS-REGION} >> config.mk` to save your AWS account's region to the config.
 
 ## Provision and Deploy
 
@@ -176,9 +176,6 @@ For Mac users, the Terminal application is the best way to go for command line s
 	* Windows: Git Bash
 
 1. Provision and Deploy Backend Resources
-	1. Change template defaults.
-		* S3 Bucket Names: [./aws/cloud-formation/parameters.json](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/parameters.json)
-		* Secrets Manager region where Xilution API Key and Organization ID resides: [./aws/cloud-formation/secrets-config.json](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/secrets-config.json)
 	1. Run `make provision-base` to provision the base AWS resources.
 		* See [./aws/cloud-formation/template-base.yml](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/template-base.yml)
 		* Checkout the 'xilution-todomvc-base' stack using the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home).
@@ -267,8 +264,6 @@ For Mac users, the Terminal application is the best way to go for command line s
 		* xilution-todomvc-staging-bucket
 	1. Run `make deprovision-base` to deprovision the base resources.
 		* See [./aws/cloud-formation/template-base.yml](https://github.com/xilution/xilution-react-todomvc/blob/master/aws/cloud-formation/template-base.yml)
-	1. Run `aws secretsmanager delete-secret --secret-id XilutionSubscriberApiKey --recovery-window-in-days 7` to delete your Xilution Subscriber API Key from AWS Secrets Manager.
-	1. Run `aws secretsmanager delete-secret --secret-id XilutionSubscriberOrgId --recovery-window-in-days 7` to delete your Xilution Subscriber Organization ID from AWS Secrets Manager.
 		
 ## Next Steps
 
@@ -290,7 +285,6 @@ I would be happy to pitch in where I can.
 		* [API Gateway](https://aws.amazon.com/api-gateway/pricing/)
 		* [S3](https://aws.amazon.com/s3/pricing/)
 		* [CloudFormation](https://aws.amazon.com/cloudformation/pricing/)
-		* [Secrets Manager](https://aws.amazon.com/secrets-manager/pricing/)
 		* For comparison, here is AWS's published pricing for virtual server and managed server services.
 			* [EC2](https://aws.amazon.com/ec2/pricing/)
 			* [ECS](https://aws.amazon.com/ecs/pricing/)
@@ -309,10 +303,7 @@ I would be happy to pitch in where I can.
 	* Other [JavaScript frameworks](https://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks) like [Angular](https://angular.io/) or [Vue.js](https://vuejs.org/) could be used as the frontend for this example.
 
 1. Is the backend necessary?
-	* The purpose of the backend is two fold.
-      First, it abstracts domain specific functionality from the frontend.
-      For example, some TodoMVC uses cases require the aggregation of a few different Xilution SaaS requests.
-      Second, it protects secrets like the Xilution Subscriber API Key and the Xilution Subscriber Organization ID.
+	* The backend is useful for abstracting secrets and domain specific functionality from the frontend.
 
 1. Why Node.js for the backend? Are there alternative programming languages?
 	* Node.js was selected for the backend of this example to provided a consistent programming experience between the frontend and the backend.

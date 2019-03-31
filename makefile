@@ -1,15 +1,7 @@
-XILUTION_API_KEY = $(shell aws secretsmanager get-secret-value --secret-id XilutionSubscriberApiKey | jq '.SecretString')
-XILUTION_ORGANIZATION_ID = $(shell aws secretsmanager get-secret-value --secret-id XilutionSubscriberOrgId | jq '.SecretString')
+include ./config.mk
+
 TODOMVC_FRONTEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-base | jq '.Stacks[0].Outputs[1].OutputValue')
 TODOMVC_BACKEND_URL = $(shell aws cloudformation describe-stacks --stack-name xilution-todomvc-sam | jq '.Stacks[0].Outputs[0].OutputValue')
-AWS_STAGING_BUCKET = $(shell jq '.[1].ParameterValue' ./aws/cloud-formation/parameters.json)
-AWS_WEBSITE_BUCKET = $(shell jq '.[0].ParameterValue' ./aws/cloud-formation/parameters.json)
-AWS_REGION = $(shell jq '.SecretsRegion' ./aws/cloud-formation/secrets-config.json)
-
-AWS_CLI_HAS_SECRETS_MANAGER = $(shell aws help | grep secretsmanager)
-ifndef AWS_CLI_HAS_SECRETS_MANAGER
-$(error Please upgrade aws-cli to proceed! https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-configure-cli.html)
-endif
 
 build-frontend:
 	TODOMVC_BACKEND_URL=$(TODOMVC_BACKEND_URL) yarn build:frontend
@@ -26,7 +18,7 @@ deploy-frontend:
 deploy-backend:
 	aws cloudformation deploy --stack-name xilution-todomvc-sam \
 		--template-file ./dist/template-sam.yaml \
-		--parameter-overrides XilutionSubscriberApiKey=$(XILUTION_API_KEY) XilutionSubscriberOrgId=$(XILUTION_ORGANIZATION_ID)
+		--parameter-overrides XilutionClientId=$(XILUTION_CLIENT_ID)
 
 deprovision-base:
 	aws cloudformation delete-stack --stack-name xilution-todomvc-base
@@ -51,13 +43,15 @@ put-types:
 provision-base:
 	aws cloudformation create-stack --stack-name xilution-todomvc-base \
 		--template-body file://./aws/cloud-formation/template-base.yml \
-		--parameters file://./aws/cloud-formation/parameters.json \
+		--parameters ParameterKey=StagingBucketName,ParameterValue=$(AWS_STAGING_BUCKET) \
+					 ParameterKey=WebsiteBucketName,ParameterValue=$(AWS_WEBSITE_BUCKET) \
 		--capabilities CAPABILITY_NAMED_IAM
 
 reprovision-base:
 	aws cloudformation update-stack --stack-name xilution-todomvc-base \
 		--template-body file://./aws/cloud-formation/template-base.yml \
-		--parameters file://./aws/cloud-formation/parameters.json \
+		--parameters ParameterKey=StagingBucketName,ParameterValue=$(AWS_STAGING_BUCKET) \
+					 ParameterKey=WebsiteBucketName,ParameterValue=$(AWS_WEBSITE_BUCKET) \
         --capabilities CAPABILITY_NAMED_IAM
 
 show-frontend-url:
@@ -65,9 +59,6 @@ show-frontend-url:
 
 show-backend-url:
 	@echo $(TODOMVC_BACKEND_URL)
-
-show-xilution-api-key:
-	@echo $(XILUTION_API_KEY)
 	
 show-frontend-ssl-url:
 	@echo https://s3.$(AWS_REGION).amazonaws.com/$(AWS_WEBSITE_BUCKET)/index.html
