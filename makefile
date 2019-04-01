@@ -37,8 +37,8 @@ package-sam:
 
 put-types:
 	mkdir -p ./temp
-	npx babel ./src/backend/* --out-dir ./temp
-	node ./utils/types/put-types.js
+	npx babel ./src/backend/* --out-dir ./temp/src/backend
+	XilutionClientId=$(XILUTION_CLIENT_ID) node ./utils/types/put-types.js
 
 provision-base:
 	aws cloudformation create-stack --stack-name xilution-todomvc-base \

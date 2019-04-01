@@ -1,10 +1,11 @@
 import { brokerRequest } from './requestAdapter';
 import { authenticate } from './authenticationBroker';
 import {
-  putTodo, getTodo, deleteTodo, fetchTodos,
+  postTodo, getTodo, deleteTodo, fetchTodos,
 } from './beagilyBroker';
 import {
   authenticateRequestSchema,
+  postTodoRequestSchema,
   putTodoRequestSchema,
   getTodoRequestSchema,
   deleteTodoRequestSchema,
@@ -12,25 +13,49 @@ import {
 } from './schemas';
 
 export const doAuthenticate = async (event, context, callback) => {
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(event, null, 2));
+
   const authenticateRequest = { body: JSON.parse(event.body) };
   const proxyResponse = await brokerRequest(authenticateRequest, authenticateRequestSchema, authenticate);
 
   callback(null, proxyResponse);
 };
 
+export const doPostTodo = async (event, context, callback) => {
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(event, null, 2));
+
+  const postTodoRequest = {
+    body: JSON.parse(event.body),
+    parameters: {
+      authorization: event.headers.Authorization,
+    },
+  };
+  const proxyResponse = await brokerRequest(postTodoRequest, postTodoRequestSchema, postTodo);
+
+  callback(null, proxyResponse);
+};
+
 export const doPutTodo = async (event, context, callback) => {
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(event, null, 2));
+
   const putTodoRequest = {
     body: JSON.parse(event.body),
     parameters: {
       authorization: event.headers.Authorization,
     },
   };
-  const proxyResponse = await brokerRequest(putTodoRequest, putTodoRequestSchema, putTodo);
+  const proxyResponse = await brokerRequest(putTodoRequest, putTodoRequestSchema, postTodo);
 
   callback(null, proxyResponse);
 };
 
 export const doGetTodo = async (event, context, callback) => {
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(event, null, 2));
+
   const getTodoRequest = {
     parameters: {
       authorization: event.headers.Authorization,
@@ -43,6 +68,9 @@ export const doGetTodo = async (event, context, callback) => {
 };
 
 export const doDeleteTodo = async (event, context, callback) => {
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(event, null, 2));
+
   const deleteTodoRequest = {
     parameters: {
       authorization: event.headers.Authorization,
@@ -55,6 +83,9 @@ export const doDeleteTodo = async (event, context, callback) => {
 };
 
 export const doFetchTodos = async (event, context, callback) => {
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(event, null, 2));
+
   const fetchTodosRequest = {
     parameters: {
       authorization: event.headers.Authorization,

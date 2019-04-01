@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import { Button } from 'react-bootstrap';
 
 import { signOut } from '../actions';
@@ -17,7 +16,7 @@ export const AppHeader = ({ dispatch, auth }) => {
         <Button
           onClick={() => {
             dispatch(signOut());
-            dispatch(push('/authenticate'));
+            // dispatch(push('/authenticate')); TODO - fix this
           }}
           type="button"
         >

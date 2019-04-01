@@ -1,10 +1,8 @@
 /* eslint-disable react/no-set-state,react/prop-types */
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import {
-  Form, FormGroup, ControlLabel, FormControl, Button,
-} from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
 import axios from 'axios/index';
 
 import LoadingIndicator from '../components/Loading';
@@ -19,7 +17,11 @@ const defaultState = {
   username: '',
 };
 
-export class Authenticate extends React.Component {
+export const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export class Authenticate extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -60,13 +62,12 @@ export class Authenticate extends React.Component {
 
       const todosResponse = await axios.get(`${serverUrl}todos`, {
         headers: {
-          authorization: authenticateResponse.data.IdToken,
+          authorization: authenticateResponse.data.accessToken,
         },
       });
 
       this.props.dispatch(fetchTodosSuccess(todosResponse.data.content));
-      this.props.dispatch(authenticationSuccess(authenticateResponse.data.IdToken));
-      this.props.dispatch(push('/todos'));
+      this.props.dispatch(authenticationSuccess(authenticateResponse.data.accessToken));
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -78,36 +79,39 @@ export class Authenticate extends React.Component {
   }
 
   render() {
+    const { auth } = this.props;
+
+    if (auth.accessToken) {
+      return <Redirect to="/todos" />;
+    }
+
     const isLoading = this.state.loading;
 
     return (
       <div>
-        {isLoading && <LoadingIndicator /> }
+        {isLoading && <LoadingIndicator />}
         <h2>Sign In</h2>
-        <Form
-          horizontal
-          onSubmit={this.handleSubmit}
-        >
-          <FormGroup controlId="username">
-            <ControlLabel>Username</ControlLabel>
-            <FormControl
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group controlId="username">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
               autoComplete="username"
               name="username"
               onChange={this.handleChange}
               type="text"
               value={this.state.username}
             />
-          </FormGroup>
-          <FormGroup controlId="password">
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
+          </Form.Group>
+          <Form.Group controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
               autoComplete="current-password"
               name="password"
               onChange={this.handleChange}
               type="password"
               value={this.state.password}
             />
-          </FormGroup>
+          </Form.Group>
           <Button type="submit">Submit</Button>
         </Form>
       </div>
@@ -115,5 +119,5 @@ export class Authenticate extends React.Component {
   }
 }
 
-export default connect()(Authenticate);
+export default connect(mapStateToProps)(Authenticate);
 /* eslint-enable */

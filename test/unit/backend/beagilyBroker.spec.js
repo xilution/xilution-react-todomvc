@@ -1,12 +1,13 @@
 import Chance from 'chance';
-import { get, put, delete as del } from 'axios';
+import {
+  get, put, post, delete as del,
+} from 'axios';
 
 import {
-  putTodo, getTodo, deleteTodo, fetchTodos, putType,
+  postTodo, getTodo, deleteTodo, fetchTodos, putType,
 } from '../../../src/backend/beagilyBroker';
 import {
   buildAuthorizedOptions,
-  buildTypeAwareOptions,
 } from '../../../src/backend/brokerUtils';
 import { getAuthenticatedUser } from '../../../src/backend/accountManagementBroker';
 
@@ -20,7 +21,6 @@ describe('data access broker tests', () => {
   let request;
   let user;
   let authorizedOptions;
-  let typeAwareOptions;
   let expectedResponse;
   let actualResponse;
 
@@ -36,7 +36,6 @@ describe('data access broker tests', () => {
       id: chance.string(),
     };
     authorizedOptions = chance.string();
-    typeAwareOptions = chance.string();
     expectedResponse = {
       data: chance.string(),
     };
@@ -46,13 +45,13 @@ describe('data access broker tests', () => {
     jest.resetAllMocks();
   });
 
-  describe('when put todo', () => {
+  describe('when post todo', () => {
     beforeEach(async () => {
       getAuthenticatedUser.mockResolvedValue(user);
       buildAuthorizedOptions.mockReturnValue(authorizedOptions);
       put.mockResolvedValue(expectedResponse);
 
-      actualResponse = await putTodo(request);
+      actualResponse = await postTodo(request);
     });
 
     test('it should return the expected response', () => {
@@ -69,9 +68,9 @@ describe('data access broker tests', () => {
       expect(buildAuthorizedOptions).toHaveBeenCalledWith(request, user);
     });
 
-    test('it should call put', () => {
-      expect(put).toHaveBeenCalledTimes(1);
-      expect(put).toHaveBeenCalledWith('https://test.beagily.basics.api.xilution.com/things', {
+    test('it should call post', () => {
+      expect(post).toHaveBeenCalledTimes(1);
+      expect(post).toHaveBeenCalledWith('https://test.beagily.basics.api.xilution.com/things', {
         ...request.body,
         '@type': 'todo',
         owningUserId: user.id,
@@ -81,8 +80,7 @@ describe('data access broker tests', () => {
 
   describe('when get todo', () => {
     beforeEach(async () => {
-      getAuthenticatedUser.mockResolvedValue(user);
-      buildTypeAwareOptions.mockReturnValue(typeAwareOptions);
+      buildAuthorizedOptions.mockReturnValue(authorizedOptions);
       get.mockResolvedValue(expectedResponse);
 
       actualResponse = await getTodo(request);
@@ -92,26 +90,20 @@ describe('data access broker tests', () => {
       expect(actualResponse).toEqual(expectedResponse);
     });
 
-    test('it should call getAuthenticatedUser', () => {
-      expect(getAuthenticatedUser).toHaveBeenCalledTimes(1);
-      expect(getAuthenticatedUser).toHaveBeenCalledWith(request);
-    });
-
-    test('it should call buildTypeAwareOptions', () => {
-      expect(buildTypeAwareOptions).toHaveBeenCalledTimes(1);
-      expect(buildTypeAwareOptions).toHaveBeenCalledWith(request, user, 'todo');
+    test('it should call buildAuthorizedOptions', () => {
+      expect(buildAuthorizedOptions).toHaveBeenCalledTimes(1);
+      expect(buildAuthorizedOptions).toHaveBeenCalledWith(request);
     });
 
     test('it should call get', () => {
       expect(get).toHaveBeenCalledTimes(1);
-      expect(get).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}`, typeAwareOptions);
+      expect(get).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}`, authorizedOptions);
     });
   });
 
   describe('when delete todo', () => {
     beforeEach(async () => {
-      getAuthenticatedUser.mockResolvedValue(user);
-      buildTypeAwareOptions.mockReturnValue(typeAwareOptions);
+      buildAuthorizedOptions.mockReturnValue(authorizedOptions);
       del.mockResolvedValue(expectedResponse);
 
       actualResponse = await deleteTodo(request);
@@ -121,29 +113,20 @@ describe('data access broker tests', () => {
       expect(actualResponse).toEqual(expectedResponse);
     });
 
-    test('it should call getAuthenticatedUser', () => {
-      expect(getAuthenticatedUser).toHaveBeenCalledTimes(1);
-      expect(getAuthenticatedUser).toHaveBeenCalledWith(request);
-    });
-
-    test('it should call buildTypeAwareOptions', () => {
-      expect(buildTypeAwareOptions).toHaveBeenCalledTimes(1);
-      expect(buildTypeAwareOptions).toHaveBeenCalledWith(request, user, 'todo');
+    test('it should call buildAuthorizedOptions', () => {
+      expect(buildAuthorizedOptions).toHaveBeenCalledTimes(1);
+      expect(buildAuthorizedOptions).toHaveBeenCalledWith(request);
     });
 
     test('it should call del', () => {
       expect(del).toHaveBeenCalledTimes(1);
-      expect(del).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}`, typeAwareOptions);
+      expect(del).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}`, authorizedOptions);
     });
   });
 
   describe('when fetching todos', () => {
     let searchCriteriaId;
-
-
     let startPage;
-
-
     let pageSize;
 
     beforeEach(async () => {
@@ -158,8 +141,7 @@ describe('data access broker tests', () => {
 
       getAuthenticatedUser.mockResolvedValue(user);
       buildAuthorizedOptions.mockReturnValue(authorizedOptions);
-      put.mockResolvedValue(searchCriteriaResponse);
-      buildTypeAwareOptions.mockReturnValue(typeAwareOptions);
+      post.mockResolvedValue(searchCriteriaResponse);
       get.mockResolvedValue(expectedResponse);
 
       actualResponse = await fetchTodos(request);
@@ -174,27 +156,23 @@ describe('data access broker tests', () => {
       expect(getAuthenticatedUser).toHaveBeenCalledWith(request);
     });
 
-    test('it should call buildAuthorizedOptions', () => {
-      expect(buildAuthorizedOptions).toHaveBeenCalledTimes(1);
-      expect(buildAuthorizedOptions).toHaveBeenCalledWith(request, user);
-    });
-
-    test('it should call put', () => {
-      expect(put).toHaveBeenCalledTimes(1);
-      expect(put).toHaveBeenCalledWith('https://test.beagily.basics.api.xilution.com/things', {
+    test('it should call post', () => {
+      expect(post).toHaveBeenCalledTimes(1);
+      expect(post).toHaveBeenCalledWith('https://test.beagily.basics.api.xilution.com/search-criterias', {
         '@type': 'fetch-todos-search-criteria',
+        criteria: {},
         owningUserId: user.id,
       }, authorizedOptions);
     });
 
-    test('it should call buildTypeAwareOptions', () => {
-      expect(buildTypeAwareOptions).toHaveBeenCalledTimes(1);
-      expect(buildTypeAwareOptions).toHaveBeenCalledWith(request, user, 'todo');
+    test('it should call buildAuthorizedOptions', () => {
+      expect(buildAuthorizedOptions).toHaveBeenCalledTimes(2);
+      expect(buildAuthorizedOptions).toHaveBeenCalledWith(request);
     });
 
     test('it should call get', () => {
       expect(get).toHaveBeenCalledTimes(1);
-      expect(get).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}`, typeAwareOptions);
+      expect(get).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}&type=todo`, authorizedOptions);
     });
   });
 

@@ -3,7 +3,7 @@ import Chance from 'chance';
 
 import {
   authenticateRequestSchema,
-  putTodoRequestSchema,
+  postTodoRequestSchema,
   getTodoRequestSchema,
   deleteTodoRequestSchema,
   fetchTodosRequestSchema,
@@ -42,7 +42,7 @@ describe('schemas tests', () => {
     });
   });
 
-  describe('when validating put todo requests', () => {
+  describe('when validating post todo requests', () => {
     test('when the request is invalid, the result should include a validation error', () => {
       const acutualValidationResult = Joi.validate({
         body: chance.pickone([...notObjects, {
@@ -54,7 +54,7 @@ describe('schemas tests', () => {
         parameters: chance.pickone([...notObjects, {
           authorization: buildInvalidString(),
         }]),
-      }, putTodoRequestSchema);
+      }, postTodoRequestSchema);
 
       expect(acutualValidationResult.error).toBeTruthy();
     });
@@ -70,7 +70,7 @@ describe('schemas tests', () => {
         parameters: {
           authorization: chance.string(),
         },
-      }, putTodoRequestSchema);
+      }, postTodoRequestSchema);
 
       expect(actualValidationResult.error).toBeFalsy();
     });

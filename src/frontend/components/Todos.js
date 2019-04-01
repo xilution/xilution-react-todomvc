@@ -7,8 +7,11 @@ import TodoFilters from './TodoFilters';
 
 const Todos = () => (
   <div>
+    <hr />
     <AddTodo />
+    <hr />
     <VisibleTodoList />
+    <hr />
     <TodoFilters />
   </div>
 );

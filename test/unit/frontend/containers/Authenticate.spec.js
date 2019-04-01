@@ -2,9 +2,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Chance from 'chance';
-import { push } from 'react-router-redux';
 import {
-  Form, FormGroup, ControlLabel, FormControl, Button,
+  Form, Button,
 } from 'react-bootstrap';
 import { get, post } from 'axios/index';
 
@@ -14,7 +13,6 @@ import { Authenticate } from '../../../../src/frontend/containers/Authenticate';
 const chance = new Chance();
 
 jest.mock('axios/index');
-jest.mock('react-router-redux');
 jest.mock('../../../../src/frontend/actions');
 
 describe('<Authenticate />', () => {
@@ -80,22 +78,21 @@ describe('<Authenticate />', () => {
 
     test('it should render a Form element', () => {
       expect(form.type()).toEqual(Form);
-      expect(form.props().horizontal).toEqual(true);
       expect(form.props().onSubmit).toEqual(instance.handleSubmit);
     });
 
     test('it should render a username form group', () => {
-      expect(userNameFormGroup.type()).toEqual(FormGroup);
+      expect(userNameFormGroup.type()).toEqual(Form.Group);
       expect(userNameFormGroup.props().controlId).toEqual('username');
     });
 
     test('it should render a username control label', () => {
-      expect(userNameControlLabel.type()).toEqual(ControlLabel);
+      expect(userNameControlLabel.type()).toEqual(Form.Label);
       expect(userNameControlLabel.children().at(0).text()).toEqual('Username');
     });
 
     test('it should render a username form control', () => {
-      expect(userNameFormControl.type()).toEqual(FormControl);
+      expect(userNameFormControl.type()).toEqual(Form.Control);
       expect(userNameFormControl.props().autoComplete).toEqual('username');
       expect(userNameFormControl.props().name).toEqual('username');
       expect(userNameFormControl.props().onChange).toEqual(instance.handleChange);
@@ -104,17 +101,17 @@ describe('<Authenticate />', () => {
     });
 
     test('it should render a password form group', () => {
-      expect(passwordFormGroup.type()).toEqual(FormGroup);
+      expect(passwordFormGroup.type()).toEqual(Form.Group);
       expect(passwordFormGroup.props().controlId).toEqual('password');
     });
 
     test('it should render a password control label', () => {
-      expect(passwordControlLabel.type()).toEqual(ControlLabel);
+      expect(passwordControlLabel.type()).toEqual(Form.Label);
       expect(passwordControlLabel.children().at(0).text()).toEqual('Password');
     });
 
     test('it should render a password form control', () => {
-      expect(passwordFormControl.type()).toEqual(FormControl);
+      expect(passwordFormControl.type()).toEqual(Form.Control);
       expect(passwordFormControl.props().autoComplete).toEqual('current-password');
       expect(passwordFormControl.props().name).toEqual('password');
       expect(passwordFormControl.props().onChange).toEqual(instance.handleChange);
@@ -181,17 +178,9 @@ describe('<Authenticate />', () => {
 
   describe('when handling submit', () => {
     let event;
-
-
     let username;
-
-
     let password;
-
-
     let accessToken;
-
-
     let content;
 
     describe('when input validation does not pass', () => {
@@ -225,7 +214,7 @@ describe('<Authenticate />', () => {
           accessToken = chance.string();
           post.mockResolvedValue({
             data: {
-              IdToken: accessToken,
+              accessToken,
             },
           });
           content = chance.string();
@@ -273,12 +262,8 @@ describe('<Authenticate />', () => {
           expect(authenticationSuccess).toHaveBeenCalledWith(accessToken);
         });
 
-        test('it should call push', () => {
-          expect(push).toHaveBeenCalledTimes(1);
-        });
-
         test('it should call dispatch', () => {
-          expect(dispatch).toHaveBeenCalledTimes(3);
+          expect(dispatch).toHaveBeenCalledTimes(2);
         });
 
         test('it should leave the component ith the default state', () => {
@@ -360,7 +345,7 @@ describe('<Authenticate />', () => {
           accessToken = chance.string();
           post.mockResolvedValue({
             data: {
-              IdToken: accessToken,
+              accessToken,
             },
           });
           error = new Error(chance.string());

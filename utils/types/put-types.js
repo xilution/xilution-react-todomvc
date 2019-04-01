@@ -1,89 +1,69 @@
-require('babel-polyfill');
+require('@babel/polyfill');
 
-const {promisify} = require('util');
+const { promisify } = require('util');
 
-const AWS = require('aws-sdk');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const prompt = require('prompt');
 
-const identityBroker = require('../../temp/src/backend/identityBroker');
-const dataAccessorBroker = require('../../temp/src/backend/dataAccessorBroker');
+const authenticationBroker = require('../../temp/src/backend/authenticationBroker');
+const beagilyBroker = require('../../temp/src/backend/beagilyBroker');
 
-const secretsConfig = require('../../aws/cloud-formation/secrets-config.json');
-// eslint-disable-next-line no-console
-console.log("Using AWS Secrets Manager in region: " + secretsConfig.SecretsRegion);
-
-const secretsmanager = new AWS.SecretsManager({
-    // Retrieve the Secrets Manager region from secrets-config.json
-    region: secretsConfig.SecretsRegion
-});
-
-const secretsmanagerGetSecretValueAsync = promisify(secretsmanager.getSecretValue.bind(secretsmanager));
 const promptGetAsync = promisify(prompt.get);
 
+const todoSchema = require('./schema/todo.json');
+const fetchTodosSearchCriteriaSchema = require('./schema/fetch-todos-search-criteria.json');
+
 const types = [
-    {
-        name: 'todo',
-        schema: require('./schema/todo.json')
-    },
-    {
-        name: 'fetch-todos-search-criteria',
-        schema: require('./schema/fetch-todos-search-criteria.json')
-    }
+  {
+    name: 'todo',
+    schema: todoSchema,
+  },
+  {
+    name: 'fetch-todos-search-criteria',
+    schema: fetchTodosSearchCriteriaSchema,
+  },
 ];
 
-const putType = async (IdToken, type) => {
-    await dataAccessorBroker.putType({
-        body: type.schema,
-        parameters: {
-            authorization: IdToken,
-            name: type.name
-        }
-    });
-    // eslint-disable-next-line no-console
-    console.log(`Done putting type: ${type.name}`);
+const putType = async (accessToken, type) => {
+  await beagilyBroker.putType({
+    body: type.schema,
+    parameters: {
+      authorization: accessToken,
+      name: type.name,
+    },
+  });
+  // eslint-disable-next-line no-console
+  console.log(`Done putting type: ${type.name}`);
 };
 
 const run = async () => {
-    const secretsmanagerResponse = await secretsmanagerGetSecretValueAsync({
-        SecretId: 'XilutionSubscriberApiKey'
-    });
+  prompt.start();
 
-    process.env.XilutionSubscriberApiKey = secretsmanagerResponse.SecretString;
+  const credentials = await promptGetAsync({
+    properties: {
+      username: {
+        required: true,
+      },
+      // eslint-disable-next-line sort-keys
+      password: {
+        hidden: true,
+        required: true,
+      },
+    },
+  });
 
-    prompt.start();
+  const { data: { accessToken } } = await authenticationBroker.authenticate({
+    body: credentials,
+  });
 
-    const credentials = await promptGetAsync({
-        properties: {
-            username: {
-                required: true
-            },
-            // eslint-disable-next-line sort-keys
-            password: {
-                hidden: true,
-                required: true
-            }
-        }
-    });
+  // eslint-disable-next-line no-console
+  console.log('Authentication success! Putting types now...');
 
-    const {data: {IdToken}} = await identityBroker.authenticate({
-        body: credentials
-    });
-
-    // eslint-disable-next-line no-console
-    console.log('Authentication success! Putting types now...');
-
-    await Promise.all(types.map((type) => putType(IdToken, type)));
+  await Promise.all(types.map(type => putType(accessToken, type)));
 };
 
 // eslint-disable-next-line no-console
 run().then(() => console.log('All Done!')).catch((error) => {
-    if (error.name == 'ResourceNotFoundException') { // Unable to find secrets in region.
-    // eslint-disable-next-line no-console
-    console.error(`Error: AWS Secrets Manager was unable locate your Xilution Subscriber API Key in the "${secretsConfig.SecretsRegion}" region.`);
-    // eslint-disable-next-line no-console
-    console.error('-----> Please check that the correct "SecretsRegion" value is in the "parameters.json" file!');
-    } else {
-        // eslint-disable-next-line no-console
-        console.error(error);
-    }
+  // eslint-disable-next-line no-console
+  console.error(error);
 });

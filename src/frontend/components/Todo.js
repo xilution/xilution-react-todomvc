@@ -12,8 +12,8 @@ const Todo = ({
   >
     {text}
     <Button
-      bsSize="xsmall"
-      bsStyle="danger"
+      size="sm"
+      variant="danger"
       onClick={deleteTodo}
       style={{
         float: 'right',
@@ -23,7 +23,7 @@ const Todo = ({
       {'Delete'}
     </Button>
     <Button
-      bsSize="xsmall"
+      size="sm"
       onClick={toggleTodo}
       style={{
         float: 'right',

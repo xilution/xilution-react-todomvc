@@ -6,16 +6,16 @@ import {
   doDeleteTodo,
   doFetchTodos,
   doGetTodo,
-  doPutTodo,
+  doPostTodo,
 } from '../../../src/backend/index';
 import { brokerRequest } from '../../../src/backend/requestAdapter';
 import { authenticate } from '../../../src/backend/authenticationBroker';
 import {
-  putTodo, getTodo, deleteTodo, fetchTodos,
+  postTodo, getTodo, deleteTodo, fetchTodos,
 } from '../../../src/backend/beagilyBroker';
 import {
   authenticateRequestSchema,
-  putTodoRequestSchema,
+  postTodoRequestSchema,
   getTodoRequestSchema,
   deleteTodoRequestSchema,
   fetchTodosRequestSchema,
@@ -72,7 +72,7 @@ describe('index tests', () => {
     });
   });
 
-  describe('when putting a todo', () => {
+  describe('when posting a todo', () => {
     beforeEach((done) => {
       event = {
         body: JSON.stringify({
@@ -83,7 +83,7 @@ describe('index tests', () => {
         },
       };
 
-      doPutTodo(event, context, (error, response) => {
+      doPostTodo(event, context, (error, response) => {
         actualError = error;
         actualResponse = response;
         done();
@@ -105,7 +105,7 @@ describe('index tests', () => {
         parameters: {
           authorization: event.headers.Authorization,
         },
-      }, putTodoRequestSchema, putTodo);
+      }, postTodoRequestSchema, postTodo);
     });
   });
 

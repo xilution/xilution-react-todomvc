@@ -22,6 +22,7 @@ export const PrivateRoute = ({ component: Component, auth, ...rest }) => (
 );
 
 PrivateRoute.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   auth: PropTypes.object.isRequired,
   component: PropTypes.func.isRequired,
 };

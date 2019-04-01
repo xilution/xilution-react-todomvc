@@ -1,4 +1,4 @@
-import { validate } from 'joi';
+import Joi from 'joi';
 
 import {
   buildInputValidationProxyResponse,
@@ -8,7 +8,7 @@ import {
 
 // eslint-disable-next-line import/prefer-default-export
 export const brokerRequest = async (request, schema, func) => {
-  const inputValidationResult = validate(request, schema);
+  const inputValidationResult = Joi.validate(request, schema);
 
   if (inputValidationResult.error) {
     return buildInputValidationProxyResponse(inputValidationResult);

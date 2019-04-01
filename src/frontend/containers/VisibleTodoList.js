@@ -52,7 +52,7 @@ export const mapDispatchToProps = dispatch => ({
     try {
       dispatch(toggleTodo(todo.id));
 
-      await put(`${serverUrl}todos`, {
+      await put(`${serverUrl}todos/${todo.id}`, {
         completed: !todo.completed,
         id: todo.id,
         text: todo.text,

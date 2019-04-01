@@ -1,10 +1,10 @@
 /* eslint-disable react/no-set-state,react/prop-types */
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Form, FormGroup, InputGroup, FormControl, Button,
+  Form, InputGroup, Button,
 } from 'react-bootstrap';
-import { put } from 'axios/index';
+import { post } from 'axios/index';
 import LoadingIndicator from '../components/Loading';
 
 import { createTodo } from '../actions';
@@ -21,7 +21,7 @@ export const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-export class AddTodo extends React.Component {
+export class AddTodo extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -51,7 +51,7 @@ export class AddTodo extends React.Component {
       text: this.state.input.trim(),
     };
 
-    const response = await put(`${serverUrl}todos`, todo, {
+    const response = await post(`${serverUrl}todos`, todo, {
       headers: {
         authorization: this.props.auth.accessToken,
       },
@@ -70,24 +70,24 @@ export class AddTodo extends React.Component {
 
   render() {
     const isLoading = this.state.loading;
+
     return (
       <div>
         {isLoading && <LoadingIndicator /> }
         <Form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="input">
+          <Form.Group controlId="input">
             <InputGroup>
-              <FormControl
+              <Form.Control
                 name="input"
                 onChange={this.handleChange}
                 type="text"
-
                 value={this.state.input}
               />
-              <InputGroup.Button>
+              <InputGroup.Append>
                 <Button type="submit">Add Todo</Button>
-              </InputGroup.Button>
+              </InputGroup.Append>
             </InputGroup>
-          </FormGroup>
+          </Form.Group>
         </Form>
       </div>
     );

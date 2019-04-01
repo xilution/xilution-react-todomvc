@@ -54,7 +54,7 @@ Within about a 1/2 hour you will have a fully functional todo management app run
 
 * Frontend
 	* Use Cases
-		* Authenticate User
+		* Login User
 		* View Todos
 		* Create/Update/Delete Todos
 	* [Single Page Web Application](https://en.wikipedia.org/wiki/Single-page_application)
@@ -110,6 +110,10 @@ For Mac users, the Terminal application is the best way to go for command line s
 	* Limited access to Xilution's Test environments is Free for registered users.
 	* Open https://register.xilution.com, to create an account in our Production environment.
 		* At this time, Test and Production accounts don't synchronize.
+
+1. [Activate Xilution - Basics - Beagily](https://test.portal.xilution.com)
+	* Some Xilution APIaaS products require activation to enable access.
+	* Without activation, you will receive 401 errors when making calls to Beagily's endpoints.
 
 1. [Install Git](https://git-scm.com/downloads)
 
@@ -215,7 +219,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `make show-frontend-url` to see the URL of the frontend application.
 	1. Copy the front end URL and paste it into a browser.
 	1. Run through the different use cases
-		* Authenticate User
+		* Login User
 			* Use your Xilution user credentials
 		* View Todos
 		* Create/Update/Delete Todos

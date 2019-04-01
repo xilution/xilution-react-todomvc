@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Chance from 'chance';
-import { push } from 'react-router-redux';
 import { Button } from 'react-bootstrap';
 
 import { signOut } from '../../../../src/frontend/actions';
@@ -10,7 +9,6 @@ import { AppHeader, mapStateToProps } from '../../../../src/frontend/containers/
 const chance = new Chance();
 
 jest.mock('../../../../src/frontend/actions');
-jest.mock('react-router-redux');
 
 describe('<AppHeader />', () => {
   let accessToken;
@@ -42,8 +40,6 @@ describe('<AppHeader />', () => {
 
   describe('when mapping state to props', () => {
     let state;
-
-
     let mappedProps;
 
     beforeEach(() => {
@@ -94,14 +90,10 @@ describe('<AppHeader />', () => {
     describe('when the button is clicked', () => {
       let action;
 
-
-      let pushResponse;
-
       beforeEach(() => {
         action = chance.string();
 
         signOut.mockReturnValue(action);
-        push.mockReturnValue(pushResponse);
 
         renderComponent();
 
@@ -113,15 +105,9 @@ describe('<AppHeader />', () => {
         expect(signOut).toHaveBeenCalledWith();
       });
 
-      test('it should call push', () => {
-        expect(push).toHaveBeenCalledTimes(1);
-        expect(push).toHaveBeenCalledWith('/authenticate');
-      });
-
       test('it should call dispatch', () => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith(action);
-        expect(dispatch).toHaveBeenCalledWith(pushResponse);
       });
     });
   });

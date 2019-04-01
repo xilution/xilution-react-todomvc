@@ -55,6 +55,22 @@ Resources:
             Path: /todos
             Method: get
 
+  PostTodoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: xilution-todomvc-post-todo-function
+      CodeUri: ../../dist/backend/
+      Handler: index.doPostTodo
+      Role:
+        Fn::ImportValue:
+          Fn::Sub: "${BaseStackName}-lambda-execution-role-arn"
+      Events:
+        PostResource:
+          Type: Api
+          Properties:
+            Path: /todos
+            Method: post
+
   PutTodoFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -68,7 +84,7 @@ Resources:
         PostResource:
           Type: Api
           Properties:
-            Path: /todos
+            Path: /todos/{id}
             Method: put
 
   GetTodoFunction:
