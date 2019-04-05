@@ -51,7 +51,7 @@
     "chance": "^1.0.13",
     "css-loader": "^2.1.1",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.2.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "eslint": "^5.15.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-import": "^2.14.0",
