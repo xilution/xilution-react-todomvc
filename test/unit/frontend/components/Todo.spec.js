@@ -57,8 +57,8 @@ describe('<Todo />', () => {
 
     test('it should render a Delete button', () => {
       expect(deleteButton.type()).toEqual(Button);
-      expect(deleteButton.props().bsSize).toEqual('xsmall');
-      expect(deleteButton.props().bsStyle).toEqual('danger');
+      expect(deleteButton.props().size).toEqual('sm');
+      expect(deleteButton.props().variant).toEqual('danger');
       expect(deleteButton.props().onClick).toEqual(deleteTodo);
       expect(deleteButton.props().style).toEqual({
         float: 'right',
@@ -69,7 +69,7 @@ describe('<Todo />', () => {
 
     test('it should render a toggle button', () => {
       expect(toggleButton.type()).toEqual(Button);
-      expect(toggleButton.props().bsSize).toEqual('xsmall');
+      expect(toggleButton.props().size).toEqual('sm');
       expect(toggleButton.props().onClick).toEqual(toggleTodo);
       expect(toggleButton.props().style).toEqual({
         float: 'right',

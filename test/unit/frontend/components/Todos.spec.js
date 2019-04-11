@@ -19,9 +19,9 @@ describe('<Todos />', () => {
 
     const children = wrapper.children();
 
-    addTodo = children.at(0);
-    visibleTodoList = children.at(1);
-    todoFilters = children.at(2);
+    addTodo = children.at(1);
+    visibleTodoList = children.at(3);
+    todoFilters = children.at(5);
   };
 
   describe('when the component renders', () => {

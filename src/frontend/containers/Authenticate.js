@@ -62,12 +62,12 @@ export class Authenticate extends Component {
 
       const todosResponse = await axios.get(`${serverUrl}todos`, {
         headers: {
-          authorization: authenticateResponse.data.accessToken,
+          authorization: authenticateResponse.data.access_token,
         },
       });
 
       this.props.dispatch(fetchTodosSuccess(todosResponse.data.content));
-      this.props.dispatch(authenticationSuccess(authenticateResponse.data.accessToken));
+      this.props.dispatch(authenticationSuccess(authenticateResponse.data.access_token));
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -81,7 +81,7 @@ export class Authenticate extends Component {
   render() {
     const { auth } = this.props;
 
-    if (auth.accessToken) {
+    if (auth && auth.accessToken) {
       return <Redirect to="/todos" />;
     }
 

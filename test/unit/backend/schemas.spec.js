@@ -20,34 +20,33 @@ const buildInvalidString = () => chance.pickone([null, undefined, {}, [], '', ch
 describe('schemas tests', () => {
   describe('when validating authenticate requests', () => {
     test('when the request is invalid, the result should include a validation error', () => {
-      const acutualValidationResult = Joi.validate({
+      const actualValidationResult = Joi.validate({
         body: chance.pickone([...notObjects, {
           password: buildInvalidString(),
           username: buildInvalidString(),
         }]),
       }, authenticateRequestSchema);
 
-      expect(acutualValidationResult.error).toBeTruthy();
+      expect(actualValidationResult.error).toBeTruthy();
     });
 
     test('when the request is valid, the result should not include a validation error', () => {
-      const acutualValidationResult = Joi.validate({
+      const actualValidationResult = Joi.validate({
         body: {
           password: chance.string(),
           username: chance.string(),
         },
       }, authenticateRequestSchema);
 
-      expect(acutualValidationResult.error).toBeFalsy();
+      expect(actualValidationResult.error).toBeFalsy();
     });
   });
 
   describe('when validating post todo requests', () => {
     test('when the request is invalid, the result should include a validation error', () => {
-      const acutualValidationResult = Joi.validate({
+      const actualValidationResult = Joi.validate({
         body: chance.pickone([...notObjects, {
           completed: buildInvalidBoolean(),
-          id: buildInvalidString(),
           text: buildInvalidString(),
           userId: buildInvalidString(),
         }]),
@@ -56,14 +55,13 @@ describe('schemas tests', () => {
         }]),
       }, postTodoRequestSchema);
 
-      expect(acutualValidationResult.error).toBeTruthy();
+      expect(actualValidationResult.error).toBeTruthy();
     });
 
     test('when the request is valid, the result should not include a validation error', () => {
       const actualValidationResult = Joi.validate({
         body: {
           completed: chance.bool(),
-          id: chance.string(),
           text: chance.string(),
           userId: chance.string(),
         },
@@ -78,14 +76,14 @@ describe('schemas tests', () => {
 
   describe('when validating get todo requests', () => {
     test('when the request is invalid, the result should include a validation error', () => {
-      const acutualValidationResult = Joi.validate({
+      const actualValidationResult = Joi.validate({
         parameters: chance.pickone([...notObjects, {
           authorization: buildInvalidString(),
           id: buildInvalidString(),
         }]),
       }, getTodoRequestSchema);
 
-      expect(acutualValidationResult.error).toBeTruthy();
+      expect(actualValidationResult.error).toBeTruthy();
     });
 
     test('when the request is valid, the result should not include a validation error', () => {
@@ -102,14 +100,14 @@ describe('schemas tests', () => {
 
   describe('when validating delete todo requests', () => {
     test('when the request is invalid, the result should include a validation error', () => {
-      const acutualValidationResult = Joi.validate({
+      const actualValidationResult = Joi.validate({
         parameters: chance.pickone([...notObjects, {
           authorization: buildInvalidString(),
           id: buildInvalidString(),
         }]),
       }, deleteTodoRequestSchema);
 
-      expect(acutualValidationResult.error).toBeTruthy();
+      expect(actualValidationResult.error).toBeTruthy();
     });
 
     test('when the request is valid, the result should not include a validation error', () => {
@@ -126,13 +124,13 @@ describe('schemas tests', () => {
 
   describe('when validating fetch todos requests', () => {
     test('when the request is invalid, the result should include a validation error', () => {
-      const acutualValidationResult = Joi.validate({
+      const actualValidationResult = Joi.validate({
         parameters: chance.pickone([...notObjects, {
           authorization: buildInvalidString(),
         }]),
       }, fetchTodosRequestSchema);
 
-      expect(acutualValidationResult.error).toBeTruthy();
+      expect(actualValidationResult.error).toBeTruthy();
     });
 
     test('when the request is valid, the result should not include a validation error', () => {

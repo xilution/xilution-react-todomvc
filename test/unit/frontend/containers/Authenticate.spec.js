@@ -214,7 +214,7 @@ describe('<Authenticate />', () => {
           accessToken = chance.string();
           post.mockResolvedValue({
             data: {
-              accessToken,
+              access_token: accessToken,
             },
           });
           content = chance.string();
@@ -345,7 +345,7 @@ describe('<Authenticate />', () => {
           accessToken = chance.string();
           post.mockResolvedValue({
             data: {
-              accessToken,
+              access_token: accessToken,
             },
           });
           error = new Error(chance.string());

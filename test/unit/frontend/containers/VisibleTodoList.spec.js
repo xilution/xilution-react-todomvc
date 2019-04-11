@@ -93,8 +93,6 @@ describe('<VisibleTodoList />', () => {
 
   describe('when mapping dispatch to props', () => {
     let dispatch;
-
-
     let mappedProps;
 
     beforeEach(() => {
@@ -114,11 +112,7 @@ describe('<VisibleTodoList />', () => {
 
     describe('when deleteTodo is invoked', () => {
       let auth;
-
-
       let todo;
-
-
       let deleteAction;
 
       beforeEach(() => {
@@ -205,11 +199,7 @@ describe('<VisibleTodoList />', () => {
 
     describe('when toggleTodo is invoked', () => {
       let auth;
-
-
       let todo;
-
-
       let toggleAction;
 
       beforeEach(() => {
@@ -241,7 +231,7 @@ describe('<VisibleTodoList />', () => {
 
         test('it should call put', () => {
           expect(put).toHaveBeenCalledTimes(1);
-          expect(put).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/todos', {
+          expect(put).toHaveBeenCalledWith(`https://api.xilution.com/not-really/Prod/todos/${todo.id}`, {
             completed: !todo.completed,
             id: todo.id,
             text: todo.text,
@@ -279,7 +269,7 @@ describe('<VisibleTodoList />', () => {
 
         test('it should call put', () => {
           expect(put).toHaveBeenCalledTimes(1);
-          expect(put).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/todos', {
+          expect(put).toHaveBeenCalledWith(`https://api.xilution.com/not-really/Prod/todos/${todo.id}`, {
             completed: !todo.completed,
             id: todo.id,
             text: todo.text,

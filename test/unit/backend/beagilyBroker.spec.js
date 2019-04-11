@@ -17,7 +17,7 @@ jest.mock('axios');
 jest.mock('../../../src/backend/brokerUtils');
 jest.mock('../../../src/backend/accountManagementBroker');
 
-describe('data access broker tests', () => {
+describe('beagily broker tests', () => {
   let request;
   let user;
   let authorizedOptions;
@@ -49,7 +49,7 @@ describe('data access broker tests', () => {
     beforeEach(async () => {
       getAuthenticatedUser.mockResolvedValue(user);
       buildAuthorizedOptions.mockReturnValue(authorizedOptions);
-      put.mockResolvedValue(expectedResponse);
+      post.mockResolvedValue(expectedResponse);
 
       actualResponse = await postTodo(request);
     });
@@ -97,7 +97,7 @@ describe('data access broker tests', () => {
 
     test('it should call get', () => {
       expect(get).toHaveBeenCalledTimes(1);
-      expect(get).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}`, authorizedOptions);
+      expect(get).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}?type=todo`, authorizedOptions);
     });
   });
 
@@ -120,7 +120,7 @@ describe('data access broker tests', () => {
 
     test('it should call del', () => {
       expect(del).toHaveBeenCalledTimes(1);
-      expect(del).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}`, authorizedOptions);
+      expect(del).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}?type=todo`, authorizedOptions);
     });
   });
 

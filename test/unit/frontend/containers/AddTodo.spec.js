@@ -4,7 +4,7 @@ import Chance from 'chance';
 import {
   Form, FormGroup, InputGroup, FormControl, Button,
 } from 'react-bootstrap';
-import { put } from 'axios/index';
+import { post } from 'axios/index';
 
 import { createTodo } from '../../../../src/frontend/actions';
 import { AddTodo, mapStateToProps } from '../../../../src/frontend/containers/AddTodo';
@@ -23,7 +23,7 @@ describe('<AddTodo />', () => {
   let formGroup;
   let inputGroup;
   let formControl;
-  let inputGroupButton;
+  let inputGroupAppend;
   let button;
 
   const renderComponent = () => {
@@ -39,8 +39,8 @@ describe('<AddTodo />', () => {
     formGroup = form.children().at(0);
     inputGroup = formGroup.children().at(0);
     formControl = inputGroup.children().at(0);
-    inputGroupButton = inputGroup.children().at(1);
-    button = inputGroupButton.children().at(0);
+    inputGroupAppend = inputGroup.children().at(1);
+    button = inputGroupAppend.children().at(0);
   };
 
   beforeEach(() => {
@@ -108,8 +108,8 @@ describe('<AddTodo />', () => {
       expect(formControl.props().value).toEqual('');
     });
 
-    test('it should render a InputGroup.Button element', () => {
-      expect(inputGroupButton.type()).toEqual(InputGroup.Button);
+    test('it should render a InputGroup.Append element', () => {
+      expect(inputGroupAppend.type()).toEqual(InputGroup.Append);
     });
 
     test('it should render a Button element', () => {
@@ -178,7 +178,7 @@ describe('<AddTodo />', () => {
         input = chance.sentence();
         instance.setState({ input });
         id = chance.string();
-        put.mockResolvedValue({
+        post.mockResolvedValue({
           headers: {
             location: `${chance.url()}/${id}`,
           },
@@ -197,9 +197,9 @@ describe('<AddTodo />', () => {
         expect(event.preventDefault).toHaveBeenCalledWith();
       });
 
-      test('it should put the todo', () => {
-        expect(put).toHaveBeenCalledTimes(1);
-        expect(put).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/todos', {
+      test('it should post the todo', () => {
+        expect(post).toHaveBeenCalledTimes(1);
+        expect(post).toHaveBeenCalledWith('https://api.xilution.com/not-really/Prod/todos', {
           completed: false,
           text: input,
         }, {
