@@ -7,8 +7,9 @@ import {
 } from 'react-bootstrap';
 import { get, post } from 'axios/index';
 
+import { Redirect } from 'react-router-dom';
 import { fetchTodosSuccess, authenticationSuccess } from '../../../../src/frontend/actions';
-import { Authenticate } from '../../../../src/frontend/containers/Authenticate';
+import { mapStateToProps, Authenticate } from '../../../../src/frontend/containers/Authenticate';
 
 const chance = new Chance();
 
@@ -16,6 +17,7 @@ jest.mock('axios/index');
 jest.mock('../../../../src/frontend/actions');
 
 describe('<Authenticate />', () => {
+  let accessToken;
   let dispatch;
   let wrapper;
   let instance;
@@ -32,6 +34,7 @@ describe('<Authenticate />', () => {
   const renderComponent = () => {
     wrapper = shallow(
       <Authenticate
+        auth={{ accessToken }}
         dispatch={dispatch}
       />,
     );
@@ -49,6 +52,7 @@ describe('<Authenticate />', () => {
   };
 
   beforeEach(() => {
+    accessToken = undefined;
     dispatch = jest.fn();
 
     renderComponent();
@@ -58,71 +62,107 @@ describe('<Authenticate />', () => {
     jest.resetAllMocks();
   });
 
+  describe('when mapping state to props', () => {
+    let state;
+    let mappedProps;
+
+    beforeEach(() => {
+      state = {
+        auth: chance.string(),
+      };
+
+      mappedProps = mapStateToProps(state);
+    });
+
+    test('it should map properly', () => {
+      expect(mappedProps).toEqual({
+        auth: state.auth,
+      });
+    });
+  });
+
   describe('when the component renders', () => {
-    test('it should have an initial state', () => {
-      expect(instance.state).toEqual({
-        loading: false,
-        password: '',
-        username: '',
+    describe('when the user is not logged in', () => {
+      describe('when is not loading', () => {
+        test('it should have an initial state', () => {
+          expect(instance.state).toEqual({
+            loading: false,
+            password: '',
+            username: '',
+          });
+        });
+
+        test('it should render a div as the root element', () => {
+          expect(wrapper.type()).toEqual('div');
+        });
+
+        test('it should render a h2 element', () => {
+          expect(h2.type()).toEqual('h2');
+          expect(h2.children().at(0).text()).toEqual('Sign In');
+        });
+
+        test('it should render a Form element', () => {
+          expect(form.type()).toEqual(Form);
+          expect(form.props().onSubmit).toEqual(instance.handleSubmit);
+        });
+
+        test('it should render a username form group', () => {
+          expect(userNameFormGroup.type()).toEqual(Form.Group);
+          expect(userNameFormGroup.props().controlId).toEqual('username');
+        });
+
+        test('it should render a username control label', () => {
+          expect(userNameControlLabel.type()).toEqual(Form.Label);
+          expect(userNameControlLabel.children().at(0).text()).toEqual('Username');
+        });
+
+        test('it should render a username form control', () => {
+          expect(userNameFormControl.type()).toEqual(Form.Control);
+          expect(userNameFormControl.props().autoComplete).toEqual('username');
+          expect(userNameFormControl.props().name).toEqual('username');
+          expect(userNameFormControl.props().onChange).toEqual(instance.handleChange);
+          expect(userNameFormControl.props().type).toEqual('text');
+          expect(userNameFormControl.props().value).toEqual('');
+        });
+
+        test('it should render a password form group', () => {
+          expect(passwordFormGroup.type()).toEqual(Form.Group);
+          expect(passwordFormGroup.props().controlId).toEqual('password');
+        });
+
+        test('it should render a password control label', () => {
+          expect(passwordControlLabel.type()).toEqual(Form.Label);
+          expect(passwordControlLabel.children().at(0).text()).toEqual('Password');
+        });
+
+        test('it should render a password form control', () => {
+          expect(passwordFormControl.type()).toEqual(Form.Control);
+          expect(passwordFormControl.props().autoComplete).toEqual('current-password');
+          expect(passwordFormControl.props().name).toEqual('password');
+          expect(passwordFormControl.props().onChange).toEqual(instance.handleChange);
+          expect(passwordFormControl.props().type).toEqual('password');
+          expect(passwordFormControl.props().value).toEqual('');
+        });
+
+        test('it should render a button', () => {
+          expect(button.type()).toEqual(Button);
+          expect(button.props().type).toEqual('submit');
+          expect(button.children().at(0).text()).toEqual('Submit');
+        });
       });
     });
 
-    test('it should render a div as the root element', () => {
-      expect(wrapper.type()).toEqual('div');
-    });
+    describe('when the user is logged in', () => {
+      beforeEach(() => {
+        accessToken = chance.string();
 
-    test('it should render a h2 element', () => {
-      expect(h2.type()).toEqual('h2');
-      expect(h2.children().at(0).text()).toEqual('Sign In');
-    });
+        renderComponent();
+      });
 
-    test('it should render a Form element', () => {
-      expect(form.type()).toEqual(Form);
-      expect(form.props().onSubmit).toEqual(instance.handleSubmit);
-    });
-
-    test('it should render a username form group', () => {
-      expect(userNameFormGroup.type()).toEqual(Form.Group);
-      expect(userNameFormGroup.props().controlId).toEqual('username');
-    });
-
-    test('it should render a username control label', () => {
-      expect(userNameControlLabel.type()).toEqual(Form.Label);
-      expect(userNameControlLabel.children().at(0).text()).toEqual('Username');
-    });
-
-    test('it should render a username form control', () => {
-      expect(userNameFormControl.type()).toEqual(Form.Control);
-      expect(userNameFormControl.props().autoComplete).toEqual('username');
-      expect(userNameFormControl.props().name).toEqual('username');
-      expect(userNameFormControl.props().onChange).toEqual(instance.handleChange);
-      expect(userNameFormControl.props().type).toEqual('text');
-      expect(userNameFormControl.props().value).toEqual('');
-    });
-
-    test('it should render a password form group', () => {
-      expect(passwordFormGroup.type()).toEqual(Form.Group);
-      expect(passwordFormGroup.props().controlId).toEqual('password');
-    });
-
-    test('it should render a password control label', () => {
-      expect(passwordControlLabel.type()).toEqual(Form.Label);
-      expect(passwordControlLabel.children().at(0).text()).toEqual('Password');
-    });
-
-    test('it should render a password form control', () => {
-      expect(passwordFormControl.type()).toEqual(Form.Control);
-      expect(passwordFormControl.props().autoComplete).toEqual('current-password');
-      expect(passwordFormControl.props().name).toEqual('password');
-      expect(passwordFormControl.props().onChange).toEqual(instance.handleChange);
-      expect(passwordFormControl.props().type).toEqual('password');
-      expect(passwordFormControl.props().value).toEqual('');
-    });
-
-    test('it should render a button', () => {
-      expect(button.type()).toEqual(Button);
-      expect(button.props().type).toEqual('submit');
-      expect(button.children().at(0).text()).toEqual('Submit');
+      test('it should redirect', () => {
+        expect(wrapper.type()).toEqual(Redirect);
+        expect(wrapper.props().to).toEqual('/todos');
+      });
     });
   });
 
@@ -180,7 +220,6 @@ describe('<Authenticate />', () => {
     let event;
     let username;
     let password;
-    let accessToken;
     let content;
 
     describe('when input validation does not pass', () => {

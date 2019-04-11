@@ -4,7 +4,7 @@ import {
 } from 'axios';
 
 import {
-  postTodo, getTodo, deleteTodo, fetchTodos, putType,
+  postTodo, putTodo, getTodo, deleteTodo, fetchTodos, putType,
 } from '../../../src/backend/beagilyBroker';
 import {
   buildAuthorizedOptions,
@@ -71,6 +71,39 @@ describe('beagily broker tests', () => {
     test('it should call post', () => {
       expect(post).toHaveBeenCalledTimes(1);
       expect(post).toHaveBeenCalledWith('https://test.beagily.basics.api.xilution.com/things', {
+        ...request.body,
+        '@type': 'todo',
+        owningUserId: user.id,
+      }, authorizedOptions);
+    });
+  });
+
+  describe('when put todo', () => {
+    beforeEach(async () => {
+      getAuthenticatedUser.mockResolvedValue(user);
+      buildAuthorizedOptions.mockReturnValue(authorizedOptions);
+      put.mockResolvedValue(expectedResponse);
+
+      actualResponse = await putTodo(request);
+    });
+
+    test('it should return the expected response', () => {
+      expect(actualResponse).toEqual(expectedResponse);
+    });
+
+    test('it should call getAuthenticatedUser', () => {
+      expect(getAuthenticatedUser).toHaveBeenCalledTimes(1);
+      expect(getAuthenticatedUser).toHaveBeenCalledWith(request);
+    });
+
+    test('it should call buildAuthorizedOptions', () => {
+      expect(buildAuthorizedOptions).toHaveBeenCalledTimes(1);
+      expect(buildAuthorizedOptions).toHaveBeenCalledWith(request, user);
+    });
+
+    test('it should call put', () => {
+      expect(put).toHaveBeenCalledTimes(1);
+      expect(put).toHaveBeenCalledWith(`https://test.beagily.basics.api.xilution.com/things/${request.parameters.id}`, {
         ...request.body,
         '@type': 'todo',
         owningUserId: user.id,

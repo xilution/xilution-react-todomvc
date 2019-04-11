@@ -7,15 +7,21 @@ import {
   doFetchTodos,
   doGetTodo,
   doPostTodo,
+  doPutTodo,
 } from '../../../src/backend/index';
 import { brokerRequest } from '../../../src/backend/requestAdapter';
 import { authenticate } from '../../../src/backend/authenticationBroker';
 import {
-  postTodo, getTodo, deleteTodo, fetchTodos,
+  putTodo,
+  postTodo,
+  getTodo,
+  deleteTodo,
+  fetchTodos,
 } from '../../../src/backend/beagilyBroker';
 import {
   authenticateRequestSchema,
   postTodoRequestSchema,
+  putTodoRequestSchema,
   getTodoRequestSchema,
   deleteTodoRequestSchema,
   fetchTodosRequestSchema,
@@ -106,6 +112,47 @@ describe('index tests', () => {
           authorization: event.headers.Authorization,
         },
       }, postTodoRequestSchema, postTodo);
+    });
+  });
+
+  describe('when putting a todo', () => {
+    beforeEach((done) => {
+      event = {
+        body: JSON.stringify({
+          [chance.string()]: chance.string(),
+        }),
+        headers: {
+          Authorization: chance.string(),
+        },
+        pathParameters: {
+          id: chance.string(),
+        },
+      };
+
+      doPutTodo(event, context, (error, response) => {
+        actualError = error;
+        actualResponse = response;
+        done();
+      });
+    });
+
+    test('should not raise an error', () => {
+      expect(actualError).toBeNull();
+    });
+
+    test('should yield the expected response', () => {
+      expect(actualResponse).toEqual(expectedResponse);
+    });
+
+    test('should call brokerRequest once with the proper params', () => {
+      expect(brokerRequest).toHaveBeenCalledTimes(1);
+      expect(brokerRequest).toHaveBeenCalledWith({
+        body: JSON.parse(event.body),
+        parameters: {
+          authorization: event.headers.Authorization,
+          id: event.pathParameters.id,
+        },
+      }, putTodoRequestSchema, putTodo);
     });
   });
 

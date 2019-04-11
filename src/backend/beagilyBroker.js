@@ -11,6 +11,8 @@ const DEFAULT_PAGE_SIZE = 100;
 const postThingUrl = 'https://test.beagily.basics.api.xilution.com/things';
 const postSearchCriteriaUrl = 'https://test.beagily.basics.api.xilution.com/search-criterias';
 
+const buildPutThingUrl = id => `https://test.beagily.basics.api.xilution.com/things/${id}`;
+
 const buildGetOrDeleteThingUrl = (id, type) => `https://test.beagily.basics.api.xilution.com/things/${id}?type=${type}`;
 
 const buildFetchThingsUrl = (searchCriteriaId, startPage, pageSize, type) => `https://test.beagily.basics.api.xilution.com/things?search-criteria-id=${searchCriteriaId}&page-number=${startPage}&page-size=${pageSize}&type=${type}`;
@@ -35,6 +37,18 @@ export const postTodo = async (request) => {
   };
 
   return post(postThingUrl, todo, buildAuthorizedOptions(request, user));
+};
+
+export const putTodo = async (request) => {
+  const user = await getAuthenticatedUser(request);
+
+  const todo = {
+    ...request.body,
+    '@type': 'todo',
+    owningUserId: user.id,
+  };
+
+  return put(buildPutThingUrl(request.parameters.id), todo, buildAuthorizedOptions(request, user));
 };
 
 export const getTodo = async request => get(buildGetOrDeleteThingUrl(request.parameters.id, 'todo'), buildAuthorizedOptions(request));

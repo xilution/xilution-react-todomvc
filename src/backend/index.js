@@ -1,7 +1,7 @@
 import { brokerRequest } from './requestAdapter';
 import { authenticate } from './authenticationBroker';
 import {
-  postTodo, getTodo, deleteTodo, fetchTodos,
+  putTodo, postTodo, getTodo, deleteTodo, fetchTodos,
 } from './beagilyBroker';
 import {
   authenticateRequestSchema,
@@ -45,9 +45,10 @@ export const doPutTodo = async (event, context, callback) => {
     body: JSON.parse(event.body),
     parameters: {
       authorization: event.headers.Authorization,
+      id: event.pathParameters.id,
     },
   };
-  const proxyResponse = await brokerRequest(putTodoRequest, putTodoRequestSchema, postTodo);
+  const proxyResponse = await brokerRequest(putTodoRequest, putTodoRequestSchema, putTodo);
 
   callback(null, proxyResponse);
 };
