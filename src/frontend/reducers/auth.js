@@ -3,7 +3,7 @@ const auth = (state = {}, action) => {
     case 'AUTHENTICATION_SUCCESS':
       return {
         ...state,
-        accessToken: action.access_token,
+        accessToken: action.accessToken,
       };
     case 'SIGN_OUT':
       return {};

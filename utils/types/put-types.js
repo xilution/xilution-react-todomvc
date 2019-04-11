@@ -52,14 +52,15 @@ const run = async () => {
     },
   });
 
-  const { data: { accessToken } } = await authenticationBroker.authenticate({
+  // eslint-disable-next-line camelcase
+  const { data: { access_token } } = await authenticationBroker.authenticate({
     body: credentials,
   });
 
   // eslint-disable-next-line no-console
   console.log('Authentication success! Putting types now...');
 
-  await Promise.all(types.map(type => putType(accessToken, type)));
+  await Promise.all(types.map(type => putType(access_token, type)));
 };
 
 // eslint-disable-next-line no-console

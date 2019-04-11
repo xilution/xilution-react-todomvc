@@ -19,7 +19,7 @@ describe('auth reducer tests', () => {
 
   test('should handle AUTHENTICATION_SUCCESS', () => {
     expect(auth(state, {
-      access_token: accessToken,
+      accessToken,
       type: 'AUTHENTICATION_SUCCESS',
     })).toEqual({
       ...state,
