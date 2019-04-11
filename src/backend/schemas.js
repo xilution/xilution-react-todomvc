@@ -27,20 +27,21 @@ export const putTodoRequestSchema = Joi.object().keys({
   }),
   parameters: Joi.object().required().keys({
     authorization: Joi.string().required(),
+    id: Joi.string().required(),
   }),
 });
 
 export const getTodoRequestSchema = Joi.object().keys({
   parameters: Joi.object().required().keys({
     authorization: Joi.string().required(),
-    id: Joi.string(),
+    id: Joi.string().required(),
   }),
 });
 
 export const deleteTodoRequestSchema = Joi.object().keys({
   parameters: Joi.object().required().keys({
     authorization: Joi.string().required(),
-    id: Joi.string(),
+    id: Joi.string().required(),
   }),
 });
 

@@ -4,6 +4,7 @@ import Chance from 'chance';
 import {
   authenticateRequestSchema,
   postTodoRequestSchema,
+  putTodoRequestSchema,
   getTodoRequestSchema,
   deleteTodoRequestSchema,
   fetchTodosRequestSchema,
@@ -69,6 +70,42 @@ describe('schemas tests', () => {
           authorization: chance.string(),
         },
       }, postTodoRequestSchema);
+
+      expect(actualValidationResult.error).toBeFalsy();
+    });
+  });
+
+  describe('when validating put todo requests', () => {
+    test('when the request is invalid, the result should include a validation error', () => {
+      const actualValidationResult = Joi.validate({
+        body: chance.pickone([...notObjects, {
+          completed: buildInvalidBoolean(),
+          id: buildInvalidString(),
+          text: buildInvalidString(),
+          userId: buildInvalidString(),
+        }]),
+        parameters: chance.pickone([...notObjects, {
+          authorization: buildInvalidString(),
+          id: buildInvalidString(),
+        }]),
+      }, putTodoRequestSchema);
+
+      expect(actualValidationResult.error).toBeTruthy();
+    });
+
+    test('when the request is valid, the result should not include a validation error', () => {
+      const actualValidationResult = Joi.validate({
+        body: {
+          completed: chance.bool(),
+          id: chance.string(),
+          text: chance.string(),
+          userId: chance.string(),
+        },
+        parameters: {
+          authorization: chance.string(),
+          id: chance.string(),
+        },
+      }, putTodoRequestSchema);
 
       expect(actualValidationResult.error).toBeFalsy();
     });
