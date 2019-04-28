@@ -22,9 +22,9 @@ const buildPutTypesUrl = name => `https://test.beagily.basics.api.xilution.com/t
 const getSearchCriteriaId = async (request, searchCriteria) => {
   const postSearchCriteriaResponse = await post(postSearchCriteriaUrl, searchCriteria, buildAuthorizedOptions(request));
 
-  const { location } = postSearchCriteriaResponse.headers;
+  const { Location } = postSearchCriteriaResponse.headers;
 
-  return location.substring(location.lastIndexOf('/') + 1);
+  return Location.substring(Location.lastIndexOf('/') + 1);
 };
 
 export const postTodo = async (request) => {

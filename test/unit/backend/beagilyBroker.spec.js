@@ -168,7 +168,7 @@ describe('beagily broker tests', () => {
       pageSize = 100;
       const searchCriteriaResponse = {
         headers: {
-          location: `${chance.string()}/${searchCriteriaId}`,
+          Location: `${chance.string()}/${searchCriteriaId}`,
         },
       };
 
