@@ -63,7 +63,7 @@ Within about a 1/2 hour you will have a fully functional todo management app run
 		* [React-Redux](https://github.com/reactjs/react-redux)
 		* [React-Router](https://github.com/ReactTraining/react-router)
 		* [React-Bootstrap](https://react-bootstrap.github.io/)
-	* [Node.js](https://nodejs.org/en/) version 8.10.0 for React Code
+	* [Node.js](https://nodejs.org/en/) version 10.16.3 for React Code
 	* [Webpack](https://webpack.js.org/) Build
 	* [Jest](https://facebook.github.io/jest/) Unit Testing
 	* [ESLint](https://eslint.org/) for Beautifully Consistent JavaScript Code Style
@@ -79,7 +79,7 @@ Within about a 1/2 hour you will have a fully functional todo management app run
 		* [Lambda (Node.js)](https://aws.amazon.com/lambda/)
 		* [CloudFormation](https://aws.amazon.com/cloudformation/)
 	* Input validation via [Joi](https://github.com/hapijs/joi)
-	* [Node.js](https://nodejs.org/en/) version 8.10.0 for Lambda Code
+	* [Node.js](https://nodejs.org/en/) version 10.16.3 for Lambda Code
 	* [Webpack](https://webpack.js.org/) Build
 		* Technique used to reduce size of deployed code.
 	* [Jest](https://facebook.github.io/jest/) Unit Testing
@@ -155,7 +155,7 @@ For Mac users, the Terminal application is the best way to go for command line s
 	1. Run `git clone https://github.com/xilution/xilution-react-todomvc` to download the code for this example.
 	1. Run `cd xilution-react-todomvc` to navigate into the directory where the code for this example has been downloaded.
 
-1. Install Node.js 8.10.0
+1. Install Node.js 10.16.3
 	1. From within the 'xilution-react-todomvc' directory, run `nvm install` to install the version of Node.js used by the example.
 
 1. Download Project Dependencies
