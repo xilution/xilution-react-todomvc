@@ -22,7 +22,7 @@
     "dist"
   ],
   "dependencies": {
-    "@babel/polyfill": "^7.2.5",
+    "@babel/polyfill": "^7.7.0",
     "aws-sdk": "^2.224.1",
     "axios": "^0.18.0",
     "joi": "^14.3.1",
