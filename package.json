@@ -64,7 +64,7 @@
     "mini-css-extract-plugin": "^0.5.0",
     "prompt": "^1.0.0",
     "regenerator-runtime": "^0.13.2",
-    "util": "^0.11.0",
+    "util": "^0.12.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.3"
