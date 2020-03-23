@@ -59,7 +59,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^4.0.0",
     "jest": "^24.5.0",
     "mini-css-extract-plugin": "^0.5.0",
     "prompt": "^1.0.0",
