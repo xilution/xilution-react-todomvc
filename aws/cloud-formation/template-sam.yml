@@ -1,6 +1,6 @@
 ---
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: 'AWS::Serverless-2016-10-31'
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
 
 Parameters:
   BaseStackName:
@@ -11,7 +11,7 @@ Parameters:
 
 Globals:
   Function:
-    Runtime: nodejs10.x
+    Runtime: nodejs14.x
     Environment:
       Variables:
         XilutionClientId: !Ref XilutionClientId
@@ -120,6 +120,6 @@ Resources:
             Method: delete
 
 Outputs:
-    ApiURL:
-      Description: API endpoint URL for Xilution todo MVC example.
-      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  ApiURL:
+    Description: API endpoint URL for Xilution todo MVC example.
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
